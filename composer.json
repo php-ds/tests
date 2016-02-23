@@ -1,0 +1,19 @@
+{
+    "name": "php-ds/tests",
+    "require": {
+        "php": ">=5.6",
+        "phpunit/phpunit": "^5.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rudi Theunissen",
+            "email": "rudolf.theunissen@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ds\\Tests\\": "tests"
+        }
+    },
+}
