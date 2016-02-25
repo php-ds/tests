@@ -157,11 +157,11 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
     public function assertInstanceDump(array $expected, $instance)
     {
         ob_start();
-        var_dump($instance);
+        $this->cleanVarDump($instance);
         $actual = ob_get_clean();
 
         ob_start();
-        var_dump($expected);
+        $this->cleanVarDump($expected);
         $expected = ob_get_clean();
 
         $class = preg_quote(get_class($instance));
@@ -169,6 +169,7 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
         $regex = preg_replace('/#\d+/', '#\d+', "object\($class\)#\d+ $data");
 
         $this->assertRegExp("~$regex~", $actual);
+
     }
 
     public function assertSerialized(array $expected, $instance, $use_keys)
@@ -197,5 +198,18 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectIterateByReferenceException();
         foreach ($instance as &$value);
+    }
+
+    /**
+     * Perform a clean var dump disabling xdebugs overload if set
+     *
+     * @param mixed $expression
+     */
+    protected function cleanVarDump($expression)
+    {
+        $overload_var_dump = ini_get('xdebug.overload_var_dump');
+        ini_set('xdebug.overload_var_dump', 'off');
+        var_dump($expression);
+        ini_set('xdebug.overload_var_dump', $overload_var_dump);
     }
 }
