@@ -5,33 +5,39 @@ trait capacity
 {
     public function testCapacity()
     {
-        $instance = $this->getInstance();
-        $this->assertEquals(8, $instance->capacity());
+        $min = \Ds\Deque::MIN_CAPACITY;
 
-        for ($i = 0; $i < 8; $i++) {
+        $instance = $this->getInstance();
+        $this->assertEquals($min, $instance->capacity());
+
+        for ($i = 0; $i < $min; $i++) {
             $instance->push($i);
         }
 
         // Should resize when full after push
-        $this->assertEquals(16, $instance->capacity());
+        $this->assertEquals($min * 2, $instance->capacity());
     }
 
     public function testAutoTruncate()
     {
+        $min = \Ds\Deque::MIN_CAPACITY;
+
         $instance = $this->getInstance(range(1, self::MANY));
-        $capacity = $instance->capacity();
+        $expected = $instance->capacity() / 2;
 
         for ($i = 0; $i < 3 * self::MANY / 4; $i++) {
             $instance->pop();
         }
 
-        $this->assertEquals($capacity / 2, $instance->capacity());
+        $this->assertEquals($expected, $instance->capacity());
     }
 
     public function testClearResetsCapacity()
     {
+        $min = \Ds\Deque::MIN_CAPACITY;
+
         $instance = $this->getInstance(range(1, self::MANY));
         $instance->clear();
-        $this->assertEquals(8, $instance->capacity());
+        $this->assertEquals($min, $instance->capacity());
     }
 }
