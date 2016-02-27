@@ -1,5 +1,5 @@
 <?php
-namespace Ds\Tests\Sequence;
+namespace Ds\Tests\Map;
 
 trait map
 {
@@ -8,7 +8,7 @@ trait map
         // values, callback
         return [
 
-            // Test mapping an empty sequence produces an empty sequence.
+            // Test mapping an empty map produces an empty map.
             [[], function(){}],
 
             // Test basic mapping where integers are doubled.
@@ -25,7 +25,7 @@ trait map
         $instance = $this->getInstance($values);
 
         $mapped = $instance->map($callback);
-        $expected = array_map($callback, $values);
+        $expected = array_map($callback, array_keys($values), $values);
 
         $this->assertToArray($values, $instance);
         $this->assertEquals($expected, $mapped->toArray());
