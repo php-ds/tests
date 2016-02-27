@@ -29,6 +29,7 @@ class MapTest extends CollectionTest
     use Map\keys;
     use Map\pairs;
     use Map\put;
+    use Map\map;
     use Map\putAll;
     use Map\reduce;
     use Map\remove;
