@@ -38,7 +38,6 @@ class MapTest extends CollectionTest
     use Map\putAll;
     use Map\reduce;
     use Map\remove;
-    use Map\removeAll;
     use Map\reverse;
     use Map\skip;
     use Map\slice;
