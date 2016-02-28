@@ -29,36 +29,4 @@ trait rotate
         $instance->rotate($rotation);
         $this->assertToArray($expected, $instance);
     }
-
-    public function testRandomRotate()
-    {
-        // This isn't the most efficient algorithm but is more obvious.
-        $array_rotate = function(array &$a, int $n) {
-            if ($n < 0) {
-                $n = abs($n); // Take the absolute value because we only need to
-                              // know how many rotations are needed. Direction
-                              // is handled in the loop using unshift and pop.
-
-                for ($n %= count($a); $n > 0; $n--) {
-                    array_unshift($a, array_pop($a));
-                }
-
-            } else {
-                for ($n %= count($a); $n > 0; $n--) {
-                    array_push($a, array_shift($a));
-                }
-            }
-        };
-
-        $values = range(1, self::MANY);
-        $instance = $this->getInstance($values);
-
-        for ($i = 0; $i < 100; $i++) {
-            $rotation = rand(-(self::MANY * 2), self::MANY * 2);
-            $instance->rotate($rotation);
-            $array_rotate($values, $rotation);
-        }
-
-        $this->assertToArray($values, $instance);
-    }
 }

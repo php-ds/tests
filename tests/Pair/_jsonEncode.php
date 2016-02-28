@@ -6,6 +6,11 @@ trait _jsonEncode
     public function testJsonEncode()
     {
         $instance = $this->getPair('a', 1);
-        $this->assertEquals(json_encode(['a', 1]), json_encode($instance));
+        $expected = json_encode([
+            'key'   => 'a',
+            'value' => 1
+        ]);
+
+        $this->assertEquals($expected, json_encode($instance));
     }
 }

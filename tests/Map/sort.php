@@ -54,16 +54,4 @@ trait sort
         $this->assertToArray($expected, $sorted);
         $this->assertToArray($values, $instance);
     }
-
-    public function testSortIsStable()
-    {
-        $values = range(1, self::MANY);
-        $instance = $this->getInstance($values);
-
-        $sorted = $instance->sort(function($a, $b) {
-            return $b[0] <=> $a[0];
-        });
-
-        $this->assertToArray($values, $sorted);
-    }
 }

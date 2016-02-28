@@ -15,8 +15,9 @@ trait pairs
 
         $this->assertInstanceOf(Vector::class, $pairs);
 
-        //
-        $to_array = function ($pair) { return $pair->toArray(); };
+        $to_array = function ($pair) {
+            return [$pair->key, $pair->value];
+        };
 
         $this->assertEquals($expected, array_map($to_array, $pairs->toArray()));
     }

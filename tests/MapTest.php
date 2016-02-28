@@ -23,20 +23,28 @@ class MapTest extends CollectionTest
     use Map\containsValue;
     use Map\copy;
     use Map\count;
+    use Map\diff;
     use Map\filter;
+    use Map\first;
     use Map\get;
+    use Map\intersect;
     use Map\isEmpty;
     use Map\keys;
+    use Map\last;
+    use Map\map;
+    use Map\merge;
     use Map\pairs;
     use Map\put;
     use Map\putAll;
     use Map\reduce;
     use Map\remove;
     use Map\reverse;
+    use Map\skip;
     use Map\slice;
     use Map\sort;
     use Map\toArray;
     use Map\values;
+    use Map\xor_;
 
     protected function getInstance(array $values = [])
     {

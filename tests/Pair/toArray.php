@@ -6,6 +6,11 @@ trait toArray
     public function testToArray()
     {
         $instance = $this->getPair('a', 1);
-        $this->assertEquals(['a', 1], $instance->toArray());
+        $expected = [
+            'key'   => 'a',
+            'value' => 1
+        ];
+
+        $this->assertEquals($expected, $instance->toArray());
     }
 }
