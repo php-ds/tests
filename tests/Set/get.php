@@ -86,7 +86,7 @@ trait get
     public function testArrayAccessGetByReference()
     {
         $instance = $this->getInstance([[1]]);
-        $this->expectAccessByReferenceNotAllowedException();
+        $this->expectAccessByReferenceHasNoEffect();
         $instance[0][0] = null;
     }
 

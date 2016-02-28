@@ -66,6 +66,10 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
         return array_map(function($a) { return [$a, $a]; }, $values);
     }
 
+    public function expectAccessByReferenceHasNoEffect()
+    {
+        $this->setExpectedException(\PHPUnit_Framework_Error_Notice::class);
+    }
 
     public function expectPropertyDoesNotExistException()
     {
