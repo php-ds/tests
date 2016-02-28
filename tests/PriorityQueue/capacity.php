@@ -25,7 +25,7 @@ trait capacity
         $instance = $this->getInstance(range(1, self::MANY));
         $capacity = $instance->capacity();
 
-        for ($i = 0; $i < 3 * self::MANY / 4; $i++) {
+        for ($i = 0; $i <= 3 * self::MANY / 4; $i++) {
             $instance->pop();
         }
 

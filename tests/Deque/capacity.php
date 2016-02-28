@@ -23,9 +23,9 @@ trait capacity
         $min = \Ds\Deque::MIN_CAPACITY;
 
         $instance = $this->getInstance(range(1, self::MANY));
-        $expected = $instance->capacity() / 2;
+        $expected = $instance->capacity() / 4;
 
-        for ($i = 0; $i < 3 * self::MANY / 4; $i++) {
+        for ($i = 0; $i <= 3 * self::MANY / 4; $i++) {
             $instance->pop();
         }
 
