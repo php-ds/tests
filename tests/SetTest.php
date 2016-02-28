@@ -23,22 +23,23 @@ class SetTest extends CollectionTest
     use Set\contains;
     use Set\copy;
     use Set\count;
-    use Set\difference;
-    use Set\exclusive;
+    use Set\diff;
     use Set\filter;
     use Set\first;
     use Set\get;
-    use Set\intersection;
+    use Set\intersect;
     use Set\isEmpty;
     use Set\join;
     use Set\last;
     use Set\reduce;
     use Set\remove;
+    use Set\removeAll;
     use Set\reverse;
     use Set\slice;
     use Set\sort;
     use Set\toArray;
     use Set\union;
+    use Set\xor;
 
     protected function getInstance(array $values = [])
     {
