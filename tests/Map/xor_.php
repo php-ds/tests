@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests\Map;
 
-trait last
+trait xor_
 {
 
 }

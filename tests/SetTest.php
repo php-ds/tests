@@ -39,7 +39,7 @@ class SetTest extends CollectionTest
     use Set\sort;
     use Set\toArray;
     use Set\union;
-    use Set\xor;
+    use Set\xor_;
 
     protected function getInstance(array $values = [])
     {

@@ -45,7 +45,7 @@ class MapTest extends CollectionTest
     use Map\sort;
     use Map\toArray;
     use Map\values;
-    use Map\xor;
+    use Map\xor_;
 
     protected function getInstance(array $values = [])
     {

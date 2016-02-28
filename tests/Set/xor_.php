@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests\Set;
 
-trait xor
+trait xor_
 {
     public function xorDataProvider()
     {
