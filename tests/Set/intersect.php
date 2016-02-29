@@ -28,6 +28,14 @@ trait intersect
         $this->assertEquals($expected, $a->intersect($b)->toArray());
     }
 
+    /**
+     * @dataProvider intersectDataProvider
+     */
+    public function testIntersectWithSelf(array $initial, array $values, array $expected)
+    {
+        $a = $this->getInstance($initial);
+        $this->assertEquals($initial, $a->intersect($a)->toArray());
+    }
     // /**
     //  * @dataProvider intersectDataProvider
     //  */
@@ -50,15 +58,6 @@ trait intersect
     //     $a &= $b;
     //     $this->assertEquals($expected, $a->toArray());
     // }
-
-    /**
-     * @dataProvider intersectDataProvider
-     */
-    public function testIntersectWithSelf(array $initial, array $values, array $expected)
-    {
-        $a = $this->getInstance($initial);
-        $this->assertEquals($initial, $a->intersect($a)->toArray());
-    }
 
     // /**
     //  * @dataProvider intersectDataProvider

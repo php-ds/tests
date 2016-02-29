@@ -40,7 +40,7 @@ trait putAll
     /**
      * @dataProvider putAllDataProvider
      */
-    public function testAddAllFromSet(array $values)
+    public function testPutAllFromSet(array $values)
     {
         $instance = $this->getInstance();
         $set = new \Ds\Set($values);
@@ -51,7 +51,7 @@ trait putAll
     /**
      * @dataProvider putAllDataProvider
      */
-    public function testAddAllFromMap(array $values)
+    public function testPutAllFromMap(array $values)
     {
         $instance = $this->getInstance();
         $map = new \Ds\Map($values);
@@ -62,7 +62,7 @@ trait putAll
     /**
      * @dataProvider putAllDataProvider
      */
-    public function testAddAllFromVector(array $values)
+    public function testPutAllFromVector(array $values)
     {
         $instance = $this->getInstance();
         $vector = new \Ds\Vector($values);
@@ -73,7 +73,7 @@ trait putAll
     /**
      * @dataProvider putAllDataProvider
      */
-    public function testAddAllFromDeque(array $values)
+    public function testPutAllFromDeque(array $values)
     {
         $instance = $this->getInstance();
         $deque = new \Ds\Deque($values);
@@ -84,7 +84,7 @@ trait putAll
     /**
      * @dataProvider putAllDataProvider
      */
-    public function testAddAllFromStack(array $values)
+    public function testPutAllFromStack(array $values)
     {
         $instance = $this->getInstance();
         $stack = new \Ds\Stack(array_reverse($values));
@@ -96,7 +96,7 @@ trait putAll
     /**
      * @dataProvider putAllDataProvider
      */
-    public function testAddAllFromQueue(array $values)
+    public function testPutAllFromQueue(array $values)
     {
         $instance = $this->getInstance();
         $queue = new \Ds\Queue($values);
@@ -108,7 +108,7 @@ trait putAll
     /**
      * @dataProvider putAllDataProvider
      */
-    public function testAddAllFromPriorityQueue(array $values)
+    public function testPutAllFromPriorityQueue(array $values)
     {
         $instance = $this->getInstance();
         $queue = new \Ds\PriorityQueue();

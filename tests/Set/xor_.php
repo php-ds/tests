@@ -26,6 +26,15 @@ trait xor_
         $this->assertEquals($expected, $a->xor($b)->toArray());
     }
 
+    /**
+     * @dataProvider xorDataProvider
+     */
+    public function testXorWithSelf(array $a, array $b, array $expected)
+    {
+        $a = $this->getInstance($a);
+        $this->assertEquals([], $a->xor($a)->toArray());
+    }
+
     // /**
     //  * @dataProvider xorDataProvider
     //  */
@@ -48,15 +57,6 @@ trait xor_
     //     $a ^= $b;
     //     $this->assertEquals($expected, $a->toArray());
     // }
-
-    /**
-     * @dataProvider xorDataProvider
-     */
-    public function testXorWithSelf(array $a, array $b, array $expected)
-    {
-        $a = $this->getInstance($a);
-        $this->assertEquals([], $a->xor($a)->toArray());
-    }
 
     // /**
     //  * @dataProvider xorDataProvider

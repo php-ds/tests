@@ -1,41 +1,45 @@
 <?php
 namespace Ds\Tests\Set;
 
+use Ds\Set;
+
 trait capacity
 {
     public function testCapacity()
     {
-        $instance = $this->getInstance();
-        $this->assertEquals(8, $instance->capacity());
+        $min = Set::MIN_CAPACITY;
 
-        for ($i = 0; $i < 8; $i++) {
+        $instance = $this->getInstance();
+        $this->assertEquals($min, $instance->capacity());
+
+        for ($i = 0; $i < $min; $i++) {
             $instance[] = $i;
         }
 
         // Should not resize when full after add
-        $this->assertEquals(8, $instance->capacity());
+        $this->assertEquals($min, $instance->capacity());
 
         // Should resize when full before add
-        $instance[] = 8;
-        $this->assertEquals(16, $instance->capacity());
+        $instance[] = $min;
+        $this->assertEquals($min * 2, $instance->capacity());
     }
 
     public function testAutoTruncate()
     {
-        $instance = $this->getInstance(range(1, self::MANY));
-        $capacity = $instance->capacity();
+        $instance = $this->getInstance(range(0, self::MANY - 1));
+        $expected = $instance->capacity() / 2;
 
-        for ($i = 1; $i <= 3 * self::MANY / 4; $i++) {
+        for ($i = 0; $i <= 3 * self::MANY / 4; $i++) {
             $instance->remove($i);
         }
 
-        $this->assertEquals($capacity / 2, $instance->capacity());
+        $this->assertEquals($expected, $instance->capacity());
     }
 
     public function testClearResetsCapacity()
     {
         $instance = $this->getInstance(range(1, self::MANY));
         $instance->clear();
-        $this->assertEquals(8, $instance->capacity());
+        $this->assertEquals(Set::MIN_CAPACITY, $instance->capacity());
     }
 }
