@@ -31,6 +31,7 @@ class VectorTest extends CollectionTest
     use Sequence\join;
     use Sequence\last;
     use Sequence\map;
+    use Sequence\merge;
     use Sequence\pop;
     use Sequence\push;
     use Sequence\pushAll;
