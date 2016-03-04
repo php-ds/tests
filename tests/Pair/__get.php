@@ -10,4 +10,16 @@ trait __get
         $this->assertEquals('a', $pair->key);
         $this->assertEquals( 1,  $pair->value);
     }
+
+    public function testBadPropertyAccess()
+    {
+        $pair = $this->getPair('a', 1);
+        $this->expectPropertyDoesNotExistException();
+        $pair->nope;
+    }
+
+    public function testBadPropertyWrite()
+    {
+        $this->markTestIncomplete();
+    }
 }

@@ -22,18 +22,25 @@ trait pairs
         $this->assertEquals($expected, array_map($to_array, $pairs->toArray()));
     }
 
-    public function testPairsAreNotReferences()
+    public function testObjectsAreMutableThroughAccess()
     {
-        $obj = new \stdClass();
-        $obj->state = true;
+        $key = new \stdClass();
+        $key->state = true;
 
         $instance = $this->getInstance();
-        $instance->put($obj, 1);
+        $instance->put($key, 1);
 
-        $pairs = $instance->pairs()->toArray();
-        $pairs[0]->key->state = false;
+        $instance->pairs()->first()->key->state = false;
 
-        $this->assertTrue($obj->state);
-        $this->assertFalse($pairs[0]->key->state);
+        $this->assertFalse($key->state);
+        $this->assertFalse($instance->pairs()->first()->key->state);
+    }
+
+    public function testKeysAreNotMutableThroughAccess()
+    {
+        $instance = $this->getInstance(['a' => 1, 'b' => 2]);
+        $instance->pairs()->first()->key = 'c';
+
+        $this->assertEquals('a', $instance->pairs()->first()->key);
     }
 }
