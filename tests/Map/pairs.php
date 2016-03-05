@@ -5,6 +5,14 @@ use Ds\Vector;
 
 trait pairs
 {
+    public function pairsDataProvider()
+    {
+        return [
+            [[], []],
+            [['a' => 1, 'b' => 2], [['a', 1], ['b', 2]]],
+        ];
+    }
+
     /**
      * @dataProvider pairsDataProvider
      */

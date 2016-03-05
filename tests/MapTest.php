@@ -51,14 +51,6 @@ class MapTest extends CollectionTest
         return new \Ds\Map($values);
     }
 
-    public function pairsDataProvider()
-    {
-        return [
-            [[], []],
-            [['a' => 1, 'b' => 2], [['a', 1], ['b', 2]]],
-        ];
-    }
-
     public function testCollisionChain()
     {
         $instance = $this->getInstance();

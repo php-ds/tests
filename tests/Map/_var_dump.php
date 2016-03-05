@@ -1,10 +1,31 @@
 <?php
 namespace Ds\Tests\Map;
 
+use Ds\Pair;
+
 trait _var_dump
 {
+    public function varDumpDataProvider()
+    {
+        // values, expected array repr
+        return [
+            [
+                [],
+                [],
+            ],
+            [
+                ['a'],
+                [new Pair(0, 'a')],
+            ],
+            [
+                ['a', 'b'],
+                [new Pair(0, 'a'), new Pair(1, 'b')],
+            ],
+        ];
+    }
+
     /**
-     * @dataProvider pairsDataProvider
+     * @dataProvider varDumpDataProvider
      */
     public function testVarDump(array $values, array $expected)
     {
