@@ -19,14 +19,14 @@ class MapTest extends CollectionTest
     use Map\allocate;
     use Map\capacity;
     use Map\clear;
-    use Map\containsKey;
-    use Map\containsValue;
     use Map\copy;
     use Map\count;
     use Map\diff;
     use Map\filter;
     use Map\first;
     use Map\get;
+    use Map\hasKey;
+    use Map\hasValue;
     use Map\intersect;
     use Map\isEmpty;
     use Map\keys;

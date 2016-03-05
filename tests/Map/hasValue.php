@@ -1,9 +1,9 @@
 <?php
 namespace Ds\Tests\Map;
 
-trait containsValue
+trait hasValue
 {
-    public function containsValueDataProvider()
+    public function hasValueDataProvider()
     {
         // initial, value, has
         return [
@@ -15,23 +15,23 @@ trait containsValue
     }
 
     /**
-     * @dataProvider containsValueDataProvider
+     * @dataProvider hasValueDataProvider
      */
     public function testHasValue(array $initial, $value, bool $has)
     {
         $instance = $this->getInstance($initial);
-        $this->assertEquals($has, $instance->containsValue($value));
+        $this->assertEquals($has, $instance->hasValue($value));
     }
 
     public function testHasValueAfterRemoveAndPut()
     {
         $instance = $this->getInstance(['a' => 1]);
-        $this->assertTrue($instance->containsValue(1));
+        $this->assertTrue($instance->hasValue(1));
 
         $instance->remove('a');
-        $this->assertFalse($instance->containsValue(1));
+        $this->assertFalse($instance->hasValue(1));
 
         $instance->put('a', 1);
-        $this->assertTrue($instance->containsValue(1));
+        $this->assertTrue($instance->hasValue(1));
     }
 }

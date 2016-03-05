@@ -1,9 +1,9 @@
 <?php
 namespace Ds\Tests\Map;
 
-trait containsKey
+trait hasKey
 {
-    public function containsKeyDataProvider()
+    public function hasKeyDataProvider()
     {
         // initial, key, has
         return [
@@ -14,23 +14,23 @@ trait containsKey
     }
 
     /**
-     * @dataProvider containsKeyDataProvider
+     * @dataProvider hasKeyDataProvider
      */
     public function testHasKey(array $initial, $key, bool $has)
     {
         $instance = $this->getInstance($initial);
-        $this->assertEquals($has, $instance->containsKey($key));
+        $this->assertEquals($has, $instance->hasKey($key));
     }
 
     public function testHasKeyAfterRemoveAndPut()
     {
         $instance = $this->getInstance(['a' => 1]);
-        $this->assertTrue($instance->containsKey('a'));
+        $this->assertTrue($instance->hasKey('a'));
 
         $instance->remove('a');
-        $this->assertFalse($instance->containsKey('a'));
+        $this->assertFalse($instance->hasKey('a'));
 
         $instance->put('a', 1);
-        $this->assertTrue($instance->containsKey('a'));
+        $this->assertTrue($instance->hasKey('a'));
     }
 }
