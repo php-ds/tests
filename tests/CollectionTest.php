@@ -48,7 +48,11 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function assertToArray(array $expected, $instance)
     {
-        $this->assertEquals($expected, $instance->toArray());
+        $actual = $instance->toArray();
+
+        $this->assertEquals($expected, $actual);
+        $this->assertEquals(array_values($expected), array_values($actual), "!!! array values do not match");
+        $this->assertEquals(array_keys  ($expected), array_keys  ($actual), "!!! array keys do not match");
     }
 
     public function basicDataProvider()

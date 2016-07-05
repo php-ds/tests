@@ -30,6 +30,7 @@ class MapTest extends CollectionTest
     use Map\intersect;
     use Map\isEmpty;
     use Map\keys;
+    use Map\ksort;
     use Map\last;
     use Map\map;
     use Map\merge;
