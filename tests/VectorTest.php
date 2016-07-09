@@ -20,7 +20,6 @@ class VectorTest extends CollectionTest
 
     use Sequence\clear;
     use Sequence\contains;
-    use Sequence\copy;
     use Sequence\count;
     use Sequence\filter;
     use Sequence\find;

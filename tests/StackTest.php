@@ -21,7 +21,6 @@ class StackTest extends CollectionTest
     use Vector\capacity;
 
     use Stack\clear;
-    use Stack\copy;
     use Stack\count;
     use Stack\isEmpty;
     use Stack\peek;

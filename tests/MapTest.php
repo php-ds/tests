@@ -19,7 +19,6 @@ class MapTest extends CollectionTest
     use Map\allocate;
     use Map\capacity;
     use Map\clear;
-    use Map\copy;
     use Map\count;
     use Map\diff;
     use Map\filter;

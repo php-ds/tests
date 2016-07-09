@@ -18,7 +18,6 @@ class PriorityQueueTest extends CollectionTest
     use PriorityQueue\allocate;
     use PriorityQueue\capacity;
     use PriorityQueue\clear;
-    use PriorityQueue\copy;
     use PriorityQueue\count;
     use PriorityQueue\isEmpty;
     use PriorityQueue\peek;

@@ -21,7 +21,6 @@ class QueueTest extends CollectionTest
     use Deque\capacity;
 
     use Queue\clear;
-    use Queue\copy;
     use Queue\count;
     use Queue\isEmpty;
     use Queue\peek;

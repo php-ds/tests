@@ -21,7 +21,6 @@ class SetTest extends CollectionTest
     use Set\capacity;
     use Set\clear;
     use Set\contains;
-    use Set\copy;
     use Set\count;
     use Set\diff;
     use Set\filter;
