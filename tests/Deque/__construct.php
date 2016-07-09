@@ -38,10 +38,13 @@ trait __construct
 
     public function testConstructCapacity()
     {
-        $n = 20;
+        $m = \Ds\Deque::MIN_CAPACITY;
+        $n = $m + 2;
 
-        $this->assertEquals(32, (new Deque(20))->capacity());
-        $this->assertEquals(32, (ds::deque(20))->capacity());
+        $this->assertEquals($m,     (new Deque($m))->capacity());
+        $this->assertEquals($m,     (ds::deque($m))->capacity());
+        $this->assertEquals($m * 2, (new Deque($n))->capacity());
+        $this->assertEquals($m * 2, (ds::deque($n))->capacity());
     }
 
     public function testConstructNoParams()

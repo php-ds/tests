@@ -19,7 +19,7 @@ trait capacity
 
         // Should resize if full before push
         $instance->push('x');
-        $this->assertEquals($min * 1.5, $instance->capacity());
+        $this->assertEquals(intval($min * 1.5), $instance->capacity());
     }
 
     public function testAutoTruncate()

@@ -21,11 +21,12 @@ trait capacity
     public function testAutoTruncate()
     {
         $min = \Ds\Deque::MIN_CAPACITY;
+        $num = $min * 16;
 
-        $instance = $this->getInstance(range(1, self::MANY));
-        $expected = $instance->capacity() / 4;
+        $instance = $this->getInstance(range(1, $num - 1));
+        $expected = $num / 2;
 
-        for ($i = 0; $i <= 3 * self::MANY / 4; $i++) {
+        for ($i = 0; $i <= 3 * $num / 4; $i++) {
             $instance->pop();
         }
 

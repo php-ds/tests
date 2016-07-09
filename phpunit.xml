@@ -1,6 +1,6 @@
-<phpunit colors="true" bootstrap="bootstrap.php">
+<phpunit bootstrap="bootstrap.php">
     <testsuites>
-        <testsuite name="all">
+        <testsuite>
             <directory>tests</directory>
         </testsuite>
     </testsuites>

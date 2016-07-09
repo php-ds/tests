@@ -37,9 +37,13 @@ trait __construct
 
     public function testConstructCapacity()
     {
-        $n = 20;
-        $this->assertEquals(32, (new Queue($n))->capacity());
-        $this->assertEquals(32, (ds::queue($n))->capacity());
+        $m = \Ds\Queue::MIN_CAPACITY;
+        $n = $m + 2;
+
+        $this->assertEquals($m,     (new Queue($m))->capacity());
+        $this->assertEquals($m,     (ds::queue($m))->capacity());
+        $this->assertEquals($m * 2, (new Queue($n))->capacity());
+        $this->assertEquals($m * 2, (ds::queue($n))->capacity());
     }
 
     public function testConstructNoParams()

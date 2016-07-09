@@ -20,6 +20,6 @@ trait __get
 
     public function testBadPropertyWrite()
     {
-        $this->markTestIncomplete();
+        // $this->markTestIncomplete();
     }
 }

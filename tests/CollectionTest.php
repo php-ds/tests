@@ -11,21 +11,8 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
     const MANY = 1 << 8 + 1;
     const SOME = 1 << 4 + 1;
 
-    public function setUp()
-    {
-        srand(1);
-    }
-
     /**
-     *
-     */
-    protected function getInstance(array $values = [])
-    {
-        return null;
-    }
-
-    /**
-     *
+     * Generic mixed value sample array.
      */
     public function sample()
     {
@@ -43,16 +30,15 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("object(" . get_class($instance) . ')', "$instance");
     }
 
-    /**
-     *
-     */
     public function assertToArray(array $expected, $instance)
     {
         $actual = $instance->toArray();
 
-        $this->assertEquals($expected, $actual);
-        $this->assertEquals(array_values($expected), array_values($actual), "!!! array values do not match");
-        $this->assertEquals(array_keys  ($expected), array_keys  ($actual), "!!! array keys do not match");
+        // We have to make separate assertions here because PHPUnit considers an
+        // array to be equal of the keys match the values even if the order is
+        // not the same, ie. [a => 1, b => 2] equals [b => 2, a => 1].
+        $this->assertEquals(array_values($expected), array_values($actual), "!!! ARRAY VALUE MISMATCH");
+        $this->assertEquals(array_keys  ($expected), array_keys  ($actual), "!!! ARRAY KEY MISMATCH");
     }
 
     public function basicDataProvider()
@@ -209,7 +195,7 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Perform a clean var dump disabling xdebugs overload if set
+     * Perform a clean var dump disabling xdebug overload if set.
      *
      * @param mixed $expression
      */
