@@ -26,7 +26,6 @@ class QueueTest extends CollectionTest
     use Queue\peek;
     use Queue\pop;
     use Queue\push;
-    use Queue\pushAll;
     use Queue\toArray;
 
     protected function getInstance(array $values = [])

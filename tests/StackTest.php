@@ -26,7 +26,6 @@ class StackTest extends CollectionTest
     use Stack\peek;
     use Stack\pop;
     use Stack\push;
-    use Stack\pushAll;
     use Stack\toArray;
 
     protected function getInstance(array $values = [])

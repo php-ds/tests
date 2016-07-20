@@ -36,7 +36,6 @@ class DequeTest extends CollectionTest
     use Sequence\merge;
     use Sequence\pop;
     use Sequence\push;
-    use Sequence\pushAll;
     use Sequence\reduce;
     use Sequence\remove;
     use Sequence\reverse;
