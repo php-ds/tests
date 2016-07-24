@@ -32,12 +32,6 @@ trait __construct
         $this->assertToArray($expected, new Map(new \ArrayIterator($values)));
     }
 
-    public function testConstructCapacity()
-    {
-        $n = 20;
-        $this->assertEquals(32, (new Map($n))->capacity());
-    }
-
     public function testConstructNoParams()
     {
         $this->assertToArray([], new Map());

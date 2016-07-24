@@ -33,12 +33,6 @@ trait __construct
         $this->assertToArray($expected, new Vector(new \ArrayIterator($values)));
     }
 
-    public function testConstructCapacity()
-    {
-        $n = 20;
-        $this->assertEquals($n, (new Vector($n))->capacity());
-    }
-
     public function testConstructNoParams()
     {
         $this->assertToArray([], new Vector());

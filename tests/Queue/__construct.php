@@ -32,15 +32,6 @@ trait __construct
         $this->assertToArray($values, new Queue(new \ArrayIterator($values)));
     }
 
-    public function testConstructCapacity()
-    {
-        $m = \Ds\Queue::MIN_CAPACITY;
-        $n = $m + 2;
-
-        $this->assertEquals($m,     (new Queue($m))->capacity());
-        $this->assertEquals($m * 2, (new Queue($n))->capacity());
-    }
-
     public function testConstructNoParams()
     {
         $this->assertToArray([], new Queue());

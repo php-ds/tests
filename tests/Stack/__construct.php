@@ -32,12 +32,6 @@ trait __construct
         $this->assertToArray(array_reverse($values), new Stack(new \ArrayIterator($values)));
     }
 
-    public function testConstructCapacity()
-    {
-        $n = 20;
-        $this->assertEquals($n, (new Stack($n))->capacity());
-    }
-
     public function testConstructNoParams()
     {
         $this->assertToArray([], new Stack());

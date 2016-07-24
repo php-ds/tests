@@ -39,9 +39,4 @@ trait __construct
     {
         $this->assertToArray([], new Set());
     }
-
-    public function testConstructCapacity()
-    {
-        $this->assertEquals(32, (new Set(20))->capacity());
-    }
 }
