@@ -16,7 +16,8 @@ trait reverse
     public function testReverse(array $values, array $expected)
     {
         $instance = $this->getInstance($values);
-        $this->assertToArray($expected, $instance->reverse());
-        $this->assertToArray($values, $instance);
+        $instance->reverse();
+
+        $this->assertToArray($expected, $instance);
     }
 }

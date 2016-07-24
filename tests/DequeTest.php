@@ -21,6 +21,7 @@ class DequeTest extends CollectionTest
     use Deque\remove;
     use Deque\slice;
 
+    use Sequence\apply;
     use Sequence\clear;
     use Sequence\contains;
     use Sequence\copy;
@@ -40,11 +41,14 @@ class DequeTest extends CollectionTest
     use Sequence\reduce;
     use Sequence\remove;
     use Sequence\reverse;
+    use Sequence\reversed;
     use Sequence\rotate;
     use Sequence\set;
     use Sequence\shift;
     use Sequence\slice;
     use Sequence\sort;
+    use Sequence\sorted;
+    use Sequence\sum;
     use Sequence\toArray;
     use Sequence\unshift;
 
@@ -115,7 +119,7 @@ class DequeTest extends CollectionTest
         // which would be necessary in the case where the isn't enough space.
 
         $expected = ['d', 'c', 'b', 'a'];
-        $this->assertToArray($expected, $instance->sort(function($a, $b) {
+        $this->assertToArray($expected, $instance->sorted(function($a, $b) {
             return $b <=> $a; // Reverse
         }));
 
@@ -133,7 +137,7 @@ class DequeTest extends CollectionTest
                                             // Wrapped values:  2
 
         $expected = ['f', 'e', 'd', 'c', 'b', 'a'];
-        $this->assertToArray($expected, $instance->sort(function($a, $b) {
+        $this->assertToArray($expected, $instance->sorted(function($a, $b) {
             return $b <=> $a; // Reverse
         }));
 
@@ -150,7 +154,7 @@ class DequeTest extends CollectionTest
                                             // Wrapped values:  2
 
         $expected = ['g', 'f', 'e', 'd', 'c', 'b', 'a'];
-        $this->assertToArray($expected, $instance->sort(function($a, $b) {
+        $this->assertToArray($expected, $instance->sorted(function($a, $b) {
             return $b <=> $a; // Reverse
         }));
     }

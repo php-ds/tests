@@ -18,6 +18,7 @@ class VectorTest extends CollectionTest
     use Vector\allocate;
     use Vector\capacity;
 
+    use Sequence\apply;
     use Sequence\clear;
     use Sequence\contains;
     use Sequence\copy;
@@ -37,11 +38,14 @@ class VectorTest extends CollectionTest
     use Sequence\reduce;
     use Sequence\remove;
     use Sequence\reverse;
+    use Sequence\reversed;
     use Sequence\rotate;
     use Sequence\set;
     use Sequence\shift;
     use Sequence\slice;
     use Sequence\sort;
+    use Sequence\sorted;
+    use Sequence\sum;
     use Sequence\toArray;
     use Sequence\unshift;
 
