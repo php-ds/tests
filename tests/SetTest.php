@@ -16,7 +16,6 @@ class SetTest extends CollectionTest
     use Set\_var_dump;
 
     use Set\add;
-    use Set\addAll;
     use Set\allocate;
     use Set\capacity;
     use Set\clear;
