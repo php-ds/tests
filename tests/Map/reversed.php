@@ -1,9 +1,9 @@
 <?php
 namespace Ds\Tests\Map;
 
-trait reverse
+trait reversed
 {
-    public function reverseDataProvider()
+    public function reversedDataProvider()
     {
         $reverse = function($a) {
             return [$a[0], array_reverse($a[1], 1)];
@@ -13,13 +13,11 @@ trait reverse
     }
 
     /**
-     * @dataProvider reverseDataProvider
+     * @dataProvider reversedDataProvider
      */
-    public function testReverse(array $values, array $expected)
+    public function testReversed(array $values, array $expected)
     {
         $instance = $this->getInstance($values);
-        $instance->reverse();
-
-        $this->assertToArray($expected, $instance);
+        $this->assertToArray($expected, $instance->reversed());
     }
 }

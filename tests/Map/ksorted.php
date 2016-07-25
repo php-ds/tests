@@ -1,9 +1,9 @@
 <?php
 namespace Ds\Tests\Map;
 
-trait ksort
+trait ksorted
 {
-    public function sortKeyDataProvider()
+    public function sortedKeyDataProvider()
     {
         return [
             [[
@@ -25,17 +25,17 @@ trait ksort
     }
 
     /**
-     * @dataProvider sortKeyDataProvider
+     * @dataProvider sortedKeyDataProvider
      */
-    public function testKeySort(array $values)
+    public function testSortedByKey(array $values)
     {
         $instance = $this->getInstance($values);
 
         $expected = $values;
         ksort($expected);
 
-        $instance->ksort();
-        $this->assertToArray($expected, $instance);
+        $this->assertToArray($expected, $instance->ksorted());
+        $this->assertToArray($values, $instance);
     }
 
     /**
@@ -45,13 +45,14 @@ trait ksort
     {
         $instance = $this->getInstance($values);
 
-        $instance->ksort(function($a, $b) {
+        $sorted = $instance->ksorted(function($a, $b) {
             return $b <=> $a;
         });
 
         $expected = $values;
         krsort($expected);
 
-        $this->assertToArray($expected, $instance);
+        $this->assertToArray($expected, $sorted);
+        $this->assertToArray($values, $instance);
     }
 }

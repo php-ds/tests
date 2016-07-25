@@ -3,7 +3,7 @@ namespace Ds\Tests\Map;
 
 trait sort
 {
-    public function sortDataProvider()
+    public function sortedDataProvider()
     {
         return [
             [[
@@ -27,31 +27,32 @@ trait sort
     /**
      * @dataProvider sortDataProvider
      */
-    public function testSort(array $values)
+    public function testSorted(array $values)
     {
         $instance = $this->getInstance($values);
 
         $expected = array_slice($values, 0, count($values), true);
         asort($expected);
 
-        $instance->sort();
-        $this->assertToArray($expected, $instance);
+        $this->assertToArray($expected, $instance->sorted());
+        $this->assertToArray($values, $instance);
     }
 
     /**
-     * @dataProvider sortDataProvider
+     * @dataProvider sortedDataProvider
      */
-    public function testSortUsingComparator(array $values)
+    public function testSortedUsingComparator(array $values)
     {
         $instance = $this->getInstance($values);
+
+        $sorted = $instance->sorted(function($a, $b) {
+            return $b <=> $a;
+        });
 
         $expected = array_slice($values, 0, count($values), true);
         arsort($expected);
 
-        $instance->sort(function($a, $b) {
-            return $b <=> $a;
-        });
-
-        $this->assertToArray($expected, $instance);
+        $this->assertToArray($expected, $sorted);
+        $this->assertToArray($values, $instance);
     }
 }

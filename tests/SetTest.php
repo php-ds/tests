@@ -32,10 +32,12 @@ class SetTest extends CollectionTest
     use Set\last;
     use Set\reduce;
     use Set\remove;
-    use Set\removeAll;
     use Set\reverse;
+    use Set\reversed;
     use Set\slice;
     use Set\sort;
+    use Set\sorted;
+    use Set\sum;
     use Set\toArray;
     use Set\union;
     use Set\xor_;
