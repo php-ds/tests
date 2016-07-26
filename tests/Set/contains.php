@@ -10,8 +10,9 @@ trait contains
         // initial, values, contains
         return [
 
-            // Test empty set does not contain anything.
-            [[ ], [ ], false],
+            // Test empty set is a subset of any other set.
+            [[],      [], true],
+            [$sample, [], true],
 
             // Test that an empty set does not contain any values.
             [[], $sample, false],

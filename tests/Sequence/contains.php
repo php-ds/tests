@@ -9,12 +9,12 @@ trait contains
 
         // initial, values, expected
         return [
-            [[], [], false],
+            [[1, 2, 3], [], true], // Empty set is a subset of any set
 
             [['a'], ['a'], true],
             [[ 1 ], [ 1 ], true],
+            [[ 1 ], [   ], true],
             [['a'], ['b'], false],
-            [[ 1 ], [   ], false],
             [[   ], [ 1 ], false],
             [['1'], [ 1 ], false],
             [[ 1 ], ['1'], false],
