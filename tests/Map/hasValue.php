@@ -5,7 +5,7 @@ trait hasValue
 {
     public function hasValueDataProvider()
     {
-        // initial, value, has
+        // initial, value, expected
         return [
             [[],                1,      false],
             [['a' => 1],        1,      true],
@@ -17,10 +17,10 @@ trait hasValue
     /**
      * @dataProvider hasValueDataProvider
      */
-    public function testHasValue(array $initial, $value, bool $has)
+    public function testHasValue(array $initial, $value, bool $expected)
     {
         $instance = $this->getInstance($initial);
-        $this->assertEquals($has, $instance->hasValue($value));
+        $this->assertEquals($expected, $instance->hasValue($value));
     }
 
     public function testHasValueAfterRemoveAndPut()
