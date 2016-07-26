@@ -44,6 +44,7 @@ class MapTest extends CollectionTest
     use Map\slice;
     use Map\sort;
     use Map\toArray;
+    use Map\union;
     use Map\values;
     use Map\xor_;
 

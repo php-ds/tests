@@ -1,9 +1,9 @@
 <?php
 namespace Ds\Tests\Map;
 
-trait merge
+trait union
 {
-    public function mergeDataProvider()
+    public function unionDataProvider()
     {
         // A, B, expected
         return [
@@ -17,24 +17,25 @@ trait merge
     }
 
     /**
-     * @dataProvider mergeDataProvider
+     * @dataProvider unionDataProvider
      */
-    public function testMerge(array $initial, array $values, array $expected)
+    public function testUnion(array $initial, array $values, array $expected)
     {
         $instance = $this->getInstance($initial);
+        $other    = $this->getInstance($values);
 
-        $this->assertToArray($expected, $instance->merge($values));
+        $this->assertToArray($expected, $instance->union($other));
         $this->assertToArray($initial, $instance);
     }
 
     /**
-     * @dataProvider mergeDataProvider
+     * @dataProvider unionDataProvider
      */
-    public function testMergeWithSelf(array $initial, array $values, array $expected)
+    public function testUnionWithSelf(array $initial, array $values, array $expected)
     {
         $instance = $this->getInstance($initial);
 
-        $this->assertToArray($initial, $instance->merge($instance));
+        $this->assertToArray($initial, $instance->union($instance));
         $this->assertToArray($initial, $instance);
     }
 }
