@@ -67,4 +67,19 @@ trait filter
 
         $this->fail('Exception should have been caught');
     }
+
+    public function testFilterWithoutCallable()
+    {
+        $values = [
+            "a" => 1,
+            "b" => 2,
+            "c" => true,
+            "d" => false,
+            "e" => [],
+            "f" => 0,
+        ];
+
+        $instance = $this->getInstance($values);
+        $this->assertToArray(array_filter($values), $instance->filter());
+    }
 }
