@@ -25,7 +25,7 @@ trait sort
     }
 
     /**
-     * @dataProvider sortDataProvider
+     * @dataProvider sortedDataProvider
      */
     public function testSorted(array $values)
     {

@@ -20,6 +20,6 @@ class HashableObject implements Hashable {
     }
 
     public function equals($obj): bool {
-        return $obj && ($obj->id === $this->id);
+        return $obj->id === $this->id;
     }
 }
