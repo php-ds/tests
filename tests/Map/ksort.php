@@ -27,7 +27,7 @@ trait ksort
     /**
      * @dataProvider sortKeyDataProvider
      */
-    public function testKeySort(array $values)
+    public function testSortByKey(array $values)
     {
         $instance = $this->getInstance($values);
 
@@ -41,7 +41,7 @@ trait ksort
     /**
      * @dataProvider sortKeyDataProvider
      */
-    public function testSortedByKeyUsingComparator(array $values)
+    public function testSortByKeyUsingComparator(array $values)
     {
         $instance = $this->getInstance($values);
 

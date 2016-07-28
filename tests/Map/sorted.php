@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests\Map;
 
-trait sort
+trait sorted
 {
     public function sortedDataProvider()
     {

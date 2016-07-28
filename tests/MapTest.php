@@ -17,6 +17,7 @@ class MapTest extends CollectionTest
     use Map\_var_dump;
 
     use Map\allocate;
+    use Map\apply;
     use Map\capacity;
     use Map\clear;
     use Map\copy;
@@ -31,6 +32,7 @@ class MapTest extends CollectionTest
     use Map\isEmpty;
     use Map\keys;
     use Map\ksort;
+    use Map\ksorted;
     use Map\last;
     use Map\map;
     use Map\merge;
@@ -42,6 +44,8 @@ class MapTest extends CollectionTest
     use Map\skip;
     use Map\slice;
     use Map\sort;
+    use Map\sorted;
+    use Map\sum;
     use Map\toArray;
     use Map\union;
     use Map\values;
