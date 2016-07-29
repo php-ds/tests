@@ -38,6 +38,7 @@ class MapTest extends CollectionTest
     use Map\merge;
     use Map\pairs;
     use Map\put;
+    use Map\putAll;
     use Map\reduce;
     use Map\remove;
     use Map\reverse;
