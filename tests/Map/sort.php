@@ -49,7 +49,7 @@ trait sort
         arsort($expected);
 
         $instance->sort(function($a, $b) {
-            return $a === $b ? 0 : ($a < $b ? 1 : -1);
+            return $b <=> $a;
         });
 
         $this->assertToArray($expected, $instance);

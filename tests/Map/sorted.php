@@ -46,7 +46,7 @@ trait sorted
         $instance = $this->getInstance($values);
 
         $sorted = $instance->sorted(function($a, $b) {
-            return $a === $b ? 0 : ($a < $b ? 1 : -1);
+            return $b <=> $a;
         });
 
         $expected = array_slice($values, 0, count($values), true);

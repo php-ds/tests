@@ -46,7 +46,7 @@ trait ksorted
         $instance = $this->getInstance($values);
 
         $sorted = $instance->ksorted(function($a, $b) {
-            return $a === $b ? 0 : ($a < $b ? 1 : -1);
+            return $b <=> $a;
         });
 
         $expected = $values;

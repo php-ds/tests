@@ -120,7 +120,7 @@ class DequeTest extends CollectionTest
 
         $expected = ['d', 'c', 'b', 'a'];
         $this->assertToArray($expected, $instance->sorted(function($a, $b) {
-            return $a === $b ? 0 : ($a < $b ? 1 : -1); // Reverse
+            return $b <=> $a; // Reverse
         }));
 
         ////////////////////////////////////////////////////////////////
@@ -138,7 +138,7 @@ class DequeTest extends CollectionTest
 
         $expected = ['f', 'e', 'd', 'c', 'b', 'a'];
         $this->assertToArray($expected, $instance->sorted(function($a, $b) {
-            return $a === $b ? 0 : ($a < $b ? 1 : -1); // Reverse
+            return $b <=> $a; // Reverse
         }));
 
         ////////////////////////////////////////////////////////////////
@@ -155,7 +155,7 @@ class DequeTest extends CollectionTest
 
         $expected = ['g', 'f', 'e', 'd', 'c', 'b', 'a'];
         $this->assertToArray($expected, $instance->sorted(function($a, $b) {
-            return $a === $b ? 0 : ($a < $b ? 1 : -1); // Reverse
+            return $b <=> $a; // Reverse
         }));
     }
 }
