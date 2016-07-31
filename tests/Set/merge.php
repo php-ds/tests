@@ -1,5 +1,5 @@
 <?php
-namespace Ds\Tests\Sequence;
+namespace Ds\Tests\Set;
 
 trait merge
 {
@@ -9,7 +9,7 @@ trait merge
         return [
             [[],          [],       []],
             [[],          ['a'],    ['a']],
-            [['a'],       ['a'],    ['a', 'a']],
+            [['a'],       ['a'],    ['a']],
             [['a'],       ['b'],    ['a', 'b']],
             [['a', 'b'],  [],       ['a', 'b']],
         ];
@@ -33,7 +33,7 @@ trait merge
     {
         $instance = $this->getInstance($initial);
 
-        $this->assertToArray(array_merge($initial, $initial), $instance->merge($instance));
+        $this->assertToArray($initial, $instance->merge($instance));
         $this->assertToArray($initial, $instance);
     }
 }

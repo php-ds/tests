@@ -30,6 +30,7 @@ class SetTest extends CollectionTest
     use Set\isEmpty;
     use Set\join;
     use Set\last;
+    use Set\merge;
     use Set\reduce;
     use Set\remove;
     use Set\reverse;
