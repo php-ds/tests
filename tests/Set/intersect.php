@@ -36,6 +36,30 @@ trait intersect
         $a = $this->getInstance($initial);
         $this->assertEquals($initial, $a->intersect($a)->toArray());
     }
+
+    public function testIntersectContains()
+    {
+        $setAB = $this->getInstance(["A", "B"]);
+        $setBC = $this->getInstance(["B", "C"]);
+
+        $setB = $setAB->intersect($setBC);
+
+        $this->assertFalse($setB->contains("A"));
+        $this->assertFalse($setB->contains("C"));
+        $this->assertTrue($setB->contains("B"));
+    }
+
+    public function testIntersectAdd()
+    {
+        $setAB = $this->getInstance(["A", "B"]);
+        $setBC = $this->getInstance(["B", "C"]);
+
+        $setB = $setAB->intersect($setBC);
+        $setB->add("B");
+
+        $this->assertEquals($setB->toArray(), ["B"]);
+    }
+
     // /**
     //  * @dataProvider intersectDataProvider
     //  */
