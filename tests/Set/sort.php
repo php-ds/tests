@@ -16,7 +16,7 @@ trait sort
         $instance = $this->getInstance([4, 1, 2, 5, 3]);
 
         $instance->sort(function($a, $b) {
-            return $b <=> $a;
+            return $a === $b ? 0 : ($a < $b ? 1 : -1);
         });
 
         $this->assertToArray([5, 4, 3, 2, 1], $instance);

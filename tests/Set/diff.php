@@ -28,6 +28,15 @@ trait diff
         $this->assertEquals($expected, $a->diff($b)->toArray());
     }
 
+    /**
+     * @dataProvider diffDataProvider
+     */
+    public function testDiffWithSelf(array $a, array $b, array $expected)
+    {
+        $a = $this->getInstance($a);
+        $this->assertEquals([], $a->diff($a)->toArray());
+    }
+
     // /**
     //  * @dataProvider diffDataProvider
     //  */
@@ -50,15 +59,6 @@ trait diff
     //     $a -= $b;
     //     $this->assertEquals($expected, $a->toArray());
     // }
-
-    /**
-     * @dataProvider diffDataProvider
-     */
-    public function testDiffWithSelf(array $a, array $b, array $expected)
-    {
-        $a = $this->getInstance($a);
-        $this->assertEquals([], $a->diff($a)->toArray());
-    }
 
     // /**
     //  * @dataProvider diffDataProvider
