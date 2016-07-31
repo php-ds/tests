@@ -27,6 +27,18 @@ trait union
         $this->assertEquals($expected, $a->union($b)->toArray());
     }
 
+    /** @test */
+    public function testUnionDoesNotFreezeWhenOperatingOnSetsWithObjects()
+    {
+        $setA = $this->getInstance([new Box("X")]);
+        $setB = $this->getInstance([new Box("Y")]);
+
+        // PHP hangs when calling union on the above sets
+        $result = $setA->union($setB);
+
+        $this->assertTrue($result->toArray() === ["X", "Y"]);
+    }
+
     // /**
     //  * @dataProvider unionDataProvider
     //  */
@@ -78,4 +90,24 @@ trait union
     //     $a |= $a;
     //     $this->assertEquals($initial, $a->toArray());
     // }
+}
+
+class Box implements \Ds\Hashable
+{
+    private $value;
+
+    public function __construct($value)
+    {
+        $this->value = $value;
+    }
+
+    public function equals($obj) : bool
+    {
+        return $this->value === $obj->value;
+    }
+
+    public function hash()
+    {
+        return 0;
+    }
 }
