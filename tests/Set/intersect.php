@@ -37,27 +37,35 @@ trait intersect
         $this->assertEquals($initial, $a->intersect($a)->toArray());
     }
 
+    /**
+     * Test that contains still works after intersect
+     */
     public function testIntersectContains()
     {
-        $setAB = $this->getInstance(["A", "B"]);
-        $setBC = $this->getInstance(["B", "C"]);
+        $ab = $this->getInstance(["a", "b"]);
+        $bc = $this->getInstance(["b", "c"]);
 
-        $setB = $setAB->intersect($setBC);
+        $b = $ab->intersect($bc);
 
-        $this->assertFalse($setB->contains("A"));
-        $this->assertFalse($setB->contains("C"));
-        $this->assertTrue($setB->contains("B"));
+        $this->assertToArray(["b"], $b);
+
+        $this->assertFalse($b->contains("a"));
+        $this->assertFalse($b->contains("c"));
+        $this->assertTrue( $b->contains("b"));
     }
 
+    /**
+     * Test that you can't add duplicates after an intersection
+     */
     public function testIntersectAdd()
     {
-        $setAB = $this->getInstance(["A", "B"]);
-        $setBC = $this->getInstance(["B", "C"]);
+        $ab = $this->getInstance(["a", "b"]);
+        $bc = $this->getInstance(["b", "c"]);
 
-        $setB = $setAB->intersect($setBC);
-        $setB->add("B");
+        $b = $ab->intersect($bc);
+        $b->add("b");
 
-        $this->assertEquals($setB->toArray(), ["B"]);
+        $this->assertToArray(["b"], $b);
     }
 
     // /**

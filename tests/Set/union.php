@@ -27,16 +27,35 @@ trait union
         $this->assertEquals($expected, $a->union($b)->toArray());
     }
 
-    /** @test */
-    public function testUnionDoesNotFreezeWhenOperatingOnSetsWithObjects()
+    /**
+     * @dataProvider unionDataProvider
+     */
+    public function testUnionWithSelf(array $initial, array $values, array $expected)
     {
-        $setA = $this->getInstance([new Box("X")]);
-        $setB = $this->getInstance([new Box("Y")]);
+        $a = $this->getInstance($initial);
+        $this->assertEquals($initial, $a->union($a)->toArray());
+    }
 
-        // PHP hangs when calling union on the above sets
-        $result = $setA->union($setB);
+    public function testUnionWhenOperatingOnSetsWithObjectsWithNonZeroHash()
+    {
+        $a = new \Ds\Tests\HashableObject("a", rand());
+        $b = new \Ds\Tests\HashableObject("b", rand());
 
-        $this->assertTrue($result->toArray() === ["X", "Y"]);
+        $setA = $this->getInstance([$a]);
+        $setB = $this->getInstance([$b]);
+
+        $this->assertToArray([$a, $b], $setA->union($setB));
+    }
+
+    public function testUnionWhenOperatingOnSetsWithObjectsWithZeroHash()
+    {
+        $a = new \Ds\Tests\HashableObject("a", 0);
+        $b = new \Ds\Tests\HashableObject("b", 0);
+
+        $setA = $this->getInstance([$a]);
+        $setB = $this->getInstance([$b]);
+
+        $this->assertToArray([$a, $b], $setA->union($setB));
     }
 
     // /**
@@ -62,15 +81,6 @@ trait union
     //     $this->assertEquals($expected, $a->toArray());
     // }
 
-    /**
-     * @dataProvider unionDataProvider
-     */
-    public function testUnionWithSelf(array $initial, array $values, array $expected)
-    {
-        $a = $this->getInstance($initial);
-        $this->assertEquals($initial, $a->union($a)->toArray());
-    }
-
     // /**
     //  * @dataProvider unionDataProvider
     //  */
@@ -90,24 +100,4 @@ trait union
     //     $a |= $a;
     //     $this->assertEquals($initial, $a->toArray());
     // }
-}
-
-class Box implements \Ds\Hashable
-{
-    private $value;
-
-    public function __construct($value)
-    {
-        $this->value = $value;
-    }
-
-    public function equals($obj) : bool
-    {
-        return $this->value === $obj->value;
-    }
-
-    public function hash()
-    {
-        return 0;
-    }
 }

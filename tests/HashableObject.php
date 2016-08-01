@@ -8,18 +8,20 @@ use Ds\Hashable;
  */
 class HashableObject implements Hashable {
 
-    private $id;
+    private $value;
+    private $hash;
 
-    public function __construct(int $id)
+    public function __construct($value, $hash = null)
     {
-        $this->id = $id;
-    }
-
-    public function hash(): string {
-        return $this->id;
+        $this->value = $value;
+        $this->hash  = func_num_args() === 1 ? $value : $hash;
     }
 
     public function equals($obj): bool {
-        return $obj->id === $this->id;
+        return $obj->value === $this->value;
+    }
+
+    public function hash() {
+        return $this->hash;
     }
 }
