@@ -15,7 +15,7 @@ class PairTest extends CollectionTest
     use Pair\_serialize;
     use Pair\_unset;
     use Pair\_var_dump;
-
+    use Pair\copy;
     use Pair\toArray;
 
     private function getPair($key, $value)
