@@ -10,6 +10,11 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
         srand(1);
     }
 
+    public function tearDownAfterClass()
+    {
+        gc_collect_cycles();
+    }
+
     /**
      * Sample size to test larger operations.
      */
