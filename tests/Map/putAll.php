@@ -36,7 +36,6 @@ trait putAll
         $this->assertToArray($values, $instance);
     }
 
-
     /**
      * @dataProvider putAllDataProvider
      */

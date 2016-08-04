@@ -88,6 +88,7 @@ trait get
         $instance = $this->getInstance([[1]]);
         $this->expectAccessByReferenceHasNoEffect();
         $instance[0][0] = null;
+        $this->assertEquals([1], $instance[0]);
     }
 
     public function testGetFirstAfterRemove()

@@ -68,4 +68,37 @@ trait push
         $this->assertToArray([$b], $a);
         $this->assertToArray([$a], $b);
     }
+
+    public function testPushDeeperIndirectCircularReference()
+    {
+        $a = $this->getInstance();
+        $b = $this->getInstance();
+
+        $a->push($b);
+        $b->push($a);
+
+        $a->push($a);
+        $b->push($b);
+
+        $a->push($b);
+        $b->push($a);
+
+        $this->assertToArray([$b, $a, $b], $a);
+        $this->assertToArray([$a, $b, $a], $b);
+    }
+
+    public function testPushIndirectCircularReferenceAfterUnshifts()
+    {
+        $a = $this->getInstance();
+        $b = $this->getInstance();
+
+        $a->push(...range(1, 5));
+        $b->push(...range(1, 5));
+
+        $a->unshift($b);
+        $b->unshift($a);
+
+        $this->assertToArray([$b, 1, 2, 3, 4, 5], $a);
+        $this->assertToArray([$a, 1, 2, 3, 4, 5], $b);
+    }
 }

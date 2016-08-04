@@ -102,4 +102,18 @@ trait put
 
         $this->assertToArray(['a' => [2]], $instance);
     }
+
+    public function testMapPutCircularReference()
+    {
+        $a = $this->getInstance();
+        $b = $this->getInstance();
+
+        $a->put("B", $b);
+        $a->put("A", $a);
+        $b->put("B", $b);
+        $b->put("A", $a);
+
+        $this->assertToArray(["B" => $b, "A" => $a], $a);
+        $this->assertToArray(["B" => $b, "A" => $a], $b);
+    }
 }

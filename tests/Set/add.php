@@ -102,8 +102,10 @@ trait add
 
         $a->add($b);
         $b->add($a);
+        $a->add($a);
+        $b->add($b);
 
-        $this->assertToArray([$b], $a);
-        $this->assertToArray([$a], $b);
+        $this->assertToArray([$b, $a], $a);
+        $this->assertToArray([$a, $b], $b);
     }
 }

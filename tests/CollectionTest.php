@@ -128,7 +128,7 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
 
     public function expectInternalIllegalOffset()
     {
-        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+        $this->setExpectedException(\PHPUnit_Framework_Error_Warning::class);
     }
 
     public function outOfRangeDataProvider()
