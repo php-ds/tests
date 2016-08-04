@@ -5,12 +5,12 @@ use Ds\Collection;
 
 abstract class CollectionTest extends \PHPUnit_Framework_TestCase
 {
-    public function setUpBeforeClass()
+    static public function setUpBeforeClass()
     {
         srand(1);
     }
 
-    public function tearDownAfterClass()
+    static public function tearDownAfterClass()
     {
         gc_collect_cycles();
     }
