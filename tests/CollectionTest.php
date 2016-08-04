@@ -5,6 +5,16 @@ use Ds\Collection;
 
 abstract class CollectionTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        srand(1);
+    }
+
+    public function tearDown()
+    {
+        gc_collect_cycles();
+    }
+
     /**
      * Sample size to test larger operations.
      */
