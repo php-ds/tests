@@ -12,7 +12,7 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
 
     static public function tearDownAfterClass()
     {
-        gc_collect_cycles();
+        // gc_collect_cycles();
     }
 
     /**
