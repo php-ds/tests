@@ -50,4 +50,11 @@ trait push
         $this->assertToArray($expected, $instance);
         $this->assertCount(count($expected), $instance);
     }
+
+    public function testPushCircularReference()
+    {
+        $instance = $this->getInstance();
+        $instance->push($instance);
+        $this->assertToArray([$instance], $instance);
+    }
 }

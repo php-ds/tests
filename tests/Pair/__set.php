@@ -16,4 +16,11 @@ trait __set
         $pair->value = 2;
         $this->assertEquals(2, $pair->value);
     }
+
+    public function testSetSelf()
+    {
+        $pair = $this->getPair('a', 1);
+        $pair->value = $pair;
+        $this->assertEquals($pair, $pair->value);
+    }
 }

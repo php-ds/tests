@@ -14,6 +14,9 @@ trait filter
             // Test only including odd values.
             [[1, 2, 3], function ($k, $v) { return $k & 1; }, [1 => 2]],
             [[1, 2, 3], function ($k, $v) { return $v & 1; }, [0 => 1, 2 => 3]],
+
+            //
+            [[1, 2, 3], function ($k)     { return $k & 1; }, [1 => 2]],
         ];
     }
 
@@ -66,6 +69,25 @@ trait filter
         }
 
         $this->fail('Exception should have been caught');
+    }
+
+    public function testFilterDoesNotLeakWhenCallbackFails()
+    {
+        $instance = $this->getInstance([
+            "a" => new \stdClass(),
+            "b" => new \stdClass(),
+            "c" => new \stdClass(),
+        ]);
+
+        try {
+            $mapped = $instance->filter(function($key, $value) {
+                if ($key === "c") {
+                    throw new \Exception();
+                }
+            });
+        } catch (\Exception $e) {
+            // Do nothing
+        }
     }
 
     public function testFilterWithoutCallable()

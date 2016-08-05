@@ -13,7 +13,6 @@ trait apply
         ];
     }
 
-
     /**
      * @dataProvider applyDataProvider
      */
@@ -61,4 +60,24 @@ trait apply
 
         $this->fail('Exception should have been caught');
     }
+
+    public function testApplyDoesNotLeakWhenCallbackFails()
+    {
+        $instance = $this->getInstance([
+            "a" => new \stdClass(),
+            "b" => new \stdClass(),
+            "c" => new \stdClass(),
+        ]);
+
+        try {
+            $instance->apply(function($key, $value) {
+                if ($key === "c") {
+                    throw new \Exception();
+                }
+            });
+        } catch (\Exception $e) {
+            // Do nothing
+        }
+    }
+
 }

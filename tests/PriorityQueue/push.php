@@ -67,4 +67,11 @@ trait push
             $this->assertEquals($i, $instance->pop());
         }
     }
+
+    public function testPushCircularReference()
+    {
+        $instance = $this->getInstance();
+        $instance->push($instance, 1);
+        $this->assertToArray([$instance], $instance);
+    }
 }

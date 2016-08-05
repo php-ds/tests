@@ -68,4 +68,23 @@ trait map
 
         $this->fail('Exception should have been caught');
     }
+
+    public function testMapDoesNotLeakWhenCallbackFails()
+    {
+        $instance = $this->getInstance([
+            "a" => new \stdClass(),
+            "b" => new \stdClass(),
+            "c" => new \stdClass(),
+        ]);
+
+        try {
+            $mapped = $instance->map(function($key, $value) {
+                if ($key === "c") {
+                    throw new \Exception();
+                }
+            });
+        } catch (\Exception $e) {
+            // Do nothing
+        }
+    }
 }
