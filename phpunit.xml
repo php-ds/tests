@@ -1,6 +1,7 @@
 <phpunit
-    cacheTokens     = "false"
-    backupGlobals   = "false"
+    cacheTokens             = "false"
+    backupGlobals           = "false"
+    backupStaticAttributes  = "false"
     >
     <testsuites>
         <testsuite>
