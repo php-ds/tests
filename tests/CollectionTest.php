@@ -7,12 +7,24 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     static public function setUpBeforeClass()
     {
-        srand(1);
+        // srand(1);
     }
 
     static public function tearDownAfterClass()
     {
         // gc_collect_cycles();
+    }
+
+    public function tearDown()
+    {
+        // See http://kriswallsmith.net/post/18029585104/faster-phpunit
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
     }
 
     /**

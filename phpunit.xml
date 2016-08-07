@@ -1,4 +1,7 @@
-<phpunit>
+<phpunit
+    cacheTokens     = "false"
+    backupGlobals   = "false"
+    >
     <testsuites>
         <testsuite>
             <directory>tests</directory>
