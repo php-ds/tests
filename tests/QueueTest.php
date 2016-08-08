@@ -37,7 +37,7 @@ class QueueTest extends CollectionTest
     public function testArrayAccessSet()
     {
         $set = $this->getInstance();
-        $this->expectArrayAccessUnsupportedException();
+        $this->expectOutOfBoundsException();
         $set['a'] = 1;
     }
 }
