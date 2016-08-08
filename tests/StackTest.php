@@ -48,4 +48,11 @@ class StackTest extends CollectionTest
         // unserialized by pushing each serialized value.
         return parent::basicDataProvider();
     }
+
+    public function testArrayAccessSet()
+    {
+        $set = $this->getInstance();
+        $this->expectArrayAccessUnsupportedException();
+        $set['a'] = 1;
+    }
 }

@@ -33,4 +33,11 @@ class QueueTest extends CollectionTest
     {
         return new \Ds\Queue($values);
     }
+
+    public function testArrayAccessSet()
+    {
+        $set = $this->getInstance();
+        $this->expectArrayAccessUnsupportedException();
+        $set['a'] = 1;
+    }
 }

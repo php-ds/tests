@@ -8,7 +8,7 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Sample sizes.
      */
-    const MANY = 1 << 8 + 1;
+    const MANY = 1 << 6 + 1;
     const SOME = 1 << 4 + 1;
 
     /**

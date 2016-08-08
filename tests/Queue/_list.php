@@ -5,6 +5,8 @@ trait _list
 {
     public function testList()
     {
-        // PriorityQueue does not support index access.
+        $instance = $this->getInstance(['a', 'b', 'c']);
+        $this->expectListNotSupportedException();
+        list($a, $b, $c) = $instance;
     }
 }

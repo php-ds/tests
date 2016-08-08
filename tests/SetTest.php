@@ -50,7 +50,7 @@ class SetTest extends CollectionTest
 
     public function getUniqueAndDuplicateData()
     {
-        $sample     = $this->sample();
+        $sample = $this->sample();
         $duplicates = [];
 
         foreach ($sample as $value) {
@@ -66,7 +66,8 @@ class SetTest extends CollectionTest
         return [$sample, $duplicates];
     }
 
-    public function testArrayAccessSet() {
+    public function testArrayAccessSet()
+    {
         $set = $this->getInstance();
         $this->expectOutOfBoundsException();
         $set['a'] = 1;

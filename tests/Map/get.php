@@ -44,4 +44,11 @@ trait get
         $instance = $this->getInstance(['a' => [1]]);
         $this->assertEquals(1, $instance['a'][0]);
     }
+
+    public function testArrayAccessGetKeyNotFound()
+    {
+        $instance = $this->getInstance(['a' => 1]);
+        $this->expectKeyNotFoundException();
+        $instance['b'];
+    }
 }

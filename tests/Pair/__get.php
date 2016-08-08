@@ -17,9 +17,4 @@ trait __get
         $this->expectPropertyDoesNotExistException();
         $pair->nope;
     }
-
-    public function testBadPropertyWrite()
-    {
-
-    }
 }

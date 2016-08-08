@@ -22,4 +22,11 @@ trait peek
         $this->assertEquals($expected, $instance->peek());
         $this->assertCount(count($initial), $instance);
     }
+
+    public function testPeekNotAllowedWhenEmpty()
+    {
+        $instance = $this->getInstance();
+        $this->expectEmptyNotAllowedException();
+        $instance->peek();
+    }
 }
