@@ -8,12 +8,15 @@ trait join
         // values, glue
         $data = [];
 
-        $glues   = ['', '~', 1, false];
-        $lengths = [0, 1, 2, 3, self::SOME, self::MANY];
+        $glues   = ['', '~', 0, 1, false];
+        $lengths = [0, 1, 2, 3, 10];
+        $obj     = $this->getInstance();
 
-        foreach ($lengths as $len) {
+        foreach ($lengths as $length) {
             foreach ($glues as $glue) {
-                $data[] = [range(0, $len - 1), $glue];
+                $data[] = [range(1, $length),            $glue]; // integers
+                $data[] = [array_fill(0, $length, 'x'),  $glue]; // string
+                $data[] = [array_fill(0, $length, $obj), $glue]; // objects
             }
         }
 
