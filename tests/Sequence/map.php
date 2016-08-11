@@ -65,6 +65,8 @@ trait map
                 if ($value === 3) {
                     throw new \Exception();
                 }
+
+                return $value;
             });
         } catch (\Exception $e) {
             $this->assertToArray([1, 2, 3], $instance);
@@ -77,20 +79,19 @@ trait map
 
     public function testMapDoesNotLeakWhenCallbackFails()
     {
-        $instance = $this->getInstance([
-            "a",
-            new \stdClass(),
-            0,
-        ]);
+        $instance = $this->getInstance(["a", "b", "c"]);
 
         try {
-            $mapped = $instance->map(function($value) {
-                if ($value === 0) {
+            $instance->map(function($value) {
+                if ($value === "c") {
                     throw new \Exception();
                 }
+                return $value;
             });
         } catch (\Exception $e) {
-            // Do nothing
+            return;
         }
+
+        $this->fail('Exception should have been caught');
     }
 }

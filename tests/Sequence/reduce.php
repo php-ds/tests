@@ -50,7 +50,7 @@ trait reduce
 
     public function testReduceCallbackThrowsException()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = $this->getInstance(["a", "b", "c"]);
         $result = null;
 
         try {
@@ -58,7 +58,7 @@ trait reduce
                 throw new \Exception();
             });
         } catch (\Exception $e) {
-            $this->assertToArray([1, 2, 3], $instance);
+            $this->assertToArray(["a", "b", "c"], $instance);
             $this->assertNull($result);
             return;
         }
@@ -68,18 +68,38 @@ trait reduce
 
     public function testReduceCallbackThrowsExceptionLaterOn()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = $this->getInstance(["a", "b", "c"]);
         $result = null;
 
         try {
             $result = $instance->reduce(function($carry, $value) {
-                if ($value === 3) {
+                if ($value === "c") {
                     throw new \Exception();
                 }
+
+                return $value;
             });
         } catch (\Exception $e) {
-            $this->assertToArray([1, 2, 3], $instance);
+            $this->assertToArray(["a", "b", "c"], $instance);
             $this->assertNull($result);
+            return;
+        }
+
+        $this->fail('Exception should have been caught');
+    }
+
+    public function testReduceCallbackDoesNotLeakOnFailure()
+    {
+        $instance = $this->getInstance(["a", "b", "c"]);
+
+        try {
+            $instance->reduce(function($carry, $value) {
+                if ($value === "c") {
+                    throw new \Exception();
+                }
+                return $value;
+            });
+        } catch (\Exception $e) {
             return;
         }
 

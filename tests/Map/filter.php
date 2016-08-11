@@ -15,8 +15,8 @@ trait filter
             [[1, 2, 3], function ($k, $v) { return $k & 1; }, [1 => 2]],
             [[1, 2, 3], function ($k, $v) { return $v & 1; }, [0 => 1, 2 => 3]],
 
-            //
-            [[1, 2, 3], function ($k)     { return $k & 1; }, [1 => 2]],
+            // Test not asking for the value.
+            [[1, 2, 3], function ($k) { return $k & 1; }, [1 => 2]],
         ];
     }
 
@@ -86,8 +86,10 @@ trait filter
                 }
             });
         } catch (\Exception $e) {
-            // Do nothing
+            return;
         }
+
+        $this->fail('Exception should have been caught');
     }
 
     public function testFilterWithoutCallable()

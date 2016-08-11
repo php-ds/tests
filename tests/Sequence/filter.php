@@ -50,7 +50,7 @@ trait filter
 
     public function testFilterCallbackThrowsException()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = $this->getInstance(["a", "b", "c"]);
         $filtered = null;
 
         try {
@@ -58,7 +58,7 @@ trait filter
                 throw new \Exception();
             });
         } catch (\Exception $e) {
-            $this->assertToArray([1, 2, 3], $instance);
+            $this->assertToArray(["a", "b", "c"], $instance);
             $this->assertNull($filtered);
             return;
         }
@@ -68,17 +68,39 @@ trait filter
 
     public function testFilterCallbackThrowsExceptionLaterOn()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = $this->getInstance(["a", "b", "c"]);
         $filtered = null;
 
         try {
             $filtered = $instance->filter(function($value) {
-                if ($value === 3) {
+                if ($value === "c") {
                     throw new \Exception();
                 }
+                return true;
             });
         } catch (\Exception $e) {
-            $this->assertToArray([1, 2, 3], $instance);
+            $this->assertToArray(["a", "b", "c"], $instance);
+            $this->assertNull($filtered);
+            return;
+        }
+
+        $this->fail('Exception should have been caught');
+    }
+
+    public function testFilterDoesNotLeakWhenCallbackFails()
+    {
+        $instance = $this->getInstance(["a", "b", "c"]);
+        $filtered = null;
+
+        try {
+            $filtered = $instance->filter(function($value) {
+                if ($value === "c") {
+                    throw new \Exception();
+                }
+                return true;
+            });
+        } catch (\Exception $e) {
+            $this->assertToArray(["a", "b", "c"], $instance);
             $this->assertNull($filtered);
             return;
         }
