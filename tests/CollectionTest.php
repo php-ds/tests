@@ -37,8 +37,8 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
         // We have to make separate assertions here because PHPUnit considers an
         // array to be equal of the keys match the values even if the order is
         // not the same, ie. [a => 1, b => 2] equals [b => 2, a => 1].
-        $this->assertEquals(array_values($expected), array_values($actual), "!!! ARRAY VALUE MISMATCH");
-        $this->assertEquals(array_keys  ($expected), array_keys  ($actual), "!!! ARRAY KEY MISMATCH");
+        $this->assertSame(array_values($expected), array_values($actual), "!!! ARRAY VALUE MISMATCH");
+        $this->assertSame(array_keys  ($expected), array_keys  ($actual), "!!! ARRAY KEY MISMATCH");
     }
 
     public function basicDataProvider()
@@ -57,6 +57,11 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     public function expectAccessByReferenceHasNoEffect()
+    {
+        $this->setExpectedException(\PHPUnit_Framework_Error_Notice::class);
+    }
+
+    public function expectUndefinedIndex()
     {
         $this->setExpectedException(\PHPUnit_Framework_Error_Notice::class);
     }
