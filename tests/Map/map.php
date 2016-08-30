@@ -16,7 +16,6 @@ trait map
         ];
     }
 
-
     /**
      * @dataProvider mapDataProvider
      */

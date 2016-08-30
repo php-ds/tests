@@ -40,6 +40,6 @@ trait partition
         $expected = [1, true, '1', '2', 0, false, '0'];
 
         $this->assertEquals(4, $instance->partition());
-        $this->assertToArray($expected, $instance);
+        $this->assertToArrayStrict($expected, $instance);
     }
 }
