@@ -1,6 +1,18 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+class MagicGetter
+{
+    private $values;
+    public function __construct(array $values)
+    {
+        $this->values = $values;
+    }
+    public function __get($offset) {
+        return $this->values[$offset];
+    }
+}
+
 trait pluck
 {
     public function pluckDataProvider()
@@ -14,12 +26,19 @@ trait pluck
             [ range(1, self::SOME), 'a'],
             [ range(1, self::MANY), 'a'],
 
-            [[],                    1],
-            [ range(1, 1),          1],
-            [ range(1, 2),          1],
-            [ range(1, 3),          1],
-            [ range(1, self::SOME), 1],
-            [ range(1, self::MANY), 1],
+            [[],                      1],
+            [ range(1, 1),            1],
+            [ range(1, 2),            1],
+            [ range(1, 3),            1],
+            [ range(1, self::SOME),   1],
+            [ range(1, self::MANY),   1],
+
+            [[],                    '1'],
+            [ range(1, 1),          '1'],
+            [ range(1, 2),          '1'],
+            [ range(1, 3),          '1'],
+            [ range(1, self::SOME), '1'],
+            [ range(1, self::MANY), '1'],
         ];
     }
 
@@ -107,5 +126,22 @@ trait pluck
         $instance->pluck('a');
     }
 
-    // test __get
+    public function testPluckOnStrings()
+    {
+        $a = "abc";
+        $b = "xyz";
+
+        $instance = $this->getInstance([$a, $b]);
+        $this->assertToArray(['b', 'y'], $instance->pluck(1));
+    }
+
+    public function testPluckUsingMagicGet()
+    {
+        $a = new MagicGetter([0, 1, 2]);
+        $b = new MagicGetter([3, 4, 5]);
+        $c = new MagicGetter([6, 7, 8]);
+
+        $instance = $this->getInstance([$a, $b, $c]);
+        $this->assertToArray([1, 4, 7], $instance->pluck(1));
+    }
 }

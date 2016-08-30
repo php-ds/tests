@@ -30,15 +30,26 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("object(" . get_class($instance) . ')', "$instance");
     }
 
-    public function assertToArray(array $expected, $instance)
+    private function assertInstanceToArray(array $expected, $instance, $strict)
     {
         $actual = $instance->toArray();
+        $assert = $strict ? 'assertSame' : 'assertEquals';
 
         // We have to make separate assertions here because PHPUnit considers an
         // array to be equal of the keys match the values even if the order is
         // not the same, ie. [a => 1, b => 2] equals [b => 2, a => 1].
-        $this->assertSame(array_values($expected), array_values($actual), "!!! ARRAY VALUE MISMATCH");
-        $this->assertSame(array_keys  ($expected), array_keys  ($actual), "!!! ARRAY KEY MISMATCH");
+        $this->$assert(array_values($expected), array_values($actual), "!!! ARRAY VALUE MISMATCH");
+        $this->$assert(array_keys  ($expected), array_keys  ($actual), "!!! ARRAY KEY MISMATCH");
+    }
+
+    public function assertToArray(array $expected, $instance)
+    {
+        $this->assertInstanceToArray($expected, $instance, false);
+    }
+
+    public function assertToArrayStrict(array $expected, $instance)
+    {
+        $this->assertInstanceToArray($expected, $instance, true);
     }
 
     public function basicDataProvider()

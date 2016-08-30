@@ -68,41 +68,39 @@ trait groupBy
         ];
     }
 
-    private function transformGroupByForObjects(array &$values)
+    private function transformGroupByForObjects(array $values)
     {
-        foreach ($values as &$value) {
+        foreach ($values as $index => $value) {
             $obj = new \stdClass();
 
-            foreach ($value as $key => $item) {
-                $obj->$key = $item;
+            foreach ($value as $key => $property) {
+                $obj->$key = $property;
             }
 
-            $value = $obj;
+            $values[$index] = $obj;
         }
+
+        return $values;
     }
 
-    private function transformGroupByForArrayAccess(array &$values)
+    private function transformGroupByForArrayAccess(array $values)
     {
-        foreach ($values as &$value) {
-            $obj = new \ArrayObject();
-
-            foreach ($value as $key => $item) {
-                $obj[$key] = $item;
-            }
-
-            $value = $obj;
+        foreach ($values as $index => $value) {
+            $values[$index] = new \ArrayObject($value);
         }
+
+        return $values;
     }
 
     private function _testGroupBy(array $values, $accessor, array $expected)
     {
         $instance = $this->getInstance($values);
 
-        foreach ($expected as $key => &$values) {
-            $values = $this->getInstance($values);
+        foreach ($expected as $key => $values) {
+            $expected[$key] = $this->getInstance($values);
         }
 
-        $this->assertToArray($expected, $instance->groupBy($accessor));
+        $this->assertEquals($expected, $instance->groupBy($accessor)->toArray());
     }
 
     /**
@@ -126,12 +124,8 @@ trait groupBy
      */
     public function testGroupByUsingIntegerIndexOnObjects(array $values, $accessor, array $expected)
     {
-        $this->transformGroupByForObjects($values);
-
-        foreach ($expected as $i => &$v) {
-            $this->transformGroupByForObjects($v);
-        }
-
+        $values = $this->transformGroupByForObjects($values);
+        $expected = array_map([$this, 'transformGroupByForObjects'], $expected);
         $this->_testGroupBy($values, $accessor, $expected);
     }
 
@@ -140,12 +134,8 @@ trait groupBy
      */
     public function testGroupByUsingIntegerIndexOnArrayAccess(array $values, $accessor, array $expected)
     {
-        $this->transformGroupByForArrayAccess($values);
-
-        foreach ($expected as $i => &$v) {
-            $this->transformGroupByForArrayAccess($v);
-        }
-
+        $values = $this->transformGroupByForArrayAccess($values);
+        $expected = array_map([$this, 'transformGroupByForArrayAccess'], $expected);
         $this->_testGroupBy($values, $accessor, $expected);
     }
 
@@ -162,12 +152,8 @@ trait groupBy
      */
     public function testGroupByUsingStringIndexOnObjects(array $values, $accessor, array $expected)
     {
-        $this->transformGroupByForObjects($values);
-
-        foreach ($expected as $i => &$v) {
-            $this->transformGroupByForObjects($v);
-        }
-
+        $values = $this->transformGroupByForObjects($values);
+        $expected = array_map([$this, 'transformGroupByForObjects'], $expected);
         $this->_testGroupBy($values, $accessor, $expected);
     }
 
@@ -176,12 +162,8 @@ trait groupBy
      */
     public function testGroupByUsingStringIndexOnArrayAccess(array $values, $accessor, array $expected)
     {
-        $this->transformGroupByForArrayAccess($values);
-
-        foreach ($expected as $i => &$v) {
-            $this->transformGroupByForArrayAccess($v);
-        }
-
+        $values = $this->transformGroupByForArrayAccess($values);
+        $expected = array_map([$this, 'transformGroupByForArrayAccess'], $expected);
         $this->_testGroupBy($values, $accessor, $expected);
     }
 
@@ -200,7 +182,7 @@ trait groupBy
      */
     public function testGroupByFailsUsingBadIndexOnObjects(array $values, $accessor, array $expected)
     {
-        $this->transformGroupByForObjects($values);
+        $values = $this->transformGroupByForObjects($values);
         $instance = $this->getInstance($values);
         $this->expectUndefinedIndex();
         $instance->groupBy('bad_index');
@@ -211,7 +193,7 @@ trait groupBy
      */
     public function testGroupByFailsUsingBadIndexOnArrayAccess(array $values, $accessor, array $expected)
     {
-        $this->transformGroupByForArrayAccess($values);
+        $values = $this->transformGroupByForArrayAccess($values);
         $instance = $this->getInstance($values);
         $this->expectUndefinedIndex();
         $instance->groupBy('bad_index');
@@ -234,5 +216,30 @@ trait groupBy
 
         $instance = $this->getInstance([$object]);
         $this->assertEquals(true, $instance->groupBy('a')->first()->key);
+    }
+
+    public function testGroupByCallbackThrowsException()
+    {
+        $instance = $this->getInstance([
+            ['a' => 1],
+            ['a' => 2],
+            ['a' => 3],
+        ]);
+
+        $grouped = null;
+
+        try {
+            $grouped = $instance->groupBy(function($value) {
+                if ($value['a'] === 3) {
+                    throw new \Exception();
+                }
+                return $value['a'];
+            });
+        } catch (\Exception $e) {
+            $this->assertNull($grouped);
+            return;
+        }
+
+        $this->fail('Exception should have been caught');
     }
 }
