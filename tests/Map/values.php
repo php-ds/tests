@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests\Map;
 
-use Ds\Vector;
+use Ds\Sequence;
 
 trait values
 {
@@ -25,7 +25,7 @@ trait values
         $instance = $this->getInstance($initial);
         $values = $instance->values();
 
-        $this->assertInstanceOf(Vector::class, $values);
+        $this->assertInstanceOf(Sequence::class, $values);
         $this->assertEquals($expected, $values->toArray());
     }
 }

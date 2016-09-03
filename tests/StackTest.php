@@ -16,10 +16,6 @@ class StackTest extends CollectionTest
     use Stack\_serialize;
     use Stack\_unset;
     use Stack\_var_dump;
-
-    use Vector\allocate;
-    use Vector\capacity;
-
     use Stack\clear;
     use Stack\copy;
     use Stack\count;

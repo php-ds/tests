@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests\Map;
 
-use Ds\Vector;
+use Ds\Sequence;
 
 trait pairs
 {
@@ -16,15 +16,15 @@ trait pairs
     /**
      * @dataProvider pairsDataProvider
      */
-    public function testPairs(array $initial, array $expected)
+    public function testTuples(array $initial, array $expected)
     {
         $instance = $this->getInstance($initial);
         $pairs = $instance->pairs();
 
-        $this->assertInstanceOf(Vector::class, $pairs);
+        $this->assertInstanceOf(Sequence::class, $pairs);
 
         $to_array = function ($pair) {
-            return [$pair->key, $pair->value];
+            return [$pair[0], $pair[1]];
         };
 
         $this->assertEquals($expected, array_map($to_array, $pairs->toArray()));

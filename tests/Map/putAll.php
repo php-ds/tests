@@ -61,22 +61,11 @@ trait putAll
     /**
      * @dataProvider putAllDataProvider
      */
-    public function testPutAllFromVector(array $values)
+    public function testPutAllFromSequence(array $values)
     {
         $instance = $this->getInstance();
-        $vector = new \Ds\Vector($values);
+        $vector = new \Ds\Sequence($values);
         $instance->putAll($vector);
-        $this->assertToArray($values, $instance);
-    }
-
-    /**
-     * @dataProvider putAllDataProvider
-     */
-    public function testPutAllFromDeque(array $values)
-    {
-        $instance = $this->getInstance();
-        $deque = new \Ds\Deque($values);
-        $instance->putAll($deque);
         $this->assertToArray($values, $instance);
     }
 
