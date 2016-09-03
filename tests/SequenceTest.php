@@ -1,8 +1,9 @@
 <?php
 namespace Ds\Tests;
 
-class DequeTest extends CollectionTest
+class SequenceTest extends CollectionTest
 {
+    use Sequence\__construct;
     use Sequence\_clone;
     use Sequence\_echo;
     use Sequence\_empty;
@@ -13,15 +14,9 @@ class DequeTest extends CollectionTest
     use Sequence\_serialize;
     use Sequence\_unset;
     use Sequence\_var_dump;
-
-    use Deque\__construct;
-    use Deque\allocate;
-    use Deque\capacity;
-    use Deque\insert;
-    use Deque\remove;
-    use Deque\slice;
-
+    use Sequence\allocate;
     use Sequence\apply;
+    use Sequence\capacity;
     use Sequence\clear;
     use Sequence\contains;
     use Sequence\copy;
@@ -58,7 +53,7 @@ class DequeTest extends CollectionTest
 
     public function getInstance(array $values = [])
     {
-        return new \Ds\Deque($values);
+        return new \Ds\Sequence($values);
     }
 
     public function testReallocatingWhenHeadNotAtZero()
@@ -119,7 +114,7 @@ class DequeTest extends CollectionTest
 
         // if the number of free slots >= number of wrapped values
 
-        // When we sort the deque, the internal buffer will have to be realigned
+        // When we sort the sequence, the internal buffer will have to be realigned
         // to zero. In this particular case, there is enough temporary space
         // between the tail and the head to push the left partition forward,
         // and pull the right partition back to zero. This avoids an allocation,

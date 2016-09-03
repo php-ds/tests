@@ -215,7 +215,7 @@ trait groupBy
         $object->a   = false;
 
         $instance = $this->getInstance([$object]);
-        $this->assertEquals(true, $instance->groupBy('a')->first()->key);
+        $this->assertEquals(true, $instance->groupBy('a')->first()[0]);
     }
 
     public function testGroupByCallbackThrowsException()

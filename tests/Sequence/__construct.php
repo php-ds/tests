@@ -1,7 +1,7 @@
 <?php
-namespace Ds\Tests\Vector;
+namespace Ds\Tests\Sequence;
 
-use Ds\Vector;
+use Ds\Sequence;
 
 trait __construct
 {
@@ -22,7 +22,7 @@ trait __construct
      */
     public function testConstruct($values, array $expected)
     {
-        $this->assertToArray($expected, new Vector($values));
+        $this->assertToArray($expected, new Sequence($values));
     }
 
    /**
@@ -30,11 +30,11 @@ trait __construct
      */
     public function testConstructUsingNonArrayIterable(array $values, array $expected)
     {
-        $this->assertToArray($expected, new Vector(new \ArrayIterator($values)));
+        $this->assertToArray($expected, new Sequence(new \ArrayIterator($values)));
     }
 
     public function testConstructNoParams()
     {
-        $this->assertToArray([], new Vector());
+        $this->assertToArray([], new Sequence());
     }
 }

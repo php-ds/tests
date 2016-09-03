@@ -14,7 +14,6 @@ class SetTest extends CollectionTest
     use Set\_serialize;
     use Set\_unset;
     use Set\_var_dump;
-
     use Set\add;
     use Set\allocate;
     use Set\capacity;

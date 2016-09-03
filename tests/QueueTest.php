@@ -16,10 +16,6 @@ class QueueTest extends CollectionTest
     use Queue\_serialize;
     use Queue\_unset;
     use Queue\_var_dump;
-
-    use Deque\allocate;
-    use Deque\capacity;
-
     use Queue\clear;
     use Queue\copy;
     use Queue\count;

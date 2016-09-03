@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests;
 
-use Ds\Vector;
+use Ds\Sequence;
 
 class MapTest extends CollectionTest
 {
@@ -15,7 +15,6 @@ class MapTest extends CollectionTest
     use Map\_serialize;
     use Map\_unset;
     use Map\_var_dump;
-
     use Map\allocate;
     use Map\apply;
     use Map\capacity;

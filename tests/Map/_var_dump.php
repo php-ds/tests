@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests\Map;
 
-use Ds\Pair;
+use Ds\Tuple;
 
 trait _var_dump
 {
@@ -15,11 +15,11 @@ trait _var_dump
             ],
             [
                 ['a'],
-                [new Pair(0, 'a')],
+                [new Tuple(0, 'a')],
             ],
             [
                 ['a', 'b'],
-                [new Pair(0, 'a'), new Pair(1, 'b')],
+                [new Tuple(0, 'a'), new Tuple(1, 'b')],
             ],
         ];
     }

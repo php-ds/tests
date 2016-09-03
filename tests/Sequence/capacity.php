@@ -1,11 +1,11 @@
 <?php
-namespace Ds\Tests\Deque;
+namespace Ds\Tests\Sequence;
 
 trait capacity
 {
     public function testCapacity()
     {
-        $min = \Ds\Deque::MIN_CAPACITY;
+        $min = \Ds\Sequence::MIN_CAPACITY;
 
         $instance = $this->getInstance();
         $this->assertEquals($min, $instance->capacity());
@@ -55,10 +55,11 @@ trait capacity
 
     public function testClearResetsCapacity()
     {
-        $min = \Ds\Deque::MIN_CAPACITY;
+        $min = \Ds\Sequence::MIN_CAPACITY;
 
         $instance = $this->getInstance(range(1, self::MANY));
         $instance->clear();
+
         $this->assertEquals($min, $instance->capacity());
     }
 }
