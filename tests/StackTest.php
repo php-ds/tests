@@ -25,7 +25,7 @@ class StackTest extends CollectionTest
     use Stack\push;
     use Stack\toArray;
 
-    protected function getInstance(array $values = [])
+    public function getInstance(array $values = [])
     {
         return new \Ds\Stack($values);
     }

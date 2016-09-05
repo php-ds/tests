@@ -25,7 +25,7 @@ class QueueTest extends CollectionTest
     use Queue\push;
     use Queue\toArray;
 
-    protected function getInstance(array $values = [])
+    public function getInstance(array $values = [])
     {
         return new \Ds\Queue($values);
     }

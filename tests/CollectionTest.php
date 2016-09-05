@@ -11,6 +11,8 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
     const MANY = 1 << 6 + 1;
     const SOME = 1 << 4 + 1;
 
+    abstract public function getInstance(array $values = []);
+
     /**
      * Generic mixed value sample array.
      */
