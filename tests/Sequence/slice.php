@@ -84,17 +84,17 @@ trait slice
         $instance->unshift('b'); // [_, _, _, _, _, _, b, c] tail = 0, head = 6
         $instance->unshift('a'); // [_, _, _, _, _, a, b, c] tail = 0, head = 5
 
-        $this->assertEquals(['a'], $instance->slice(0, 1)->toArray());
-        $this->assertEquals(['b'], $instance->slice(1, 1)->toArray());
-        $this->assertEquals(['c'], $instance->slice(2, 1)->toArray());
+        $this->assertToArray(['a'], $instance->slice(0, 1));
+        $this->assertToArray(['b'], $instance->slice(1, 1));
+        $this->assertToArray(['c'], $instance->slice(2, 1));
 
-        $this->assertEquals(['a', 'b'], $instance->slice(0, 2)->toArray());
-        $this->assertEquals(['b', 'c'], $instance->slice(1, 2)->toArray());
-        $this->assertEquals(['c'     ], $instance->slice(2, 2)->toArray());
+        $this->assertToArray(['a', 'b'], $instance->slice(0, 2));
+        $this->assertToArray(['b', 'c'], $instance->slice(1, 2));
+        $this->assertToArray(['c'     ], $instance->slice(2, 2));
 
-        $this->assertEquals(['a', 'b', 'c'], $instance->slice(0, 3)->toArray());
-        $this->assertEquals(['b', 'c'     ], $instance->slice(1, 3)->toArray());
-        $this->assertEquals(['c'          ], $instance->slice(2, 3)->toArray());
+        $this->assertToArray(['a', 'b', 'c'], $instance->slice(0, 3));
+        $this->assertToArray(['b', 'c'     ], $instance->slice(1, 3));
+        $this->assertToArray(['c'          ], $instance->slice(2, 3));
 
         /* If only some values have wrapped around, slice would have to copy
            from both the wrapped and not-wrapped values */
@@ -105,16 +105,16 @@ trait slice
         $instance->push('c');    // [b, c, _, _, _, _, _, _] tail = 2, head = 1
         $instance->unshift('a'); // [b, c, _, _, _, _, _, a] tail = 2, head = 7
 
-        $this->assertEquals(['a'], $instance->slice(0, 1)->toArray());
-        $this->assertEquals(['b'], $instance->slice(1, 1)->toArray());
-        $this->assertEquals(['c'], $instance->slice(2, 1)->toArray());
+        $this->assertToArray(['a'], $instance->slice(0, 1));
+        $this->assertToArray(['b'], $instance->slice(1, 1));
+        $this->assertToArray(['c'], $instance->slice(2, 1));
 
-        $this->assertEquals(['a', 'b'], $instance->slice(0, 2)->toArray());
-        $this->assertEquals(['b', 'c'], $instance->slice(1, 2)->toArray());
-        $this->assertEquals(['c'     ], $instance->slice(2, 2)->toArray());
+        $this->assertToArray(['a', 'b'], $instance->slice(0, 2));
+        $this->assertToArray(['b', 'c'], $instance->slice(1, 2));
+        $this->assertToArray(['c'     ], $instance->slice(2, 2));
 
-        $this->assertEquals(['a', 'b', 'c'], $instance->slice(0, 3)->toArray());
-        $this->assertEquals(['b', 'c'     ], $instance->slice(1, 3)->toArray());
-        $this->assertEquals(['c'          ], $instance->slice(2, 3)->toArray());
+        $this->assertToArray(['a', 'b', 'c'], $instance->slice(0, 3));
+        $this->assertToArray(['b', 'c'     ], $instance->slice(1, 3));
+        $this->assertToArray(['c'          ], $instance->slice(2, 3));
     }
 }

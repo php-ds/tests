@@ -15,11 +15,11 @@ trait _var_dump
             ],
             [
                 ['a'],
-                [new Tuple(0, 'a')],
+                [new Tuple([0, 'a'])],
             ],
             [
                 ['a', 'b'],
-                [new Tuple(0, 'a'), new Tuple(1, 'b')],
+                [new Tuple([0, 'a']), new Tuple([1, 'b'])],
             ],
         ];
     }

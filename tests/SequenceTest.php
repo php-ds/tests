@@ -14,7 +14,9 @@ class SequenceTest extends CollectionTest
     use Sequence\_serialize;
     use Sequence\_unset;
     use Sequence\_var_dump;
+    use Sequence\all;
     use Sequence\allocate;
+    use Sequence\any;
     use Sequence\apply;
     use Sequence\capacity;
     use Sequence\clear;
@@ -44,10 +46,13 @@ class SequenceTest extends CollectionTest
     use Sequence\rotate;
     use Sequence\set;
     use Sequence\shift;
+    use Sequence\shuffle;
     use Sequence\slice;
     use Sequence\sort;
     use Sequence\sorted;
+    use Sequence\splice;
     use Sequence\sum;
+    use Sequence\swap;
     use Sequence\toArray;
     use Sequence\unshift;
 

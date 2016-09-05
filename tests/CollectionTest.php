@@ -12,6 +12,8 @@ abstract class CollectionTest extends TestCase
     const MANY = 65;
     const SOME = 17;
 
+    abstract public function getInstance(array $values = []);
+
     /**
      * Generic mixed value sample array.
      */
