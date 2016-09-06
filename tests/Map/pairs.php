@@ -38,10 +38,10 @@ trait pairs
         $instance = $this->getInstance();
         $instance->put($key, 1);
 
-        $instance->pairs()->first()->key->state = false;
+        $instance->pairs()->first()[0]->state = false;
 
         $this->assertFalse($key->state);
-        $this->assertFalse($instance->pairs()->first()->key->state);
+        $this->assertFalse($instance->pairs()->first()[0]->state);
     }
 
     public function testKeysAreNotMutableThroughAccess()
@@ -49,6 +49,6 @@ trait pairs
         $instance = $this->getInstance(['a' => 1, 'b' => 2]);
         $instance->pairs()->first()->key = 'c';
 
-        $this->assertEquals('a', $instance->pairs()->first()->key);
+        $this->assertEquals('a', $instance->pairs()->first()[0]);
     }
 }

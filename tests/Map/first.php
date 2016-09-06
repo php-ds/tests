@@ -21,7 +21,7 @@ trait first
         $instance = $this->getInstance($initial);
         $first = $instance->first();
 
-        $this->assertEquals($expected, [$first->key, $first->value]);
+        $this->assertEquals($expected, [$first[0], $first[1]]);
     }
 
     public function testFirstNowAllowedWhenEmpty()
