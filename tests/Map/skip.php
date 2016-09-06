@@ -35,7 +35,7 @@ trait skip
         $instance = $this->getInstance($values);
         $pair = $instance->skip($position);
 
-        $this->assertEquals($expected, [$pair->key, $pair->value]);
+        $this->assertEquals($expected, [$pair[0], $pair[1]]);
     }
 
     /**

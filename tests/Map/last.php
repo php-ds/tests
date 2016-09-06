@@ -21,7 +21,7 @@ trait last
         $instance = $this->getInstance($initial);
         $last = $instance->last();
 
-        $this->assertEquals($expected, [$last->key, $last->value]);
+        $this->assertEquals($expected, [$last[0], $last[1]]);
     }
 
     public function testLastNotAllowedWhenEmpty()
