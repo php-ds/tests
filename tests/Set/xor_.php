@@ -35,6 +35,20 @@ trait xor_
         $this->assertEquals([], $a->xor($a)->toArray());
     }
 
+    /**
+     * @see https://github.com/php-ds/extension/issues/53
+     */
+    public function testXorAfterDiff()
+    {
+        $a = $this->getInstance(['guest', 'member']);
+        $b = $this->getInstance(['member', 'nothing']);
+
+        $k = $a->diff($b);  // [guest]
+        $x = $a->xor($k);   // [guest, member] ^ [guest] = [member]
+
+        $this->assertToArray(['member'], $x);
+    }
+
     // /**
     //  * @dataProvider xorDataProvider
     //  */
