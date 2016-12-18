@@ -26,6 +26,7 @@ class SequenceTest extends CollectionTest
     use Sequence\each;
     use Sequence\filter;
     use Sequence\find;
+    use Sequence\fill;
     use Sequence\first;
     use Sequence\get;
     use Sequence\groupBy;
