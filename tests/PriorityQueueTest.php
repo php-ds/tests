@@ -14,8 +14,6 @@ class PriorityQueueTest extends CollectionTest
     use PriorityQueue\_serialize;
     use PriorityQueue\_unset;
     use PriorityQueue\_var_dump;
-    use PriorityQueue\allocate;
-    use PriorityQueue\capacity;
     use PriorityQueue\clear;
     use PriorityQueue\copy;
     use PriorityQueue\count;

@@ -10,5 +10,4 @@ class TupleTest extends CollectionTest
     {
         return new \Ds\Tuple($values);
     }
-
 }

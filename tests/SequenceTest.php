@@ -15,10 +15,8 @@ class SequenceTest extends CollectionTest
     use Sequence\_unset;
     use Sequence\_var_dump;
     use Sequence\all;
-    use Sequence\allocate;
     use Sequence\any;
     use Sequence\apply;
-    use Sequence\capacity;
     use Sequence\clear;
     use Sequence\contains;
     use Sequence\copy;

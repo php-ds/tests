@@ -17,10 +17,8 @@ class MapTest extends CollectionTest
     use Map\_unset;
     use Map\_var_dump;
     use Map\all;
-    use Map\allocate;
     use Map\any;
     use Map\apply;
-    use Map\capacity;
     use Map\clear;
     use Map\copy;
     use Map\count;
