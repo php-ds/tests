@@ -53,7 +53,7 @@ class MapTest extends CollectionTest
     use Map\values;
     use Map\xor_;
 
-    protected function getInstance(array $values = [])
+    public function getInstance(array $values = [])
     {
         return new \Ds\Map($values);
     }

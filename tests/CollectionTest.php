@@ -2,8 +2,9 @@
 namespace Ds\Tests;
 
 use Ds\Collection;
+use PHPUnit_Framework_TestCase;
 
-abstract class CollectionTest extends \PHPUnit_Framework_TestCase
+abstract class CollectionTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Sample sizes.
@@ -166,7 +167,7 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function assertSerialized(array $expected, $instance, $use_keys)
+    public function assertSerialized(array $expected, $instance)
     {
         $unserialized = unserialize(serialize($instance));
 
@@ -186,6 +187,18 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertEquals($expected, $data);
+
+        /**
+         * @see https://github.com/php-ds/extension/issues/82
+         */
+        $producer = new Producer($this);
+        $iterated = [];
+
+        foreach ($producer->getInstance($expected) as $key => $value) {
+            $iterated[$key] = $value;
+        }
+
+        $this->assertEquals($expected, $iterated);
     }
 
     public function assertForEachByReferenceThrowsException($instance)
@@ -207,3 +220,23 @@ abstract class CollectionTest extends \PHPUnit_Framework_TestCase
         ini_set('xdebug.overload_var_dump', $overload_var_dump);
     }
 }
+
+/**
+ * @internal
+ * @see assertForEach
+ * @see https://github.com/php-ds/extension/issues/82
+ */
+class Producer {
+
+    private $test;
+
+    public function __construct($test) {
+        $this->test = $test;
+    }
+
+    public function getInstance(array $values = null)
+    {
+        return $this->test->getInstance($values);
+    }
+}
+

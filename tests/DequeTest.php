@@ -52,7 +52,7 @@ class DequeTest extends CollectionTest
     use Sequence\toArray;
     use Sequence\unshift;
 
-    protected function getInstance(array $values = [])
+    public function getInstance(array $values = [])
     {
         return new \Ds\Deque($values);
     }

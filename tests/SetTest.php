@@ -43,7 +43,7 @@ class SetTest extends CollectionTest
     use Set\union;
     use Set\xor_;
 
-    protected function getInstance(array $values = [])
+    public function getInstance(array $values = [])
     {
         return new \Ds\Set($values);
     }
