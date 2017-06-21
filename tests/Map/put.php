@@ -116,4 +116,60 @@ trait put
         $this->assertToArray(["B" => $b, "A" => $a], $a);
         $this->assertToArray(["B" => $b, "A" => $a], $b);
     }
+
+    public function testPutKeyAsReference()
+    {
+        $map = $this->getInstance();
+
+        $key = ['a'];
+        $ref = &$key;
+
+        $map->put($key, 1);
+        $this->assertEquals(1, $map->get($key));
+        $this->assertEquals(1, $map->get($ref));
+
+        $this->assertTrue($map->hasKey($key));
+        $this->assertTrue($map->hasKey($ref));
+        $this->assertTrue($map->hasKey(['a']));
+
+        $map->put($ref, 2);
+        $this->assertEquals(2, $map->get($ref));
+        $this->assertEquals(2, $map->get($key));
+
+        $this->assertTrue($map->hasKey($key));
+        $this->assertTrue($map->hasKey($ref));
+        $this->assertTrue($map->hasKey(['a']));
+
+        // Check that the variable that was a reference is still
+        $ref['x'] = 10;
+        $this->assertEquals(10, $key['x']);
+    }
+
+    public function testArrayAccessPutKeyAsReference()
+    {
+        $map = $this->getInstance();
+
+        $key = ['a'];
+        $ref = &$key;
+
+        $map[$key] = 1;
+        $this->assertEquals(1, $map->get($key));
+        $this->assertEquals(1, $map->get($ref));
+
+        $this->assertTrue($map->hasKey($key));
+        $this->assertTrue($map->hasKey($ref));
+        $this->assertTrue($map->hasKey(['a']));
+
+        $map[$ref] = 2;
+        $this->assertEquals(2, $map->get($ref));
+        $this->assertEquals(2, $map->get($key));
+
+        $this->assertTrue($map->hasKey($key));
+        $this->assertTrue($map->hasKey($ref));
+        $this->assertTrue($map->hasKey(['a']));
+
+        // Check that the variable that was a reference is still
+        $ref['x'] = 10;
+        $this->assertEquals(10, $key['x']);
+    }
 }
