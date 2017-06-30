@@ -91,4 +91,11 @@ trait get
         $instance = $this->getInstance([[1]]);
         $this->assertEquals(1, $instance[0][0]);
     }
+
+    public function testArrayAccessGetNullCoalesce()
+    {
+        $instance = $this->getInstance();
+
+        $this->assertEquals(null, $instance[10] ?? null);
+    }
 }

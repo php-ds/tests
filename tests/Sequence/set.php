@@ -94,4 +94,44 @@ trait set
 
         $this->assertToArray([[2]], $instance);
     }
+
+    public function testSetWithReference()
+    {
+        $instance = $this->getInstance(['a', 'b', 'c']);
+
+        $key = 1;
+        $ref = &$key;
+
+        $instance->set($key, 'B');
+        $this->assertEquals('B', $instance->get($key));
+        $this->assertEquals('B', $instance->get($ref));
+
+        $instance->set($ref, '#');
+        $this->assertEquals('#', $instance->get($key));
+        $this->assertEquals('#', $instance->get($ref));
+
+        // Check that the variable that was a reference is still
+        $ref++;
+        $this->assertEquals(2, $key);
+    }
+
+    public function testArrayAccessSetWithReference()
+    {
+        $instance = $this->getInstance(['a', 'b', 'c']);
+
+        $key = 1;
+        $ref = &$key;
+
+        $instance[$key] = 'B';
+        $this->assertEquals('B', $instance[$key]);
+        $this->assertEquals('B', $instance[$ref]);
+
+        $instance[$ref] = '#';
+        $this->assertEquals('#', $instance[$key]);
+        $this->assertEquals('#', $instance[$ref]);
+
+        // Check that the variable that was a reference is still
+        $ref++;
+        $this->assertEquals(2, $key);
+    }
 }

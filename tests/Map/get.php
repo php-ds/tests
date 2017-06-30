@@ -51,4 +51,26 @@ trait get
         $this->expectKeyNotFoundException();
         $instance['b'];
     }
+
+    public function testArrayAccessGetNullCoalesce()
+    {
+        $instance = $this->getInstance();
+
+        $obj = new \stdClass;
+
+        $this->assertEquals(null, $instance[false] ?? null);
+        $this->assertEquals(null, $instance[[]] ?? null);
+        $this->assertEquals(null, $instance[$obj] ?? null);
+        $this->assertEquals(null, $instance[0] ?? null);
+
+        $instance->put(false, 1);
+        $instance->put([], 2);
+        $instance->put($obj, 3);
+        $instance->put(0, 4);
+
+        $this->assertEquals(1, $instance[false] ?? null);
+        $this->assertEquals(2, $instance[[]] ?? null);
+        $this->assertEquals(3, $instance[$obj] ?? null);
+        $this->assertEquals(4, $instance[0] ?? null);
+    }
 }
