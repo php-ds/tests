@@ -118,4 +118,108 @@ trait get
         $instance->remove('b');
         $this->assertEquals('a', $instance->get(0));
     }
+
+    public function getAfterRemoveProvider()
+    {
+        // values, value to remove, get index, expected result
+        return [
+            [['a', 'b', 'c'], 'a', 0, 'b'],
+            [['a', 'b', 'c'], 'a', 1, 'c'],
+
+            [['a', 'b', 'c'], 'b', 0, 'a'],
+            [['a', 'b', 'c'], 'b', 1, 'c'],
+
+            [['a', 'b', 'c'], 'c', 0, 'a'],
+            [['a', 'b', 'c'], 'c', 1, 'b'],
+        ];
+    }
+
+    /**
+     * @dataProvider getAfterRemoveProvider
+     */
+    public function testGetAfterRemove(array $values, $remove, $index, $expected)
+    {
+        $instance = $this->getInstance($values);
+        $instance->remove($remove);
+
+        $this->assertEquals($expected, $instance->get($index));
+    }
+
+    public function testGetAfterRemoveAtTheStart()
+    {
+        $instance = $this->getInstance(['a', 'b', 'c', 'd', 'e']);
+
+        $instance->remove('a');
+        $this->assertEquals('b', $instance->get(0));
+        $this->assertEquals('c', $instance->get(1));
+        $this->assertEquals('d', $instance->get(2));
+        $this->assertEquals('e', $instance->get(3));
+
+        $instance->remove('b');
+        $this->assertEquals('c', $instance->get(0));
+        $this->assertEquals('d', $instance->get(1));
+        $this->assertEquals('e', $instance->get(2));
+
+        $instance->remove('c');
+        $this->assertEquals('d', $instance->get(0));
+        $this->assertEquals('e', $instance->get(1));
+
+        $instance->remove('d');
+        $this->assertEquals('e', $instance->get(0));
+
+        $instance->remove('e');
+        $this->assertTrue($instance->isEmpty());
+    }
+
+    public function testGetAfterRemoveAtTheEnd()
+    {
+        $instance = $this->getInstance(['a', 'b', 'c', 'd', 'e']);
+
+        $instance->remove('e');
+        $this->assertEquals('a', $instance->get(0));
+        $this->assertEquals('b', $instance->get(1));
+        $this->assertEquals('c', $instance->get(2));
+        $this->assertEquals('d', $instance->get(3));
+
+        $instance->remove('d');
+        $this->assertEquals('a', $instance->get(0));
+        $this->assertEquals('b', $instance->get(1));
+        $this->assertEquals('c', $instance->get(2));
+
+        $instance->remove('c');
+        $this->assertEquals('a', $instance->get(0));
+        $this->assertEquals('b', $instance->get(1));
+
+        $instance->remove('b');
+        $this->assertEquals('a', $instance->get(0));
+
+        $instance->remove('a');
+        $this->assertTrue($instance->isEmpty());
+    }
+
+    public function testGetAfterMultipleRemoveAtEitherEnd()
+    {
+        $instance = $this->getInstance(['a', 'b', 'c', 'd', 'e']);
+
+        $instance->remove('a');
+        $this->assertEquals('b', $instance->get(0));
+        $this->assertEquals('c', $instance->get(1));
+        $this->assertEquals('d', $instance->get(2));
+        $this->assertEquals('e', $instance->get(3));
+
+        $instance->remove('e');
+        $this->assertEquals('b', $instance->get(0));
+        $this->assertEquals('c', $instance->get(1));
+        $this->assertEquals('d', $instance->get(2));
+
+        $instance->remove('b');
+        $this->assertEquals('c', $instance->get(0));
+        $this->assertEquals('d', $instance->get(1));
+
+        $instance->remove('d');
+        $this->assertEquals('c', $instance->get(0));
+
+        $instance->remove('c');
+        $this->assertTrue($instance->isEmpty());
+    }
 }

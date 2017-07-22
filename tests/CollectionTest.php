@@ -9,8 +9,8 @@ abstract class CollectionTest extends PHPUnit_Framework_TestCase
     /**
      * Sample sizes.
      */
-    const MANY = 1 << 6 + 1;
-    const SOME = 1 << 4 + 1;
+    const MANY = 65;
+    const SOME = 17;
 
     /**
      * Generic mixed value sample array.
@@ -18,12 +18,51 @@ abstract class CollectionTest extends PHPUnit_Framework_TestCase
     public function sample()
     {
         return array_merge(
-            [[], null],
-            ['#', '1', 1, 1.0, true],
-            ['',  '0', 0, 0.0, false],
-            ['a', 'A', new \stdClass()],
+            [[]],                               // empty
+            [['a']],                            // 1 value
+            [['a', 'b']],                       // 2 values
+            [['a', 'b', 'c']],                  // 3 values
+            ['#', '1', 1, 1.0, true],           // == true
+            ['',  '0', 0, 0.0, false, null],    // == false
+            ['a', 'A', new \stdClass()],        // string cases, stdClass
             range(2, self::SOME)
         );
+    }
+
+    /**
+     * @return a basic data provider providing two equal values for each test.
+     */
+    public function basicDataProvider()
+    {
+        $values = [
+            [],
+            ['a'],
+            ['a', 'b'],
+            ['a', 'b', 'c'],
+            $this->sample(),
+        ];
+
+        return array_map(function($a) { return [$a, $a]; }, $values);
+    }
+
+    /**
+     * @return a data provider for Sequence and Set to test out of range indexes.
+     */
+    public function outOfRangeDataProvider()
+    {
+        return [
+            [[ ], -1],
+            [[ ],  1],
+            [[1],  2],
+            [[1], -1],
+        ];
+    }
+
+    public function badIndexDataProvider()
+    {
+        return [
+            [[], 'a'],
+        ];
     }
 
     public function assertInstanceToString($instance)
@@ -36,25 +75,10 @@ abstract class CollectionTest extends PHPUnit_Framework_TestCase
         $actual = $instance->toArray();
 
         // We have to make separate assertions here because PHPUnit considers an
-        // array to be equal of the keys match the values even if the order is
+        // array to be equal if the keys match the values even if the order is
         // not the same, ie. [a => 1, b => 2] equals [b => 2, a => 1].
         $this->assertEquals(array_values($expected), array_values($actual), "!!! ARRAY VALUE MISMATCH");
         $this->assertEquals(array_keys  ($expected), array_keys  ($actual), "!!! ARRAY KEY MISMATCH");
-    }
-
-    public function basicDataProvider()
-    {
-        $sample = $this->sample();
-
-        $values = [
-            [],
-            ['a'],
-            ['a', 'b'],
-            ['a', 'b', 'c'],
-            $sample,
-        ];
-
-        return array_map(function($a) { return [$a, $a]; }, $values);
     }
 
     public function expectAccessByReferenceHasNoEffect()
@@ -130,23 +154,6 @@ abstract class CollectionTest extends PHPUnit_Framework_TestCase
     public function expectInternalIllegalOffset()
     {
         $this->setExpectedException(\PHPUnit_Framework_Error_Warning::class);
-    }
-
-    public function outOfRangeDataProvider()
-    {
-        return [
-            [[ ], -1],
-            [[ ],  1],
-            [[1],  2],
-            [[1], -1],
-        ];
-    }
-
-    public function badIndexDataProvider()
-    {
-        return [
-            [[], 'a'],
-        ];
     }
 
     public function assertInstanceDump(array $expected, $instance)

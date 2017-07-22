@@ -20,17 +20,37 @@ trait capacity
 
     public function testAutoTruncate()
     {
-        $min = \Ds\Deque::MIN_CAPACITY;
-        $num = $min * 16;
+        // size => capacity
+        $boundaries = [
+            64 => 128, // Initial capacity for 64 elements would be 128.
+            33 => 128,
+            32 =>  64,
+            31 =>  64,
+            17 =>  64,
+            16 =>  32,
+            15 =>  32,
+            9  =>  32,
+            8  =>  16,
+            7  =>  16,
+            5  =>  16,
+            4  =>   8,
+            3  =>   8,
+            0  =>   8,
+        ];
 
-        $instance = $this->getInstance(range(1, $num - 1));
-        $expected = $num / 2;
+        $instance = $this->getInstance(range(1, array_keys($boundaries)[0]));
 
-        for ($i = 0; $i <= 3 * $num / 4; $i++) {
+        for (;;) {
+            if ( ! is_null(($expected = $boundaries[$instance->count()] ?? null))) {
+                $this->assertEquals($expected, $instance->capacity());
+            }
+
+            if ($instance->isEmpty()) {
+                break;
+            }
+
             $instance->pop();
         }
-
-        $this->assertEquals($expected, $instance->capacity());
     }
 
     public function testClearResetsCapacity()

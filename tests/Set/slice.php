@@ -76,7 +76,7 @@ trait slice
     {
         $n = self::MANY;
         $x = 0;
-        $y = $n / 2;
+        $y = intdiv($n, 2);
 
         $instance = $this->getInstance(range(0, $n));
 
@@ -87,8 +87,8 @@ trait slice
     public function testLargeSliceOffset()
     {
         $n = self::MANY;
-        $x = $n / 4;
-        $y = $n / 4 + $n / 2;
+        $x = intdiv($n, 4);
+        $y = intdiv($n, 4) + intdiv($n, 2);
 
         $instance = $this->getInstance(range(0, $n));
 

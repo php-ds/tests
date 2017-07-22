@@ -64,15 +64,18 @@ trait remove
     {
         $instance = $this->getInstance();
 
-        for ($i = 0; $i < self::MANY; $i++) {
+        $size = self::MANY + (self::MANY & 1); // Force even
+        $half = intdiv($size, 2);
+
+        for ($i = 1; $i <= $size; $i++) {
             $instance->put($i, $i);
         }
 
-        for ($i = self::MANY / 2; $i < self::MANY; $i++) {
+        for ($i = $half + 1; $i <= $size; $i++) {
             $instance->remove($i);
         }
 
-        $this->assertCount(self::MANY / 2, $instance);
+        $this->assertCount($half, $instance);
     }
 
     public function testRandomRemove()

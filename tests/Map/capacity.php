@@ -26,14 +26,37 @@ trait capacity
 
     public function testAutoTruncate()
     {
-        $instance = $this->getInstance(range(1, self::MANY));
-        $expected = $instance->capacity() / 2;
+        // size => capacity
+        $boundaries = [
+            64 => 64,  // Initial capacity for 64 elements would be 64 (full).
+            33 => 64,
+            32 => 64,
+            31 => 64,
+            17 => 64,
+            16 => 64,
+            15 => 32,
+            9  => 32,
+            8  => 32,
+            7  => 16,
+            5  => 16,
+            4  => 16,
+            3  =>  8,
+            0  =>  8,
+        ];
 
-        for ($i = 0; $i <= 3 * self::MANY / 4; $i++) {
-            $instance->remove($i);
+        $instance = $this->getInstance(range(1, array_keys($boundaries)[0]));
+
+        for(;;) {
+            if ( ! is_null(($expected = $boundaries[$instance->count()] ?? null))) {
+                $this->assertEquals($expected, $instance->capacity());
+            }
+
+            if ($instance->isEmpty()) {
+                break;
+            }
+
+            $instance->remove($instance->count() - 1);
         }
-
-        $this->assertEquals($expected, $instance->capacity());
     }
 
     public function testClearResetsCapacity()

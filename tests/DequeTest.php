@@ -65,6 +65,9 @@ class DequeTest extends CollectionTest
         $instance->shift();
         $instance->shift();
 
+        // [_, _, c, d, _, _, _, _]
+
+        // Push many to force a reallocation, where the head is not at 0.
         foreach (range(0, self::MANY) as $value) {
             $instance->push($value);
         }
