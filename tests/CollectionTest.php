@@ -226,6 +226,15 @@ abstract class CollectionTest extends PHPUnit_Framework_TestCase
         var_dump($expression);
         ini_set('xdebug.overload_var_dump', $overload_var_dump);
     }
+
+    /**
+     * @see https://github.com/php-ds/extension/issues/62
+     */
+    public function testConvertingToBoolean()
+    {
+        $instance = $this->getInstance();
+        $this->assertTrue((bool) $instance);
+    }
 }
 
 /**

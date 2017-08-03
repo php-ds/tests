@@ -22,4 +22,13 @@ class PairTest extends CollectionTest
     {
         return new \Ds\Pair($key, $value);
     }
+
+    /**
+     * @see https://github.com/php-ds/extension/issues/62
+     */
+    public function testConvertingToBoolean()
+    {
+        $instance = $this->getPair('a', 1);
+        $this->assertTrue((bool) $instance);
+    }
 }
