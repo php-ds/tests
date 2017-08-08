@@ -2,7 +2,7 @@
     "name": "php-ds/tests",
     "require": {
         "php": ">=7.0.0",
-        "phpunit/phpunit": "^5.2"
+        "phpunit/phpunit": "^6.0"
     },
     "license": "MIT",
     "authors": [

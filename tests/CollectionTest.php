@@ -2,9 +2,9 @@
 namespace Ds\Tests;
 
 use Ds\Collection;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-abstract class CollectionTest extends PHPUnit_Framework_TestCase
+abstract class CollectionTest extends TestCase
 {
     /**
      * Sample sizes.
@@ -83,77 +83,77 @@ abstract class CollectionTest extends PHPUnit_Framework_TestCase
 
     public function expectAccessByReferenceHasNoEffect()
     {
-        $this->setExpectedException(\PHPUnit_Framework_Error_Notice::class);
+        $this->expectException(\PHPUnit\Framework\Error\Notice::class);
     }
 
     public function expectPropertyDoesNotExistException()
     {
-        $this->setExpectedException(\OutOfBoundsException::class);
+        $this->expectException(\OutOfBoundsException::class);
     }
 
     public function expectReconstructionNotAllowedException()
     {
-        $this->setExpectedException('Error');
+        $this->expectException('Error');
     }
 
     public function expectImmutableException()
     {
-        $this->setExpectedException('Error');
+        $this->expectException('Error');
     }
 
     public function expectAccessByReferenceNotAllowedException()
     {
-        $this->setExpectedException('Error');
+        $this->expectException('Error');
     }
 
     public function expectListNotSupportedException()
     {
-        $this->setExpectedException('Error');
+        $this->expectException('Error');
     }
 
     public function expectIterateByReferenceException()
     {
-        $this->setExpectedException('Error');
+        $this->expectException('Error');
     }
 
     public function expectWrongIndexTypeException()
     {
-        $this->setExpectedException('TypeError');
+        $this->expectException('TypeError');
     }
 
     public function expectOutOfBoundsException()
     {
-        $this->setExpectedException(\OutOfBoundsException::class);
+        $this->expectException(\OutOfBoundsException::class);
     }
 
     public function expectArrayAccessUnsupportedException()
     {
-        $this->setExpectedException('Error');
+        $this->expectException('Error');
     }
 
     public function expectKeyNotFoundException()
     {
-        $this->setExpectedException(\OutOfBoundsException::class);
+        $this->expectException(\OutOfBoundsException::class);
     }
 
     public function expectIndexOutOfRangeException()
     {
-        $this->setExpectedException(\OutOfRangeException::class);
+        $this->expectException(\OutOfRangeException::class);
     }
 
     public function expectEmptyNotAllowedException()
     {
-        $this->setExpectedException(\UnderflowException::class);
+        $this->expectException(\UnderflowException::class);
     }
 
     public function expectNotIterableOrArrayException()
     {
-        $this->setExpectedException('TypeError');
+        $this->expectException('TypeError');
     }
 
     public function expectInternalIllegalOffset()
     {
-        $this->setExpectedException(\PHPUnit_Framework_Error_Warning::class);
+        $this->expectException(\PHPUnit\Framework\Error\Warning::class);
     }
 
     public function assertInstanceDump(array $expected, $instance)

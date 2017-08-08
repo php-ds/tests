@@ -48,7 +48,7 @@ trait _isset
     public function testArrayAccessIssetIndexBadIndex($initial, $index)
     {
         $instance = $this->getInstance($initial);
-        isset($instance[$index]);
+        $this->assertFalse(isset($instance[$index]));
     }
 
     /**
@@ -57,7 +57,7 @@ trait _isset
     public function testArrayAccessIssetIndexOutOfRange($initial, $index)
     {
         $instance = $this->getInstance($initial);
-        isset($instance[$index]);
+        $this->assertFalse(isset($instance[$index]));
     }
 
 
