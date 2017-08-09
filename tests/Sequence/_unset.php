@@ -21,6 +21,8 @@ trait _unset
     {
         $instance = $this->getInstance($initial);
         unset($instance[$index]);
+        
+        $this->assertFalse(isset($instance[$index]));
     }
 
     /**
@@ -30,6 +32,8 @@ trait _unset
     {
         $instance = $this->getInstance($initial);
         unset($instance[$index]);
+        
+        $this->assertFalse(isset($instance[$index]));
     }
 
 
