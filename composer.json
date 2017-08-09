@@ -8,9 +8,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0"
-    },
-    "require-dev": {
+        "php": ">=7.0.0",
         "phpunit/phpunit": "^6.0"
     },
     "autoload": {
