@@ -12,6 +12,9 @@ trait push
 
             [['a' => 1], ['b' => 2], ['b', 'a']],
             [['a' => 1], ['b' => 1], ['a', 'b']],
+
+            // Non-integer priorities
+            [[], ['a' => 1.5, 'b' => '5', 'c' => false], ['b', 'a', 'c']],
         ];
     }
 
@@ -52,6 +55,7 @@ trait push
         }
 
         asort($reference);
+
         $this->assertEmpty(array_diff_key($reference, $instance->toArray()));
     }
 
