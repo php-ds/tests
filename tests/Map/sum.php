@@ -8,34 +8,42 @@ trait sum
         return [
 
             // Empty
-            [[]],
+            [[], 0],
 
             // Basic integer sum
-            [[1, 2, 3, 4, 5]],
+            [[1, 2, 3], 6],
 
             // Basic float sum
-            [[1.5, 2.5, 5.1]],
+            [[1.5, 2.5, 5.1], 9.1],
 
-            // Mixed sum
-            [[1.5, 3, 5]],
+            // Mixed numeric
+            [[1.5, 3], 4.5],
 
             // Numeric strings
-            [["2", "5", "10.5"]],
+            [["2", "5", "10.5"], 17.5],
 
-            // Mixed
-            [["2", "5", 10.5, 9]],
-
-            // Mixed with non-numbers
-            [["2", "5", 10.5, 9, "a", new \stdClass()]],
+            // Non-numbers
+            [["a", true, false, null], 1],
         ];
     }
 
     /**
      * @dataProvider sumDataProvider
      */
-    public function testSum($values)
+    public function testSum($values, $expected)
     {
         $instance = $this->getInstance($values);
-        $this->assertEquals(array_sum($values), $instance->sum());
+        $this->assertEquals($expected, $instance->sum());
+    }
+
+    public function testSumObjectCasting()
+    {
+        if ( ! extension_loaded('gmp')) {
+            $this->markTestSkipped("GMP extension is not installed");
+            return;
+        }
+
+        $instance = $this->getInstance([1, 2, gmp_init(42)]);
+        $this->assertEquals(45, $instance->sum());
     }
 }
