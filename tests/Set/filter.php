@@ -79,19 +79,4 @@ trait filter
 
         $this->fail('Exception should have been caught');
     }
-
-    public function testFilterCallbackUsesIndex()
-    {
-        $instance = $this->getInstance(['a', 'b', 'c']);
-
-        $instance->remove('b');
-        $instance->add('x');
-
-        $buffer = '';
-        $instance->filter(function($value, $index) use (&$buffer) {
-            $buffer .= "$value:$index,";
-        });
-
-        $this->assertEquals("a:0,c:1,x:2,", $buffer);
-    }
 }
