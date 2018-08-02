@@ -14,16 +14,20 @@ trait capacity
             $instance->push($i);
         }
 
-        // Should resize when full after push
-        $this->assertEquals($min * 2, $instance->capacity());
+        // Should not resize when full after push
+        $this->assertEquals($min, $instance->capacity());
+
+        // Should resize if full before push
+        $instance->push('x');
+        $this->assertEquals(intval($min * 2), $instance->capacity());
     }
 
     public function testAutoTruncate()
     {
         // size => capacity
         $boundaries = [
-            64 => 128, // Initial capacity for 64 elements would be 128.
-            33 => 128,
+            64 =>  64,
+            33 =>  64,
             32 =>  64,
             31 =>  64,
             17 =>  64,
