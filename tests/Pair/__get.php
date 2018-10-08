@@ -11,13 +11,6 @@ trait __get
         $this->assertEquals( 1,  $pair->value);
     }
 
-    public function testBadPropertyAccess()
-    {
-        $pair = $this->getPair('a', 1);
-        $this->expectPropertyDoesNotExistException();
-        $pair->nope;
-    }
-
     public function testReflection()
     {
         $pair = $this->getPair('a', 'b');
