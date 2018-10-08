@@ -23,6 +23,9 @@ trait add
             [['1'], [ 1 ], ['1', 1 ]],
             [[ 1 ], ['1'], [ 1, '1']],
 
+            // Test that 0.0 and -0.0 are treated as the same value
+            [[], [0.0, -0.0], [0.0]],
+
             // Test adding sample values to empty set adds all.
             [[], $unique, $unique],
 
