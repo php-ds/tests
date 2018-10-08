@@ -31,6 +31,11 @@ trait put
                 [[null, null], [null, null]],
                 [[null, null]]
             ],
+            [
+                // Test that -0.0 and 0.0 map to the same key
+                [[-0.0, -0.0], [0.0, 0.0]],
+                [[-0.0, 0.0]],
+            ]
         ];
     }
 
