@@ -31,6 +31,17 @@ trait map
         $this->assertEquals($expected, $mapped->toArray());
     }
 
+    public function testMapPreservesKeys()
+    {
+        $instance = $this->getInstance(["speed" => 5]);
+
+        $mapped = $instance->map(function ($key, $value) {
+            return $value * 2;
+        });
+
+        $this->assertToArray(["speed" => 10], $mapped);
+    }
+
     public function testMapCallbackThrowsException()
     {
         $instance = $this->getInstance([1, 2, 3]);
