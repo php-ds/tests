@@ -88,7 +88,8 @@ abstract class CollectionTest extends TestCase
 
     public function expectPropertyDoesNotExistException()
     {
-        $this->expectException(\OutOfBoundsException::class);
+        $this->expectException(\PHPUnit\Framework\Error\Notice::class);
+        $this->expectExceptionMessage('Undefined property');
     }
 
     public function expectReconstructionNotAllowedException()
