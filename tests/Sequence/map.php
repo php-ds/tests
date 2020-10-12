@@ -77,13 +77,11 @@ trait map
         $this->fail('Exception should have been caught');
     }
 
-    /**
-     * 
-     * @expectedException Exception
-     */
     public function testMapDoesNotLeakWhenCallbackFails()
     {
         $instance = $this->getInstance(["a", "b", "c"]);
+
+        static::expectException(\Exception::class);
 
         $instance->map(function($value) {
             if ($value === "c") {

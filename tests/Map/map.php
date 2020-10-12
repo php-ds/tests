@@ -80,10 +80,6 @@ trait map
         $this->fail('Exception should have been caught');
     }
 
-    /**
-     * 
-     * @expectedException Exception
-     */
     public function testMapDoesNotLeakWhenCallbackFails()
     {
         $instance = $this->getInstance([
@@ -91,6 +87,8 @@ trait map
             "b" => new \stdClass(),
             "c" => new \stdClass(),
         ]);
+
+        static::expectException(\Exception::class);
 
         $mapped = $instance->map(function($key, $value) {
             if ($key === "c") {

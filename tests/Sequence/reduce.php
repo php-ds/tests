@@ -88,13 +88,11 @@ trait reduce
         $this->fail('Exception should have been caught');
     }
 
-    /**
-     * 
-     * @expectedException Exception
-     */
     public function testReduceCallbackDoesNotLeakOnFailure()
     {
         $instance = $this->getInstance(["a", "b", "c"]);
+
+        static::expectException(\Exception::class);
 
         $instance->reduce(function($carry, $value) {
             if ($value === "c") {

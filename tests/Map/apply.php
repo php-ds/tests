@@ -61,10 +61,6 @@ trait apply
         $this->fail('Exception should have been caught');
     }
 
-    /**
-     * 
-     * @expectedException Exception
-     */
     public function testApplyDoesNotLeakWhenCallbackFails()
     {
         $instance = $this->getInstance([
@@ -73,11 +69,12 @@ trait apply
             "c" => new \stdClass(),
         ]);
 
+        static::expectException(\Exception::class);
+
         $instance->apply(function($key, $value) {
             if ($key === "c") {
                 throw new \Exception();
             }
         });
     }
-
 }

@@ -30,7 +30,7 @@ abstract class CollectionTest extends TestCase
     }
 
     /**
-     * @return a basic data provider providing two equal values for each test.
+     * @return array provides two equal values for each test.
      */
     public function basicDataProvider()
     {
@@ -46,7 +46,7 @@ abstract class CollectionTest extends TestCase
     }
 
     /**
-     * @return a data provider for Sequence and Set to test out of range indexes.
+     * @return array a data provider for Sequence and Set to test out of range.
      */
     public function outOfRangeDataProvider()
     {
@@ -83,78 +83,82 @@ abstract class CollectionTest extends TestCase
 
     public function expectAccessByReferenceHasNoEffect()
     {
-        $this->expectException(\PHPUnit\Framework\Error\Notice::class);
+        static::expectNotice();
     }
 
     public function expectPropertyDoesNotExistException()
     {
-        $this->expectException(\PHPUnit\Framework\Error\Notice::class);
-        $this->expectExceptionMessage('Undefined property');
+        static::expectNotice();
+        $this->expectNoticeMessage('Undefined property');
     }
 
     public function expectReconstructionNotAllowedException()
     {
-        $this->expectException('Error');
+        static::expectException(\Error::class);
     }
 
     public function expectImmutableException()
     {
-        $this->expectException('Error');
+        static::expectException(\Error::class);
     }
 
     public function expectAccessByReferenceNotAllowedException()
     {
-        $this->expectException('Error');
+        static::expectException(\Error::class);
     }
 
     public function expectListNotSupportedException()
     {
-        $this->expectException('Error');
+        static::expectException(\Error::class);
     }
 
     public function expectIterateByReferenceException()
     {
-        $this->expectException('Error');
+        static::expectException(\Error::class);
     }
 
     public function expectWrongIndexTypeException()
     {
-        $this->expectException('TypeError');
+        static::expectException(\TypeError::class);
     }
 
     public function expectOutOfBoundsException()
     {
-        $this->expectException(\OutOfBoundsException::class);
+        static::expectException(\OutOfBoundsException::class);
     }
 
     public function expectArrayAccessUnsupportedException()
     {
-        $this->expectException('Error');
+        static::expectException(\Error::class);
     }
 
     public function expectKeyNotFoundException()
     {
-        $this->expectException(\OutOfBoundsException::class);
+        static::expectException(\OutOfBoundsException::class);
     }
 
     public function expectIndexOutOfRangeException()
     {
-        $this->expectException(\OutOfRangeException::class);
+        static::expectException(\OutOfRangeException::class);
     }
 
     public function expectEmptyNotAllowedException()
     {
-        $this->expectException(\UnderflowException::class);
+        static::expectException(\UnderflowException::class);
     }
 
     public function expectNotIterableOrArrayException()
     {
-        $this->expectException('TypeError');
+        static::expectException(\TypeError::class);
     }
 
     public function expectInternalIllegalOffset()
     {
-        $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        if (PHP_MAJOR_VERSION === 7) {
+            static::expectWarning();
+        } else {
+            static::expectException(\TypeError::class);
+        }
     }
 
     public function assertInstanceDump(array $expected, $instance)
@@ -171,7 +175,7 @@ abstract class CollectionTest extends TestCase
         $data  = preg_quote(substr($expected, 5)); // Slice past 'array'
         $regex = preg_replace('/#\d+/', '#\d+', "object\($class\)#\d+ $data");
 
-        $this->assertRegExp("~$regex~", $actual);
+        static::assertMatchesRegularExpression("~$regex~", $actual);
 
     }
 
@@ -188,6 +192,9 @@ abstract class CollectionTest extends TestCase
 
     public function assertForEach(array $expected, $instance)
     {
+        /**
+         * foreach instance
+         */
         $data = [];
 
         foreach ($instance as $key => $value) {
@@ -197,6 +204,19 @@ abstract class CollectionTest extends TestCase
         $this->assertEquals($expected, $data);
 
         /**
+         * foreach on iterator
+         */
+        $data = [];
+
+        foreach ($instance->getIterator() as $key => $value) {
+            $data[$key] = $value;
+        }
+
+        $this->assertEquals($expected, $data);
+
+        /**
+         * foreach implicit
+         *
          * @see https://github.com/php-ds/extension/issues/82
          */
         $producer = new Producer($this);

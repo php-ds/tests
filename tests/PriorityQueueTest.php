@@ -3,28 +3,28 @@ namespace Ds\Tests;
 
 class PriorityQueueTest extends CollectionTest
 {
-    use PriorityQueue\__construct;
-    use PriorityQueue\_clone;
-    use PriorityQueue\_echo;
-    use PriorityQueue\_empty;
-    use PriorityQueue\_foreach;
-    use PriorityQueue\_isset;
-    use PriorityQueue\_jsonEncode;
-    use PriorityQueue\_list;
-    use PriorityQueue\_serialize;
-    use PriorityQueue\_unset;
-    use PriorityQueue\_var_dump;
+   use PriorityQueue\__construct;
+   use PriorityQueue\_clone;
+   use PriorityQueue\_echo;
+   use PriorityQueue\_empty;
+   use PriorityQueue\_foreach;
+   use PriorityQueue\_isset;
+   use PriorityQueue\_jsonEncode;
+   use PriorityQueue\_list;
+   use PriorityQueue\_serialize;
+   use PriorityQueue\_unset;
+   use PriorityQueue\_var_dump;
 
-    use PriorityQueue\allocate;
-    use PriorityQueue\capacity;
-    use PriorityQueue\clear;
-    use PriorityQueue\copy;
-    use PriorityQueue\count;
-    use PriorityQueue\isEmpty;
-    use PriorityQueue\peek;
-    use PriorityQueue\pop;
-    use PriorityQueue\push;
-    use PriorityQueue\toArray;
+   use PriorityQueue\allocate;
+   use PriorityQueue\capacity;
+   use PriorityQueue\clear;
+   use PriorityQueue\copy;
+   use PriorityQueue\count;
+   use PriorityQueue\isEmpty;
+   use PriorityQueue\peek;
+   use PriorityQueue\pop;
+   use PriorityQueue\push;
+   use PriorityQueue\toArray;
 
     public function getInstance(array $values = [])
     {

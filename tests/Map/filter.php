@@ -71,10 +71,6 @@ trait filter
         $this->fail('Exception should have been caught');
     }
 
-    /**
-     * 
-     * @expectedException Exception
-     */
     public function testFilterDoesNotLeakWhenCallbackFails()
     {
         $instance = $this->getInstance([
@@ -82,6 +78,8 @@ trait filter
             "b" => new \stdClass(),
             "c" => new \stdClass(),
         ]);
+
+        static::expectException(\Exception::class);
 
         $mapped = $instance->filter(function($key, $value) {
             if ($key === "c") {
