@@ -100,6 +100,13 @@ trait put
         $this->assertToArray(['a' => 2], $instance);
     }
 
+    public function testArrayAccessPutByMethod()
+    {
+        $instance = $this->getInstance(['a' => 1]);
+        $instance->offsetSet('a', 2);
+        $this->assertToArray(['a' => 2], $instance);
+    }
+
     public function testArrayAccessPutByReference()
     {
         $instance = $this->getInstance(['a' => [1]]);

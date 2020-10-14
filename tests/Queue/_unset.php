@@ -9,4 +9,11 @@ trait _unset
         $this->expectArrayAccessUnsupportedException();
         unset($set['a']);
     }
+
+    public function testArrayAccessUnsetByMethod()
+    {
+        $set = $this->getInstance();
+        $this->expectArrayAccessUnsupportedException();
+        $set->offsetUnset('a');
+    }
 }

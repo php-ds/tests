@@ -50,6 +50,21 @@ trait push
         $this->assertCount(count($expected), $instance);
     }
 
+    /**
+     * @dataProvider pushDataProvider
+     */
+    public function testArrayAccessPushByMethod(array $values, array $expected)
+    {
+        $instance = $this->getInstance();
+
+        foreach ($values as $value) {
+            $instance->offsetSet(null, $value);
+        }
+
+        $this->assertToArray($expected, $instance);
+        $this->assertCount(count($expected), $instance);
+    }
+
     public function testPushCircularReference()
     {
         $instance = $this->getInstance();

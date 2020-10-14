@@ -69,7 +69,7 @@ class SetTest extends CollectionTest
     public function testArrayAccessSet()
     {
         $set = $this->getInstance();
-        $this->expectOutOfBoundsException();
+        $this->expectArrayAccessUnsupportedException();
         $set['a'] = 1;
     }
 }

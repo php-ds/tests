@@ -5,8 +5,15 @@ trait _isset
 {
     public function testArrayAccessIsset()
     {
-        $set = $this->getInstance();
+        $set = $this->getInstance(['a', 'b', 'c']);
         $this->expectArrayAccessUnsupportedException();
-        isset($set['a']);
+        isset($set[0]);
+    }
+
+    public function testArrayAccessIssetByMethod()
+    {
+        $set = $this->getInstance(['a', 'b', 'c']);
+        $this->expectArrayAccessUnsupportedException();
+        $set->offsetExists(0);
     }
 }

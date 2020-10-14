@@ -15,6 +15,17 @@ trait _unset
     }
 
     /**
+     * @dataProvider removeDataProvider
+     */
+    public function testArrayAccessUnsetByMethod($initial, $index, $return, array $expected)
+    {
+        $instance = $this->getInstance($initial);
+        $instance->offsetUnset($index);
+        $this->assertToArray($expected, $instance);
+        $this->assertEquals(count($expected), count($instance));
+    }
+
+    /**
      * @dataProvider badIndexDataProvider
      */
     public function testArrayAccessUnsetIndexBadIndex($initial, $index)

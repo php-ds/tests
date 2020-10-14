@@ -9,4 +9,11 @@ trait _isset
         $this->expectArrayAccessUnsupportedException();
         isset($set['a']);
     }
+
+    public function testArrayAccessIssetByMethod()
+    {
+        $set = $this->getInstance();
+        $this->expectArrayAccessUnsupportedException();
+        $set->offsetExists('a');
+    }
 }

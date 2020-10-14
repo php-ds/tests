@@ -33,6 +33,20 @@ trait _isset
     /**
      * @dataProvider issetDataProvider
      */
+    public function testArrayAccessIssetByMethod(array $initial, $key, bool $isset)
+    {
+        $instance = $this->getInstance();
+
+        foreach ($initial as $key => $value) {
+            $instance->put($key, $value);
+        }
+
+        $this->assertEquals($isset, $instance->offsetExists($key));
+    }
+
+    /**
+     * @dataProvider issetDataProvider
+     */
     public function testArrayAccessIssetByReference(array $initial, $key, bool $isset)
     {
         $instance = $this->getInstance([$initial]);

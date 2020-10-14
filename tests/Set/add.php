@@ -79,6 +79,24 @@ trait add
     /**
      * @dataProvider addDataProvider
      */
+    public function testArrayAccessAddByMethod(
+        array $initial,
+        array $values,
+        array $expected
+    ) {
+        $instance = $this->getInstance($initial);
+
+        foreach($values as $value) {
+            $instance->offsetSet(null, $value);
+        }
+
+        $this->assertEquals(count($expected), count($instance));
+        $this->assertToArray($expected, $instance);
+    }
+
+    /**
+     * @dataProvider addDataProvider
+     */
     public function testAddVariadic(
         array $initial,
         array $values,

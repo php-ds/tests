@@ -39,6 +39,12 @@ trait get
         $this->assertEquals(1, $instance['a']);
     }
 
+    public function testArrayAccessGetByMethod()
+    {
+        $instance = $this->getInstance(['a' => 1]);
+        $this->assertEquals(1, $instance->offsetGet('a'));
+    }
+
     public function testArrayAccessGetByReference()
     {
         $instance = $this->getInstance(['a' => [1]]);

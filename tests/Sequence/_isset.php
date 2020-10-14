@@ -43,6 +43,15 @@ trait _isset
     }
 
     /**
+     * @dataProvider issetDataProvider
+     */
+    public function testArrayAccessIssetByMethod($initial, $index, bool $isset)
+    {
+        $instance = $this->getInstance($initial);
+        $this->assertEquals($isset, $instance->offsetExists($index));
+    }
+
+    /**
      * @dataProvider badIndexDataProvider
      */
     public function testArrayAccessIssetIndexBadIndex($initial, $index)

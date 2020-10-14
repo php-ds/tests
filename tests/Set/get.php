@@ -64,6 +64,15 @@ trait get
     }
 
     /**
+     * @dataProvider getDataProvider
+     */
+    public function testArrayAccessGetByMethod(array $initial, $index, $return)
+    {
+        $instance = $this->getInstance($initial);
+        $this->assertEquals($return, $instance->offsetGet($index));
+    }
+
+    /**
      * @dataProvider badIndexDataProvider
      */
     public function testArrayAccessGetIndexBadIndex($initial, $index)

@@ -2,6 +2,8 @@
 namespace Ds\Tests;
 
 use Ds\Collection;
+use PHPUnit\Framework\Error\Notice;
+use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 
 abstract class CollectionTest extends TestCase
@@ -83,13 +85,12 @@ abstract class CollectionTest extends TestCase
 
     public function expectAccessByReferenceHasNoEffect()
     {
-        static::expectNotice();
+        static::expectException(Notice::class);
     }
 
     public function expectPropertyDoesNotExistException()
     {
-        static::expectNotice();
-        $this->expectNoticeMessage('Undefined property');
+        static::expectException(Notice::class);
     }
 
     public function expectReconstructionNotAllowedException()
@@ -155,7 +156,7 @@ abstract class CollectionTest extends TestCase
     public function expectInternalIllegalOffset()
     {
         if (PHP_MAJOR_VERSION === 7) {
-            static::expectWarning();
+            static::expectException(Warning::class);
         } else {
             static::expectException(\TypeError::class);
         }
@@ -175,7 +176,7 @@ abstract class CollectionTest extends TestCase
         $data  = preg_quote(substr($expected, 5)); // Slice past 'array'
         $regex = preg_replace('/#\d+/', '#\d+', "object\($class\)#\d+ $data");
 
-        static::assertMatchesRegularExpression("~$regex~", $actual);
+        static::assertRegExp("~$regex~", $actual);
 
     }
 
