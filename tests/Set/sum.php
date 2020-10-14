@@ -35,15 +35,4 @@ trait sum
         $instance = $this->getInstance($values);
         $this->assertEquals($expected, $instance->sum());
     }
-
-    public function testSumObjectCasting()
-    {
-        if ( ! extension_loaded('gmp')) {
-            $this->markTestSkipped("GMP extension is not installed");
-            return;
-        }
-
-        $instance = $this->getInstance([1, 2, gmp_init(42)]);
-        $this->assertEquals(45, $instance->sum());
-    }
 }
