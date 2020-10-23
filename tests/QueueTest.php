@@ -1,6 +1,7 @@
 <?php
 namespace Ds\Tests;
 
+use ArrayAccess;
 use Ds\Collection;
 
 class QueueTest extends CollectionTest
@@ -39,5 +40,10 @@ class QueueTest extends CollectionTest
         $set = $this->getInstance();
         $this->expectArrayAccessUnsupportedException();
         $set['a'] = 1;
+    }
+
+    public function testImplementsArrayAccess()
+    {
+        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
     }
 }

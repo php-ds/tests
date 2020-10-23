@@ -1,6 +1,8 @@
 <?php
 namespace Ds\Tests;
 
+use ArrayAccess;
+
 class DequeTest extends CollectionTest
 {
     use Sequence\_clone;
@@ -160,5 +162,10 @@ class DequeTest extends CollectionTest
         $this->assertToArray($expected, $instance->sorted(function($a, $b) {
             return $b <=> $a; // Reverse
         }));
+    }
+
+    public function testImplementsArrayAccess()
+    {
+        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
     }
 }
