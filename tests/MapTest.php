@@ -1,6 +1,7 @@
 <?php
 namespace Ds\Tests;
 
+use ArrayAccess;
 use Ds\Vector;
 
 class MapTest extends CollectionTest
@@ -169,5 +170,10 @@ class MapTest extends CollectionTest
         foreach ($reference as $key => $value) {
             $this->assertEquals($value, $instance->get($key));
         }
+    }
+
+    public function testImplementsArrayAccess()
+    {
+        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
     }
 }

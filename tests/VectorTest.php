@@ -1,6 +1,8 @@
 <?php
 namespace Ds\Tests;
 
+use ArrayAccess;
+
 class VectorTest extends CollectionTest
 {
     use Sequence\_clone;
@@ -52,5 +54,10 @@ class VectorTest extends CollectionTest
     public function getInstance(array $values = [])
     {
         return new \Ds\Vector($values);
+    }
+
+    public function testImplementsArrayAccess()
+    {
+        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
     }
 }

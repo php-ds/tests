@@ -1,6 +1,8 @@
 <?php
 namespace Ds\Tests;
 
+use ArrayAccess;
+
 class SetTest extends CollectionTest
 {
     use Set\__construct;
@@ -71,5 +73,10 @@ class SetTest extends CollectionTest
         $set = $this->getInstance();
         $this->expectArrayAccessUnsupportedException();
         $set['a'] = 1;
+    }
+
+    public function testImplementsArrayAccess()
+    {
+        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
     }
 }
