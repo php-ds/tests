@@ -6,6 +6,10 @@ use PHPUnit\Framework\Error\Notice;
 use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 
+use function ini_get;
+use function strpos;
+use function var_dump;
+
 abstract class CollectionTest extends TestCase
 {
     /**
@@ -243,10 +247,12 @@ abstract class CollectionTest extends TestCase
      */
     protected function cleanVarDump($expression)
     {
-        $overload_var_dump = ini_get('xdebug.overload_var_dump');
-        ini_set('xdebug.overload_var_dump', 'off');
+        $xdebugMode = ini_get('xdebug.mode');
+        if (strpos($xdebugMode, 'develop') !== false) {
+            self::fail("Run tests using Xdebug with 'develop' mode enabled overloads native var_dump(). Change the mode to something else.");
+        }
+
         var_dump($expression);
-        ini_set('xdebug.overload_var_dump', $overload_var_dump);
     }
 
     /**
