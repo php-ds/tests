@@ -31,7 +31,7 @@ class PriorityQueueTest extends CollectionTest
         $queue = new \Ds\PriorityQueue();
 
         foreach ($values as $value => $priority) {
-            $queue->push($value, $priority);
+            $queue->push($value, (int) $priority);
         }
 
         return $queue;

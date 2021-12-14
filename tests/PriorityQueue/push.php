@@ -26,7 +26,7 @@ trait push
         $instance = $this->getInstance($initial);
 
         foreach ($values as $value => $priority) {
-            $instance->push($value, $priority);
+            $instance->push($value, (int) $priority);
         }
 
         $this->assertToArray($expected, $instance);
@@ -51,7 +51,7 @@ trait push
         shuffle($reference);
 
         foreach ($reference as $index => $priority) {
-            $instance->push($index, $priority);
+            $instance->push($index, (int) $priority);
         }
 
         asort($reference);
