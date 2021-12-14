@@ -8,8 +8,8 @@
         }
     ],
     "require": {
-        "php": ">=7.2.0",
-        "phpunit/phpunit": "^8.5"
+        "php": "^7.4 || ~8.0.0 || ~8.1.0",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
