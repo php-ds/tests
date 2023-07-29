@@ -48,6 +48,20 @@ trait slice
         $this->assertToArray($expected, $sliced);
     }
 
+    /**
+     * @dataProvider sliceDataProvider
+     */
+    public function testSliceWithLengthNull(array $values, int $index, int $length)
+    {
+        $instance = $this->getInstance($values);
+
+        $sliced = $instance->slice($index, null);
+        $expected = array_slice($values, $index, null, true);
+
+        $this->assertToArray($values, $instance);
+        $this->assertToArray($expected, $sliced);
+    }
+
     public function testSliceAfterRemoveOutsideOfSlice()
     {
         $instance = $this->getInstance(['a', 'b', 'c', 'd', 'e']);
