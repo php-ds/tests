@@ -180,7 +180,7 @@ abstract class CollectionTest extends TestCase
         $data  = preg_quote(substr($expected, 5)); // Slice past 'array'
         $regex = preg_replace('/#\d+/', '#\d+', "object\($class\)#\d+ $data");
 
-        static::assertRegExp("~$regex~", $actual);
+        static::assertMatchesRegularExpression("~$regex~", $actual);
 
     }
 
