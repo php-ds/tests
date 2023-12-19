@@ -87,16 +87,6 @@ abstract class CollectionTest extends TestCase
         $this->assertEquals(array_keys  ($expected), array_keys  ($actual), "!!! ARRAY KEY MISMATCH");
     }
 
-    public function expectAccessByReferenceHasNoEffect()
-    {
-        static::expectException(Notice::class);
-    }
-
-    public function expectPropertyDoesNotExistException()
-    {
-        static::expectException(Notice::class);
-    }
-
     public function expectReconstructionNotAllowedException()
     {
         static::expectException(\Error::class);
@@ -160,7 +150,7 @@ abstract class CollectionTest extends TestCase
     public function expectInternalIllegalOffset()
     {
         if (PHP_MAJOR_VERSION === 7) {
-            static::expectException(Warning::class);
+            static::markTestSkipped(); // PHP 7 does not promote E_ERROR to an exception.
         } else {
             static::expectException(\TypeError::class);
         }

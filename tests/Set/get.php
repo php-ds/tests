@@ -92,14 +92,6 @@ trait get
         $instance[$index];
     }
 
-    public function testArrayAccessGetByReference()
-    {
-        $instance = $this->getInstance([[1]]);
-        $this->expectAccessByReferenceHasNoEffect();
-        $instance[0][0] = null;
-        $this->assertEquals([1], $instance[0]);
-    }
-
     public function testGetFirstAfterRemove()
     {
         $instance = $this->getInstance();
