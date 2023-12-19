@@ -80,4 +80,26 @@ class SetTest extends CollectionTest
     {
         $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
     }
+
+    /**
+     * @see https://github.com/php-ds/ext-ds/issues/193
+     */
+    public function testIssue193()
+    {
+        $data = [
+            [
+                'id' => 1,
+                'data' => 'test',
+            ],
+            [
+                'id' => 2,
+                'data' => 'test',
+            ]
+        ];
+        foreach ($data as &$item) {
+            unset($item['id']);
+        }
+        $set = new \Ds\Set($data);
+        static::assertEquals([['data' => 'test']], $set->toArray());
+    }
 }

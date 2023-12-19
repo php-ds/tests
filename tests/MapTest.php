@@ -176,4 +176,15 @@ class MapTest extends CollectionTest
     {
         $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
     }
+
+    /**
+     * @see https://github.com/php-ds/ext-ds/issues/200
+     */
+    public function testIssue200()
+    {
+        static::expectNotToPerformAssertions();
+        $map = $this->getInstance();
+        $map->put('#200', $this->getInstance());
+        $map->keys()->merge($map->keys());
+    }
 }
