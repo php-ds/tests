@@ -5,6 +5,7 @@ trait sum
 {
     public function sumDataProvider()
     {
+        $nonNumbers = version_compare(PHP_VERSION, '8.3.0', '>=') ? [true, false, null] : ["a", true, false, null];
         return [
 
             // Empty
@@ -23,7 +24,7 @@ trait sum
             [["2", "5", "10.5"], 17.5],
 
             // Non-numbers
-            [["a", true, false, null], 1],
+            [$nonNumbers, 1],
         ];
     }
 
