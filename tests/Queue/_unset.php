@@ -5,14 +5,14 @@ trait _unset
 {
     public function testArrayAccessUnset()
     {
-        $set = $this->getInstance();
+        $set = static::getInstance();
         $this->expectArrayAccessUnsupportedException();
         unset($set['a']);
     }
 
     public function testArrayAccessUnsetByMethod()
     {
-        $set = $this->getInstance();
+        $set = static::getInstance();
         $this->expectArrayAccessUnsupportedException();
         $set->offsetUnset('a');
     }

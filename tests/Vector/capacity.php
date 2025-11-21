@@ -7,7 +7,7 @@ trait capacity
     {
         $min = \Ds\Vector::MIN_CAPACITY;
 
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->assertEquals($min, $instance->capacity());
 
         for ($i = 0; $i < $min; $i++) {
@@ -42,7 +42,7 @@ trait capacity
             0  =>   8,
         ];
 
-        $instance = $this->getInstance(range(1, array_keys($boundaries)[0]));
+        $instance = static::getInstance(range(1, array_keys($boundaries)[0]));
 
         for (;;) {
             if ( ! is_null(($expected = $boundaries[$instance->count()] ?? null))) {
@@ -61,7 +61,7 @@ trait capacity
     {
         $min = \Ds\Vector::MIN_CAPACITY;
 
-        $instance = $this->getInstance(range(1, self::MANY));
+        $instance = static::getInstance(range(1, self::MANY));
         $instance->clear();
         $this->assertEquals($min, $instance->capacity());
     }

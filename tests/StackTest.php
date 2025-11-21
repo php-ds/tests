@@ -4,7 +4,7 @@ namespace Ds\Tests;
 use ArrayAccess;
 use Ds\Collection;
 
-class StackTest extends CollectionTest
+class StackTest extends CollectionTestCase
 {
     use Stack\__construct;
     use Stack\_clone;
@@ -30,12 +30,12 @@ class StackTest extends CollectionTest
     use Stack\push;
     use Stack\toArray;
 
-    public function getInstance(array $values = [])
+    public static function getInstance(array $values = [])
     {
         return new \Ds\Stack($values);
     }
 
-    public function basicDataProvider()
+    public static function basicDataProvider()
     {
         // Stack should produce values in reverse order.
         return array_map(function($data) {
@@ -52,13 +52,13 @@ class StackTest extends CollectionTest
 
     public function testArrayAccessSet()
     {
-        $set = $this->getInstance();
+        $set = static::getInstance();
         $this->expectArrayAccessUnsupportedException();
         $set['a'] = 1;
     }
 
     public function testImplementsArrayAccess()
     {
-        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
+        $this->assertInstanceOf(ArrayAccess::class, static::getInstance());
     }
 }

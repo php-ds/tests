@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\PriorityQueue;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait push
 {
-    public function pushDataProvider()
+    public static function pushDataProvider()
     {
         // initial, values, expected
         return [
@@ -18,12 +20,10 @@ trait push
         ];
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+    #[DataProvider('pushDataProvider')]
     public function testPush(array $initial, array $values, array $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
 
         foreach ($values as $value => $priority) {
             $instance->push($value, (int) $priority);
@@ -34,7 +34,7 @@ trait push
 
     public function testPushIdenticalValues()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         $instance->push('a', 1);
         $instance->push('a', 1);
@@ -45,7 +45,7 @@ trait push
 
     public function testPushManyRandom()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         $reference = range(1, self::SOME);
         shuffle($reference);
@@ -61,7 +61,7 @@ trait push
 
     public function testInsertionOrder()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach (range(1, self::MANY) as $i) {
             $instance->push($i, 0);
@@ -74,7 +74,7 @@ trait push
 
     public function testPushCircularReference()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $instance->push($instance, 1);
         $this->assertToArray([$instance], $instance);
     }

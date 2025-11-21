@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait reduce
 {
-    public function reduceDataProvider()
+    public static function reduceDataProvider()
     {
         // values, initial, callback
         return [
@@ -19,12 +21,10 @@ trait reduce
         ];
     }
 
-    /**
-     * @dataProvider reduceDataProvider
-     */
+    #[DataProvider('reduceDataProvider')]
     public function testReduce(array $values, $initial, callable $callback)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $reduced = $instance->reduce($callback, $initial);
         $expected = array_reduce($values, $callback, $initial);
@@ -33,12 +33,10 @@ trait reduce
         $this->assertEquals($expected, $reduced);
     }
 
-    /**
-     * @dataProvider reduceDataProvider
-     */
+    #[DataProvider('reduceDataProvider')]
     public function testReduceWithoutInitial(array $values, $initial, callable $callback)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $reduced = $instance->reduce($callback);
         $expected = array_reduce($values, $callback);
@@ -49,7 +47,7 @@ trait reduce
 
     public function testReduceCallbackThrowsException()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
         $result = null;
 
         try {
@@ -67,7 +65,7 @@ trait reduce
 
     public function testReduceCallbackThrowsExceptionLaterOn()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
         $result = null;
 
         try {

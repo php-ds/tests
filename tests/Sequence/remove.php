@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait remove
 {
-    public function removeDataProvider()
+    public static function removeDataProvider()
     {
         // initial, index, return, expected
         return [
@@ -19,12 +21,10 @@ trait remove
         ];
     }
 
-    /**
-     * @dataProvider removeDataProvider
-     */
+    #[DataProvider('removeDataProvider')]
     public function testRemove($initial, $index, $return, array $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $returned = $instance->remove($index);
 
         $this->assertEquals(count($initial) - 1, count($instance));
@@ -32,22 +32,18 @@ trait remove
         $this->assertEquals($return, $returned);
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+    #[DataProvider('outOfRangeDataProvider')]
     public function testRemoveIndexOutOfRange($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->expectIndexOutOfRangeException();
         $instance->remove($index);
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+    #[DataProvider('badIndexDataProvider')]
     public function testRemoveIndexBadIndex($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->expectWrongIndexTypeException();
         $instance->remove($index);
     }

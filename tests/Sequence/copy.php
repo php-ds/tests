@@ -1,14 +1,14 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait copy
 {
-    /**
-     * @dataProvider basicDataProvider
-     */
+    #[DataProvider('basicDataProvider')]
     public function testCopy(array $values, array $expected)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $copy = $instance->copy();
 
         $this->assertEquals($instance->toArray(), $copy->toArray());

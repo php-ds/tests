@@ -5,7 +5,7 @@ trait _empty
 {
     public function testArrayAccessEmpty()
     {
-        $set = $this->getInstance(['a', 'b', 'c']);
+        $set = static::getInstance(['a', 'b', 'c']);
         $this->expectArrayAccessUnsupportedException();
         empty($set[0]);
     }

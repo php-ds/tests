@@ -1,32 +1,30 @@
 <?php
 namespace Ds\Tests\Stack;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use Ds\Stack;
 
 trait __construct
 {
-    public function constructDataProvider()
+    public static function constructDataProvider()
     {
         return [
             [[]],
             [['a']],
             [['a', 'a']],
             [['a', 'b']],
-            [$this->sample()],
+            [self::sample()],
         ];
     }
 
-    /**
-     * @dataProvider constructDataProvider
-     */
+    #[DataProvider('constructDataProvider')]
     public function testConstruct(array $values)
     {
         $this->assertToArray(array_reverse($values), new Stack($values));
     }
 
-    /**
-     * @dataProvider constructDataProvider
-     */
+    #[DataProvider('constructDataProvider')]
     public function testConstructUsingIterable(array $values)
     {
         $this->assertToArray(array_reverse($values), new Stack(new \ArrayIterator($values)));

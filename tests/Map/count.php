@@ -5,13 +5,13 @@ trait count
 {
     public function testCount()
     {
-        $instance = $this->getInstance($this->sample());
-        $this->assertCount(count($this->sample()), $instance);
+        $instance = static::getInstance(self::sample());
+        $this->assertCount(count(self::sample()), $instance);
     }
 
     public function testCountEmpty()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->assertCount(0, $instance);
     }
 }

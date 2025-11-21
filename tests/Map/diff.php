@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait diff
 {
-    public function diffDataProvider()
+    public static function diffDataProvider()
     {
         // Keys in A but not in B.
         // A, B, expected result
@@ -17,23 +19,19 @@ trait diff
         ];
     }
 
-    /**
-     * @dataProvider diffDataProvider
-     */
+    #[DataProvider('diffDataProvider')]
     public function testDiff(array $a, array $b, array $expected)
     {
-        $a = $this->getInstance($a);
-        $b = $this->getInstance($b);
+        $a = static::getInstance($a);
+        $b = static::getInstance($b);
 
         $this->assertEquals($expected, $a->diff($b)->toArray());
     }
 
-    /**
-     * @dataProvider diffDataProvider
-     */
+    #[DataProvider('diffDataProvider')]
     public function testDiffWithSelf(array $a, array $b, array $expected)
     {
-        $map = $this->getInstance($a);
+        $map = static::getInstance($a);
 
         $this->assertEquals([], $map->diff($map)->toArray());
     }

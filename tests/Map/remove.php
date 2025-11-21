@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use Ds\Tests\HashableObject;
 
 trait remove
 {
-    public function removeDataProvider()
+    public static function removeDataProvider()
     {
         $o = new \stdClass();
 
@@ -23,7 +25,7 @@ trait remove
         ];
     }
 
-    public function removeHashableDataProvider()
+    public static function removeHashableDataProvider()
     {
         // Two objects with the same hash code and equals.
         $h1 = new HashableObject(1);
@@ -35,9 +37,7 @@ trait remove
         ];
     }
 
-    /**
-     * @dataProvider removeHashableDataProvider
-     */
+    #[DataProvider('removeHashableDataProvider')]
     public function testRemoveHashable(array $initial, $key, $expected, array $result)
     {
         $this->testRemove($initial, $key, $expected, $result);
@@ -45,7 +45,7 @@ trait remove
 
     public function testRemoveAllFromFront()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         for ($i = 0; $i < self::MANY; $i++) {
             $instance->put($i, $i);
@@ -62,7 +62,7 @@ trait remove
 
     public function testRemoveHalfFromMidway()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         $size = self::MANY + (self::MANY & 1); // Force even
         $half = intdiv($size, 2);
@@ -80,7 +80,7 @@ trait remove
 
     public function testRandomRemove()
     {
-        $instance  = $this->getInstance();
+        $instance  = static::getInstance();
         $reference = [];
 
         for ($i = 0; $i < 10; $i++) {
@@ -105,12 +105,10 @@ trait remove
         $this->assertToArray($reference, $instance);
     }
 
-    /**
-     * @dataProvider removeDataProvider
-     */
+    #[DataProvider('removeDataProvider')]
     public function testRemove(array $initial, $key, $expected, array $result)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach ($initial as $pair) {
             $instance->put($pair[0], $pair[1]);
@@ -122,13 +120,13 @@ trait remove
 
     public function testRemoveDefault()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->assertEquals('a', $instance->remove('?', 'a'));
     }
 
     public function testRemoveKeyNotFound()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->expectKeyNotFoundException();
         $instance->remove('?');
     }

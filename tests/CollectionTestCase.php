@@ -10,7 +10,7 @@ use function ini_get;
 use function strpos;
 use function var_dump;
 
-abstract class CollectionTest extends TestCase
+abstract class CollectionTestCase extends TestCase
 {
     /**
      * Sample sizes.
@@ -19,9 +19,14 @@ abstract class CollectionTest extends TestCase
     const SOME = 17;
 
     /**
+     * Create an instance of the data structure being tested.
+     */
+    abstract public static function getInstance(array $values = []);
+
+    /**
      * Generic mixed value sample array.
      */
-    public function sample()
+    public static function sample()
     {
         return array_merge(
             [[]],                               // empty
@@ -38,23 +43,23 @@ abstract class CollectionTest extends TestCase
     /**
      * @return array provides two equal values for each test.
      */
-    public function basicDataProvider()
+    public static function basicDataProvider()
     {
         $values = [
             [],
             ['a'],
             ['a', 'b'],
             ['a', 'b', 'c'],
-            $this->sample(),
+            self::sample(),
         ];
 
-        return array_map(function($a) { return [$a, $a]; }, $values);
+        return array_map(fn($a) => [$a, $a], $values);
     }
 
     /**
      * @return array a data provider for Sequence and Set to test out of range.
      */
-    public function outOfRangeDataProvider()
+    public static function outOfRangeDataProvider()
     {
         return [
             [[ ], -1],
@@ -64,7 +69,7 @@ abstract class CollectionTest extends TestCase
         ];
     }
 
-    public function badIndexDataProvider()
+    public static function badIndexDataProvider()
     {
         return [
             [[], 'a'],
@@ -250,7 +255,7 @@ abstract class CollectionTest extends TestCase
      */
     public function testConvertingToBoolean()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->assertTrue((bool) $instance);
     }
 }
@@ -268,9 +273,9 @@ class Producer {
         $this->test = $test;
     }
 
-    public function getInstance(array $values = null)
+    public function getInstance(array|null $values = null)
     {
-        return $this->test->getInstance($values);
+        return $this->test::getInstance($values);
     }
 }
 

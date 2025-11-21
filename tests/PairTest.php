@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests;
 
-class PairTest extends CollectionTest
+class PairTest extends CollectionTestCase
 {
     use Pair\__construct;
     use Pair\__get;
@@ -17,6 +17,11 @@ class PairTest extends CollectionTest
     use Pair\_var_dump;
     use Pair\copy;
     use Pair\toArray;
+
+    public static function getInstance(array $values = [])
+    {
+        return new \Ds\Pair($values[0] ?? null, $values[1] ?? null);
+    }
 
     private function getPair($key, $value)
     {

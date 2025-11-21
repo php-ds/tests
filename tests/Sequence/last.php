@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait last
 {
-    public function lastDataProvider()
+    public static function lastDataProvider()
     {
         // initial, returned
         return [
@@ -13,18 +15,16 @@ trait last
         ];
     }
 
-    /**
-     * @dataProvider lastDataProvider
-     */
+    #[DataProvider('lastDataProvider')]
     public function testLast($initial, $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertEquals($expected, $instance->last());
     }
 
     public function testLastNotAllowedWhenEmpty()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->expectEmptyNotAllowedException();
         $instance->last();
     }

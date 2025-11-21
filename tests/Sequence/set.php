@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait set
 {
-    public function setDataProvider()
+    public static function setDataProvider()
     {
         // initial, index, value, expected
         return [
@@ -20,12 +22,10 @@ trait set
     }
 
 
-    /**
-     * @dataProvider setDataProvider
-     */
+    #[DataProvider('setDataProvider')]
     public function testSet($initial, $index, $value, array $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
 
         $instance->set($index, $value);
 
@@ -35,53 +35,43 @@ trait set
         $this->assertEquals(count($initial), count($instance));
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+    #[DataProvider('outOfRangeDataProvider')]
     public function testSetOutOfRange($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->expectIndexOutOfRangeException();
         $instance->set($index, 1);
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+    #[DataProvider('badIndexDataProvider')]
     public function testSetIndexBadIndex($initial, $index)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->expectWrongIndexTypeException();
         $instance->set($index, 1);
     }
 
-    /**
-     * @dataProvider setDataProvider
-     */
+    #[DataProvider('setDataProvider')]
     public function testArrayAccessSet($initial, $index, $value, array $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $instance[$index] = $value;
         $this->assertToArray($expected, $instance);
         $this->assertEquals(count($expected), count($instance));
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+    #[DataProvider('badIndexDataProvider')]
     public function testArrayAccessSetIndexBadIndex($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->expectWrongIndexTypeException();
         $instance[$index] = 1;
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+    #[DataProvider('outOfRangeDataProvider')]
     public function testArrayAccessSetIndexOutOfRange($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->expectIndexOutOfRangeException();
         $instance[$index] = 1;
     }
@@ -89,7 +79,7 @@ trait set
 
     public function testArrayAccessSetByReference()
     {
-        $instance = $this->getInstance([[1]]);
+        $instance = static::getInstance([[1]]);
         $instance[0][0] = 2;
 
         $this->assertToArray([[2]], $instance);
@@ -97,7 +87,7 @@ trait set
 
     public function testSetWithReference()
     {
-        $instance = $this->getInstance(['a', 'b', 'c']);
+        $instance = static::getInstance(['a', 'b', 'c']);
 
         $key = 1;
         $ref = &$key;
@@ -117,7 +107,7 @@ trait set
 
     public function testArrayAccessSetWithReference()
     {
-        $instance = $this->getInstance(['a', 'b', 'c']);
+        $instance = static::getInstance(['a', 'b', 'c']);
 
         $key = 1;
         $ref = &$key;

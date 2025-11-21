@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _empty
 {
-    public function emptyDataProvider()
+    public static function emptyDataProvider()
     {
         // initial, index, empty
         return [
@@ -36,39 +38,31 @@ trait _empty
         ];
     }
 
-    /**
-     * @dataProvider emptyDataProvider
-     */
+    #[DataProvider('emptyDataProvider')]
     public function testArrayAccessEmpty($initial, $index, bool $empty)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertEquals($empty, empty($instance[$index]));
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+    #[DataProvider('badIndexDataProvider')]
     public function testArrayAccessEmptyIndexBadIndex($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertTrue(empty($instance[$index]));
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+    #[DataProvider('outOfRangeDataProvider')]
     public function testArrayAccessEmptyIndexOutOfRange($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertTrue(empty($instance[$index]));
     }
 
-    /**
-     * @dataProvider emptyDataProvider
-     */
+    #[DataProvider('emptyDataProvider')]
     public function testArrayAccessEmptyByReference($initial, $index, bool $empty)
     {
-        $instance = $this->getInstance([$initial]);
+        $instance = static::getInstance([$initial]);
         $this->assertEquals($empty, empty($instance[0][$index]));
     }
 }

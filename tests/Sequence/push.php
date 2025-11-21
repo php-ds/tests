@@ -1,31 +1,29 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait push
 {
-    public function pushDataProvider()
+    public static function pushDataProvider()
     {
-        return $this->basicDataProvider();
+        return self::basicDataProvider();
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+    #[DataProvider('pushDataProvider')]
     public function testPushVariadic(array $values, array $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $instance->push(...$values);
 
         $this->assertToArray($expected, $instance);
         $this->assertEquals(count($expected), count($instance));
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+    #[DataProvider('pushDataProvider')]
     public function testPush(array $values, array $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach ($values as $value) {
             $instance->push($value);
@@ -35,12 +33,10 @@ trait push
         $this->assertEquals(count($expected), count($instance));
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+    #[DataProvider('pushDataProvider')]
     public function testArrayAccessPush(array $values, array $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach ($values as $value) {
             $instance[] = $value;
@@ -50,12 +46,10 @@ trait push
         $this->assertEquals(count($expected), count($instance));
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+    #[DataProvider('pushDataProvider')]
     public function testArrayAccessPushByMethod(array $values, array $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach ($values as $value) {
             $instance->offsetSet(null, $value);
@@ -67,15 +61,15 @@ trait push
 
     public function testPushCircularReference()
     {
-        $instance = $this->getInstance(['a', 'b', 'c']);
+        $instance = static::getInstance(['a', 'b', 'c']);
         $instance->push($instance);
         $this->assertToArray(['a', 'b', 'c', $instance], $instance);
     }
 
     public function testPushIndirectCircularReference()
     {
-        $a = $this->getInstance();
-        $b = $this->getInstance();
+        $a = static::getInstance();
+        $b = static::getInstance();
 
         $a->push($b);
         $b->push($a);
@@ -86,8 +80,8 @@ trait push
 
     public function testPushDeeperIndirectCircularReference()
     {
-        $a = $this->getInstance();
-        $b = $this->getInstance();
+        $a = static::getInstance();
+        $b = static::getInstance();
 
         $a->push($b);
         $b->push($a);
@@ -104,8 +98,8 @@ trait push
 
     public function testPushIndirectCircularReferenceAfterUnshifts()
     {
-        $a = $this->getInstance();
-        $b = $this->getInstance();
+        $a = static::getInstance();
+        $b = static::getInstance();
 
         $a->push(...range(1, 5));
         $b->push(...range(1, 5));

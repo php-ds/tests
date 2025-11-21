@@ -1,10 +1,12 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _empty
 {
 
-    public function emptyDataProvider()
+    public static function emptyDataProvider()
     {
         // initial, key, empty
         return [
@@ -16,12 +18,10 @@ trait _empty
         ];
     }
 
-    /**
-     * @dataProvider emptyDataProvider
-     */
+    #[DataProvider('emptyDataProvider')]
     public function testArrayAccessEmpty(array $initial, $key, bool $empty)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach ($initial as $key => $value) {
             $instance->put($key, $value);
@@ -30,12 +30,10 @@ trait _empty
         $this->assertEquals($empty, empty($instance[$key]));
     }
 
-    /**
-     * @dataProvider emptyDataProvider
-     */
+    #[DataProvider('emptyDataProvider')]
     public function testArrayAccessEmptyByReference(array $initial, $key, bool $empty)
     {
-        $instance = $this->getInstance([$initial]);
+        $instance = static::getInstance([$initial]);
         $this->assertEquals($empty, empty($instance[0][$key]));
     }
 

@@ -1,20 +1,20 @@
 <?php
 namespace Ds\Tests\Stack;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait count
 {
-    /**
-     * @dataProvider basicDataProvider
-     */
+    #[DataProvider('basicDataProvider')]
     public function testCount(array $values, array $expected)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $this->assertCount(count($expected), $instance);
     }
 
     public function testCountEmpty()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->assertCount(0, $instance);
     }
 }

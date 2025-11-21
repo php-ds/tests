@@ -9,7 +9,7 @@ trait capacity
     {
         $min = PriorityQueue::MIN_CAPACITY;
 
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->assertEquals($min, $instance->capacity());
 
         for ($i = 0; $i < $min; $i++) {
@@ -44,7 +44,7 @@ trait capacity
             0  =>  8,
         ];
 
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach (range(1, array_keys($boundaries)[0]) as $value) {
             $instance->push($value, 1);
@@ -65,7 +65,7 @@ trait capacity
 
     public function testClearResetsCapacity()
     {
-        $instance = $this->getInstance(range(1, self::MANY));
+        $instance = static::getInstance(range(1, self::MANY));
         $instance->clear();
         $this->assertEquals(PriorityQueue::MIN_CAPACITY, $instance->capacity());
     }

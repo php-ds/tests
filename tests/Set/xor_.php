@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait xor_
 {
-    public function xorDataProvider()
+    public static function xorDataProvider()
     {
         // Values in either A or B, but not both.
         // A, B, expected result
@@ -15,23 +17,19 @@ trait xor_
         ];
     }
 
-    /**
-     * @dataProvider xorDataProvider
-     */
+    #[DataProvider('xorDataProvider')]
     public function testXor(array $a, array $b, array $expected)
     {
-        $a = $this->getInstance($a);
-        $b = $this->getInstance($b);
+        $a = static::getInstance($a);
+        $b = static::getInstance($b);
 
         $this->assertEquals($expected, $a->xor($b)->toArray());
     }
 
-    /**
-     * @dataProvider xorDataProvider
-     */
+    #[DataProvider('xorDataProvider')]
     public function testXorWithSelf(array $a, array $b, array $expected)
     {
-        $a = $this->getInstance($a);
+        $a = static::getInstance($a);
         $this->assertEquals([], $a->xor($a)->toArray());
     }
 
@@ -40,8 +38,8 @@ trait xor_
      */
     public function testXorAfterDiff()
     {
-        $a = $this->getInstance(['guest', 'member']);
-        $b = $this->getInstance(['member', 'nothing']);
+        $a = static::getInstance(['guest', 'member']);
+        $b = static::getInstance(['member', 'nothing']);
 
         $k = $a->diff($b);  // [guest]
         $x = $a->xor($k);   // [guest, member] ^ [guest] = [member]
@@ -54,8 +52,8 @@ trait xor_
     //  */
     // public function testXorOperator(array $a, array $b, array $expected)
     // {
-    //     $a = $this->getInstance($a);
-    //     $b = $this->getInstance($b);
+    //     $a = static::getInstance($a);
+    //     $b = static::getInstance($b);
 
     //     $this->assertEquals($expected, ($a ^ $b)->toArray());
     // }
@@ -65,8 +63,8 @@ trait xor_
     //  */
     // public function testXorOperatorAssign(array $a, array $b, array $expected)
     // {
-    //     $a = $this->getInstance($a);
-    //     $b = $this->getInstance($b);
+    //     $a = static::getInstance($a);
+    //     $b = static::getInstance($b);
 
     //     $a ^= $b;
     //     $this->assertEquals($expected, $a->toArray());
@@ -77,7 +75,7 @@ trait xor_
     //  */
     // public function testXorOperatorWithSelf(array $a, array $b, array $expected)
     // {
-    //     $a = $this->getInstance($a);
+    //     $a = static::getInstance($a);
     //     $this->assertEquals([], ($a ^ $a)->toArray());
     // }
 
@@ -86,7 +84,7 @@ trait xor_
     //  */
     // public function testXorOperatorAssignWithSelf(array $a, array $b, array $expected)
     // {
-    //     $a = $this->getInstance($a);
+    //     $a = static::getInstance($a);
 
     //     $a ^= $a;
     //     $this->assertEquals([], $a->toArray());

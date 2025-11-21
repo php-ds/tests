@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\PriorityQueue;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait allocate
 {
-    public function allocateDataProvider()
+    public static function allocateDataProvider()
     {
         // initial, allocation, expected capacity
         return [
@@ -20,12 +22,10 @@ trait allocate
         ];
     }
 
-    /**
-     * @dataProvider allocateDataProvider
-     */
+    #[DataProvider('allocateDataProvider')]
     public function testAllocate(int $initial, int $allocate, int $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         $instance->allocate($initial);
         $instance->allocate($allocate);

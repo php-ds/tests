@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use Ds\Vector;
 
 trait values
 {
-    public function valuesDataProvider()
+    public static function valuesDataProvider()
     {
         return [
 
@@ -17,12 +19,10 @@ trait values
         ];
     }
 
-    /**
-     * @dataProvider valuesDataProvider
-     */
+    #[DataProvider('valuesDataProvider')]
     public function testValues(array $initial, array $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $values = $instance->values();
 
         $this->assertInstanceOf(Vector::class, $values);

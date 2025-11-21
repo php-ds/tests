@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait apply
 {
-    public function applyDataProvider()
+    public static function applyDataProvider()
     {
         // values, callback
         return [
@@ -13,12 +15,10 @@ trait apply
         ];
     }
 
-    /**
-     * @dataProvider applyDataProvider
-     */
+    #[DataProvider('applyDataProvider')]
     public function testApply(array $values, callable $callback)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $instance->apply($callback);
 
         $expected = array_map($callback, array_keys($values), $values);
@@ -27,7 +27,7 @@ trait apply
 
     public function testApplyCallbackThrowsException()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
 
         try {
             $instance->apply(function($value) {
@@ -43,7 +43,7 @@ trait apply
 
     public function testApplyCallbackThrowsExceptionLaterOn()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
 
         try {
             $instance->apply(function($key, $value) {
@@ -63,7 +63,7 @@ trait apply
 
     public function testApplyDoesNotLeakWhenCallbackFails()
     {
-        $instance = $this->getInstance([
+        $instance = static::getInstance([
             "a" => new \stdClass(),
             "b" => new \stdClass(),
             "c" => new \stdClass(),

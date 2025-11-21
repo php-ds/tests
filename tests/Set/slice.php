@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait slice
 {
-    public function sliceDataProvider()
+    public static function sliceDataProvider()
     {
         $a = ['a', 'b', 'c'];
         $n = count($a);
@@ -20,12 +22,10 @@ trait slice
         return $data;
     }
 
-    /**
-     * @dataProvider sliceDataProvider
-     */
+    #[DataProvider('sliceDataProvider')]
     public function testSlice(array $values, int $index, int $length)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $sliced = $instance->slice($index, $length);
         $expected = array_slice($values, $index, $length);
@@ -34,12 +34,10 @@ trait slice
         $this->assertToArray($expected, $sliced);
     }
 
-    /**
-     * @dataProvider sliceDataProvider
-     */
+    #[DataProvider('sliceDataProvider')]
     public function testSliceWithoutLength(array $values, int $index, int $length)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $sliced = $instance->slice($index);
         $expected = array_slice($values, $index, null);
@@ -48,12 +46,10 @@ trait slice
         $this->assertToArray($expected, $sliced);
     }
 
-    /**
-     * @dataProvider sliceDataProvider
-     */
+    #[DataProvider('sliceDataProvider')]
     public function testSliceWithLengthNull(array $values, int $index, int $length)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $sliced = $instance->slice($index, null);
         $expected = array_slice($values, $index, null);
@@ -64,7 +60,7 @@ trait slice
 
     public function testSliceAfterRemoveOutsideOfSlice()
     {
-        $instance = $this->getInstance(['a', 'b', 'c', 'd', 'e']);
+        $instance = static::getInstance(['a', 'b', 'c', 'd', 'e']);
         $instance->remove('d');
 
         $this->assertToArray(['a', 'b', 'c'], $instance->slice(0, 3));
@@ -72,7 +68,7 @@ trait slice
 
     public function testSliceAfterRemoveAtStartOfSlice()
     {
-        $instance = $this->getInstance(['a', 'b', 'c', 'd', 'e']);
+        $instance = static::getInstance(['a', 'b', 'c', 'd', 'e']);
         $instance->remove('b');
 
         $this->assertToArray(['c', 'd', 'e'], $instance->slice(1));
@@ -80,7 +76,7 @@ trait slice
 
     public function testSliceAfterRemoveWithinSlice()
     {
-        $instance = $this->getInstance(['a', 'b', 'c', 'd', 'e']);
+        $instance = static::getInstance(['a', 'b', 'c', 'd', 'e']);
         $instance->remove('c');
 
         $this->assertToArray(['b', 'd', 'e'], $instance->slice(1));
@@ -92,7 +88,7 @@ trait slice
         $x = 0;
         $y = intdiv($n, 2);
 
-        $instance = $this->getInstance(range(0, $n));
+        $instance = static::getInstance(range(0, $n));
 
         $this->assertToArray(range($x, $y - 1), $instance->slice($x, $y));
         $this->assertToArray(range($y, $n),     $instance->slice($y));
@@ -104,7 +100,7 @@ trait slice
         $x = intdiv($n, 4);
         $y = intdiv($n, 4) + intdiv($n, 2);
 
-        $instance = $this->getInstance(range(0, $n));
+        $instance = static::getInstance(range(0, $n));
 
         $this->assertToArray(range($x, $y - 1), $instance->slice($x, $y - $x));
     }

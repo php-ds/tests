@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait get
 {
-    public function getDataProvider()
+    public static function getDataProvider()
     {
         // initial, key, expected
         return [
@@ -11,56 +13,54 @@ trait get
         ];
     }
 
-    /**
-     * @dataProvider getDataProvider
-     */
+    #[DataProvider('getDataProvider')]
     public function testGet(array $initial, $key, $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertEquals($expected, $instance->get($key));
     }
 
     public function testGetDefault()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->assertEquals('a', $instance->get('?', 'a'));
     }
 
     public function testGetKeyNotFound()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->expectKeyNotFoundException();
         $instance->get('?');
     }
 
     public function testArrayAccessGet()
     {
-        $instance = $this->getInstance(['a' => 1]);
+        $instance = static::getInstance(['a' => 1]);
         $this->assertEquals(1, $instance['a']);
     }
 
     public function testArrayAccessGetByMethod()
     {
-        $instance = $this->getInstance(['a' => 1]);
+        $instance = static::getInstance(['a' => 1]);
         $this->assertEquals(1, $instance->offsetGet('a'));
     }
 
     public function testArrayAccessGetByReference()
     {
-        $instance = $this->getInstance(['a' => [1]]);
+        $instance = static::getInstance(['a' => [1]]);
         $this->assertEquals(1, $instance['a'][0]);
     }
 
     public function testArrayAccessGetKeyNotFound()
     {
-        $instance = $this->getInstance(['a' => 1]);
+        $instance = static::getInstance(['a' => 1]);
         $this->expectKeyNotFoundException();
         $instance['b'];
     }
 
     public function testArrayAccessGetNullCoalesce()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         $obj = new \stdClass;
 

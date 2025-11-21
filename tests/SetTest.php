@@ -3,7 +3,7 @@ namespace Ds\Tests;
 
 use ArrayAccess;
 
-class SetTest extends CollectionTest
+class SetTest extends CollectionTestCase
 {
     use Set\__construct;
     use Set\_clone;
@@ -46,14 +46,14 @@ class SetTest extends CollectionTest
     use Set\union;
     use Set\xor_;
 
-    public function getInstance(array $values = [])
+    public static function getInstance(array $values = [])
     {
         return new \Ds\Set($values);
     }
 
-    public function getUniqueAndDuplicateData()
+    public static function getUniqueAndDuplicateData()
     {
-        $sample = $this->sample();
+        $sample = self::sample();
         $duplicates = [];
 
         foreach ($sample as $value) {
@@ -71,14 +71,14 @@ class SetTest extends CollectionTest
 
     public function testArrayAccessSet()
     {
-        $set = $this->getInstance();
+        $set = static::getInstance();
         $this->expectArrayAccessUnsupportedException();
         $set['a'] = 1;
     }
 
     public function testImplementsArrayAccess()
     {
-        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
+        $this->assertInstanceOf(ArrayAccess::class, static::getInstance());
     }
 
     /**

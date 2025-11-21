@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait add
 {
-    public function addDataProvider()
+    public static function addDataProvider()
     {
-        list($unique, $duplicates) = $this->getUniqueAndDuplicateData();
+        list($unique, $duplicates) = self::getUniqueAndDuplicateData();
 
         // initial, input, expected
         return [
@@ -40,15 +42,13 @@ trait add
         ];
     }
 
-    /**
-     * @dataProvider addDataProvider
-     */
+    #[DataProvider('addDataProvider')]
     public function testAdd(
         array $initial,
         array $values,
         array $expected
     ) {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
 
         foreach($values as $value) {
             $instance->add($value);
@@ -58,15 +58,13 @@ trait add
         $this->assertToArray($expected, $instance);
     }
 
-    /**
-     * @dataProvider addDataProvider
-     */
+    #[DataProvider('addDataProvider')]
     public function testArrayAccessAdd(
         array $initial,
         array $values,
         array $expected
     ) {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
 
         foreach($values as $value) {
             $instance[] = $value;
@@ -76,15 +74,13 @@ trait add
         $this->assertToArray($expected, $instance);
     }
 
-    /**
-     * @dataProvider addDataProvider
-     */
+    #[DataProvider('addDataProvider')]
     public function testArrayAccessAddByMethod(
         array $initial,
         array $values,
         array $expected
     ) {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
 
         foreach($values as $value) {
             $instance->offsetSet(null, $value);
@@ -94,15 +90,13 @@ trait add
         $this->assertToArray($expected, $instance);
     }
 
-    /**
-     * @dataProvider addDataProvider
-     */
+    #[DataProvider('addDataProvider')]
     public function testAddVariadic(
         array $initial,
         array $values,
         array $expected
     ) {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $instance->add(...$values);
 
         $this->assertEquals(count($expected), count($instance));
@@ -111,15 +105,15 @@ trait add
 
     public function testAddCircularReference()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $instance->add($instance);
         $this->assertToArray([$instance], $instance);
     }
 
     public function testAddIndirectCircularReference()
     {
-        $a = $this->getInstance();
-        $b = $this->getInstance();
+        $a = static::getInstance();
+        $b = static::getInstance();
 
         $a->add($b);
         $b->add($a);

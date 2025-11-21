@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait sorted
 {
-    public function sortedDataProvider()
+    public static function sortedDataProvider()
     {
         return [
             [[
@@ -24,12 +26,10 @@ trait sorted
         ];
     }
 
-    /**
-     * @dataProvider sortedDataProvider
-     */
+    #[DataProvider('sortedDataProvider')]
     public function testSorted(array $values)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $expected = array_slice($values, 0, count($values), true);
         asort($expected);
@@ -38,12 +38,10 @@ trait sorted
         $this->assertToArray($values, $instance);
     }
 
-    /**
-     * @dataProvider sortedDataProvider
-     */
+    #[DataProvider('sortedDataProvider')]
     public function testSortedUsingComparator(array $values)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $sorted = $instance->sorted(function($a, $b) {
             return $b <=> $a;

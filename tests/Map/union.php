@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait union
 {
-    public function unionDataProvider()
+    public static function unionDataProvider()
     {
         // A, B, expected
         return [
@@ -16,24 +18,20 @@ trait union
         ];
     }
 
-    /**
-     * @dataProvider unionDataProvider
-     */
+    #[DataProvider('unionDataProvider')]
     public function testUnion(array $initial, array $values, array $expected)
     {
-        $instance = $this->getInstance($initial);
-        $other    = $this->getInstance($values);
+        $instance = static::getInstance($initial);
+        $other    = static::getInstance($values);
 
         $this->assertToArray($expected, $instance->union($other));
         $this->assertToArray($initial, $instance);
     }
 
-    /**
-     * @dataProvider unionDataProvider
-     */
+    #[DataProvider('unionDataProvider')]
     public function testUnionWithSelf(array $initial, array $values, array $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
 
         $this->assertToArray($initial, $instance->union($instance));
         $this->assertToArray($initial, $instance);

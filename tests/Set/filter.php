@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait filter
 {
-    public function filterDataProvider()
+    public static function filterDataProvider()
     {
         // values, callback
         return [
@@ -14,12 +16,10 @@ trait filter
         ];
     }
 
-    /**
-     * @dataProvider filterDataProvider
-     */
+    #[DataProvider('filterDataProvider')]
     public function testFilter(array $values, callable $callback)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $filtered = $instance->filter($callback);
         $expected = array_values(array_filter($values, $callback));
@@ -28,12 +28,10 @@ trait filter
         $this->assertEquals($expected, $filtered->toArray());
     }
 
-    /**
-     * @dataProvider filterDataProvider
-     */
+    #[DataProvider('filterDataProvider')]
     public function testFilterWithoutCallback(array $values, callable $callback)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $filtered = $instance->filter();
         $expected = array_values(array_filter($values));
@@ -44,7 +42,7 @@ trait filter
 
     public function testFilterCallbackThrowsException()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
         $filtered = null;
 
         try {
@@ -62,7 +60,7 @@ trait filter
 
     public function testFilterCallbackThrowsExceptionLaterOn()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
         $filtered = null;
 
         try {

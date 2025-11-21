@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait remove
 {
-    public function removeDataProvider()
+    public static function removeDataProvider()
     {
-        list($unique, $duplicates) = $this->getUniqueAndDuplicateData();
+        list($unique, $duplicates) = self::getUniqueAndDuplicateData();
 
         // initial, values to remove, expected.
         return [
@@ -34,15 +36,13 @@ trait remove
         ];
     }
 
-    /**
-     * @dataProvider removeDataProvider
-     */
+    #[DataProvider('removeDataProvider')]
     public function testRemove(
         array $initial,
         array $values,
         array $expected
     ) {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
 
         foreach ($values as $value) {
             $instance->remove($value);
@@ -59,15 +59,13 @@ trait remove
         }
     }
 
-    /**
-     * @dataProvider removeDataProvider
-     */
+    #[DataProvider('removeDataProvider')]
     public function testRemoveVariadic(
         array $initial,
         array $values,
         array $expected
     ) {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $instance->remove(...$values);
 
         $this->assertEquals(count($expected), count($instance));

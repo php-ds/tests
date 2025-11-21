@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait filter
 {
-    public function filterDataProvider()
+    public static function filterDataProvider()
     {
         // values, callback, expected
         return [
@@ -20,12 +22,10 @@ trait filter
         ];
     }
 
-    /**
-     * @dataProvider filterDataProvider
-     */
+    #[DataProvider('filterDataProvider')]
     public function testFilter(array $values, callable $callback, array $expected)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $filtered = $instance->filter($callback);
 
@@ -35,7 +35,7 @@ trait filter
 
     public function testFilterCallbackThrowsException()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
         $filtered = null;
 
         try {
@@ -53,7 +53,7 @@ trait filter
 
     public function testFilterCallbackThrowsExceptionLaterOn()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
         $filtered = null;
 
         try {
@@ -73,7 +73,7 @@ trait filter
 
     public function testFilterDoesNotLeakWhenCallbackFails()
     {
-        $instance = $this->getInstance([
+        $instance = static::getInstance([
             "a" => new \stdClass(),
             "b" => new \stdClass(),
             "c" => new \stdClass(),
@@ -99,7 +99,7 @@ trait filter
             "f" => 0,
         ];
 
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $this->assertToArray(array_filter($values), $instance->filter());
     }
 }

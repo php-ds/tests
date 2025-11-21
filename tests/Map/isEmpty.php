@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait isEmpty
 {
-    public function isEmptyDataProvider()
+    public static function isEmptyDataProvider()
     {
         // values, is empty
         return [
@@ -12,18 +14,16 @@ trait isEmpty
         ];
     }
 
-    /**
-     * @dataProvider isEmptyDataProvider
-     */
+    #[DataProvider('isEmptyDataProvider')]
     public function testIsEmpty(array $values, bool $isEmpty)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $this->assertEquals($isEmpty, $instance->isEmpty());
     }
 
     public function testIsNotEmptyAfterRemove()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->assertTrue($instance->isEmpty());
 
         $instance->put('a', 1);

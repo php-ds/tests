@@ -4,7 +4,7 @@ namespace Ds\Tests;
 use ArrayAccess;
 use Ds\Vector;
 
-class MapTest extends CollectionTest
+class MapTest extends CollectionTestCase
 {
     use Map\__construct;
     use Map\_clone;
@@ -54,14 +54,14 @@ class MapTest extends CollectionTest
     use Map\values;
     use Map\xor_;
 
-    public function getInstance(array $values = [])
+    public static function getInstance(array $values = [])
     {
         return new \Ds\Map($values);
     }
 
     public function testCollisionChain()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         // We want to add three distinct values with the same hash mod.
         $instance->put( 3, 'a');
@@ -75,7 +75,7 @@ class MapTest extends CollectionTest
 
     public function testCollisionChainAcrossResize()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         $n = 64;
 
@@ -90,7 +90,7 @@ class MapTest extends CollectionTest
 
     public function testNonPackedRehash()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         $instance->put( 3, 'a');
         $instance->put(11, 'b');
@@ -114,7 +114,7 @@ class MapTest extends CollectionTest
 
     public function testPutAfterRemove()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $instance->put(1, 1);
         $instance->put(2, 2);
 
@@ -126,7 +126,7 @@ class MapTest extends CollectionTest
 
     public function testRandomPutAndRemove()
     {
-        $instance  = $this->getInstance();
+        $instance  = static::getInstance();
         $reference = [];
 
         for ($i = 0; $i < self::MANY; $i++) {
@@ -151,7 +151,7 @@ class MapTest extends CollectionTest
 
     public function testAlternatingPutAndRemove()
     {
-        $instance  = $this->getInstance();
+        $instance  = static::getInstance();
         $reference = [];
 
         for ($i = 0; $i < self::MANY; $i++) {
@@ -174,7 +174,7 @@ class MapTest extends CollectionTest
 
     public function testImplementsArrayAccess()
     {
-        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
+        $this->assertInstanceOf(ArrayAccess::class, static::getInstance());
     }
 
     /**
@@ -183,8 +183,8 @@ class MapTest extends CollectionTest
     public function testIssue200()
     {
         static::expectNotToPerformAssertions();
-        $map = $this->getInstance();
-        $map->put('#200', $this->getInstance());
+        $map = static::getInstance();
+        $map->put('#200', static::getInstance());
         $map->keys()->merge($map->keys());
     }
 }

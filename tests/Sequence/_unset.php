@@ -1,47 +1,41 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _unset
 {
-    /**
-     * @dataProvider removeDataProvider
-     */
+    #[DataProvider('removeDataProvider')]
     public function testArrayAccessUnset($initial, $index, $return, array $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         unset($instance[$index]);
         $this->assertToArray($expected, $instance);
         $this->assertEquals(count($expected), count($instance));
     }
 
-    /**
-     * @dataProvider removeDataProvider
-     */
+    #[DataProvider('removeDataProvider')]
     public function testArrayAccessUnsetByMethod($initial, $index, $return, array $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $instance->offsetUnset($index);
         $this->assertToArray($expected, $instance);
         $this->assertEquals(count($expected), count($instance));
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+    #[DataProvider('badIndexDataProvider')]
     public function testArrayAccessUnsetIndexBadIndex($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         unset($instance[$index]);
         
         $this->assertFalse(isset($instance[$index]));
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+    #[DataProvider('outOfRangeDataProvider')]
     public function testArrayAccessUnsetIndexOutOfRange($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         unset($instance[$index]);
         
         $this->assertFalse(isset($instance[$index]));
@@ -50,7 +44,7 @@ trait _unset
 
     public function testArrayAccessUnsetByReference()
     {
-        $instance = $this->getInstance([[1]]);
+        $instance = static::getInstance([[1]]);
         unset($instance[0][0]);
 
         $this->assertToArray([[]], $instance);

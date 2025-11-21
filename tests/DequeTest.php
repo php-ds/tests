@@ -3,7 +3,7 @@ namespace Ds\Tests;
 
 use ArrayAccess;
 
-class DequeTest extends CollectionTest
+class DequeTest extends CollectionTestCase
 {
     use Sequence\_clone;
     use Sequence\_echo;
@@ -54,14 +54,14 @@ class DequeTest extends CollectionTest
     use Sequence\toArray;
     use Sequence\unshift;
 
-    public function getInstance(array $values = [])
+    public static function getInstance(array $values = [])
     {
         return new \Ds\Deque($values);
     }
 
     public function testReallocatingWhenHeadNotAtZero()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         $instance->push('a', 'b', 'c', 'd');
         $instance->shift();
@@ -81,7 +81,7 @@ class DequeTest extends CollectionTest
 
     public function testReallocatingWhenHeadHasWrapped()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         $instance->push('a');
         $instance->push('b');
@@ -106,7 +106,7 @@ class DequeTest extends CollectionTest
 
     public function testRealignmentOfWrappedBufferWithLargeTempSpace()
     {
-        $instance = $this->getInstance();   // [_, _, _, _, _, _, _, _]
+        $instance = static::getInstance();   // [_, _, _, _, _, _, _, _]
 
         $instance->push('c', 'd');
         $instance->unshift('a', 'b');       // [c, d, _, _, _, _, a, b]
@@ -132,7 +132,7 @@ class DequeTest extends CollectionTest
         // Also test the boundary case, where the number of wrapped values
         // equals the amount of free space in the buffer.
 
-        $instance = $this->getInstance();   // [_, _, _, _, _, _, _, _]
+        $instance = static::getInstance();   // [_, _, _, _, _, _, _, _]
 
         $instance->push('c', 'd', 'e', 'f');
         $instance->unshift('a', 'b');       // [c, d, e, f, _, _, a, b]
@@ -149,7 +149,7 @@ class DequeTest extends CollectionTest
         ////////////////////////////////////////////////////////////////
         // Also test for assurance when there isn't enough space.
 
-        $instance = $this->getInstance();   // [_, _, _, _, _, _, _, _]
+        $instance = static::getInstance();   // [_, _, _, _, _, _, _, _]
 
         $instance->push('c', 'd', 'e', 'f', 'g');
         $instance->unshift('a', 'b');       // [c, d, e, f, g, _, a, b]
@@ -166,6 +166,6 @@ class DequeTest extends CollectionTest
 
     public function testImplementsArrayAccess()
     {
-        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
+        $this->assertInstanceOf(ArrayAccess::class, static::getInstance());
     }
 }

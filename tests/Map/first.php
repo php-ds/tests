@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait first
 {
-    public function firstDataProvider()
+    public static function firstDataProvider()
     {
         // initial, returned
         return [
@@ -13,12 +15,10 @@ trait first
         ];
     }
 
-    /**
-     * @dataProvider firstDataProvider
-     */
+    #[DataProvider('firstDataProvider')]
     public function testFirst(array $initial, $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $first = $instance->first();
 
         $this->assertEquals($expected, [$first->key, $first->value]);
@@ -26,7 +26,7 @@ trait first
 
     public function testFirstNowAllowedWhenEmpty()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->expectEmptyNotAllowedException();
         $instance->first();
     }

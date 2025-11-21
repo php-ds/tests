@@ -1,19 +1,19 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _jsonEncode
 {
-    public function jsonEncodeDataProvider()
+    public static function jsonEncodeDataProvider()
     {
-        return $this->basicDataProvider();
+        return self::basicDataProvider();
     }
 
-    /**
-     * @dataProvider jsonEncodeDataProvider
-     */
+    #[DataProvider('jsonEncodeDataProvider')]
     public function testJsonEncode(array $initial, array $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertEquals(json_encode((object) $expected), json_encode($instance));
     }
 }

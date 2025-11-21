@@ -4,7 +4,7 @@ namespace Ds\Tests;
 use ArrayAccess;
 use Ds\Collection;
 
-class QueueTest extends CollectionTest
+class QueueTest extends CollectionTestCase
 {
     use Queue\__construct;
     use Queue\_clone;
@@ -30,20 +30,20 @@ class QueueTest extends CollectionTest
     use Queue\push;
     use Queue\toArray;
 
-    public function getInstance(array $values = [])
+    public static function getInstance(array $values = [])
     {
         return new \Ds\Queue($values);
     }
 
     public function testArrayAccessSet()
     {
-        $set = $this->getInstance();
+        $set = static::getInstance();
         $this->expectArrayAccessUnsupportedException();
         $set['a'] = 1;
     }
 
     public function testImplementsArrayAccess()
     {
-        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
+        $this->assertInstanceOf(ArrayAccess::class, static::getInstance());
     }
 }

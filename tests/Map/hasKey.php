@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait hasKey
 {
-    public function hasKeyDataProvider()
+    public static function hasKeyDataProvider()
     {
         // initial, key, has
         return [
@@ -13,18 +15,16 @@ trait hasKey
         ];
     }
 
-    /**
-     * @dataProvider hasKeyDataProvider
-     */
+    #[DataProvider('hasKeyDataProvider')]
     public function testHasKey(array $initial, $key, bool $has)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertEquals($has, $instance->hasKey($key));
     }
 
     public function testHasKeyAfterRemoveAndPut()
     {
-        $instance = $this->getInstance(['a' => 1]);
+        $instance = static::getInstance(['a' => 1]);
         $this->assertTrue($instance->hasKey('a'));
 
         $instance->remove('a');

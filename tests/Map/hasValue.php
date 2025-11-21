@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait hasValue
 {
-    public function hasValueDataProvider()
+    public static function hasValueDataProvider()
     {
         // initial, value, expected
         return [
@@ -14,18 +16,16 @@ trait hasValue
         ];
     }
 
-    /**
-     * @dataProvider hasValueDataProvider
-     */
+    #[DataProvider('hasValueDataProvider')]
     public function testHasValue(array $initial, $value, bool $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertEquals($expected, $instance->hasValue($value));
     }
 
     public function testHasValueAfterRemoveAndPut()
     {
-        $instance = $this->getInstance(['a' => 1]);
+        $instance = static::getInstance(['a' => 1]);
         $this->assertTrue($instance->hasValue(1));
 
         $instance->remove('a');

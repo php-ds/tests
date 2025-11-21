@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait contains
 {
-    public function containsDataProvider()
+    public static function containsDataProvider()
     {
-        $sample = $this->sample();
+        $sample = self::sample();
 
         // initial, values, expected
         return [
@@ -27,12 +29,10 @@ trait contains
         ];
     }
 
-    /**
-     * @dataProvider containsDataProvider
-     */
+    #[DataProvider('containsDataProvider')]
     public function testContains($initial, array $values, bool $expected)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertEquals($expected, $instance->contains(...$values));
     }
 }

@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait insert
 {
-    public function insertDataProvider()
+    public static function insertDataProvider()
     {
-        $s = $this->sample();
+        $s = self::sample();
 
         $h = count($s) / 2;
 
@@ -30,30 +32,26 @@ trait insert
     }
 
 
-    /**
-     * @dataProvider insertDataProvider
-     */
+    #[DataProvider('insertDataProvider')]
     public function testInsertVariadic(array $initial, $index, array $values)
     {
         $expected = $initial;
         array_splice($expected, $index, 0, $values);
 
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $instance->insert($index, ...$values);
 
         $this->assertEquals(count($expected), count($instance));
         $this->assertToArray($expected, $instance);
     }
 
-    /**
-     * @dataProvider insertDataProvider
-     */
+    #[DataProvider('insertDataProvider')]
     public function testInsert(array $initial, $index, array $values)
     {
         $expected = $initial;
         array_splice($expected, $index, 0, array_reverse($values));
 
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
 
         foreach ($values as $value) {
             $instance->insert($index, $value);
@@ -63,22 +61,18 @@ trait insert
         $this->assertToArray($expected, $instance);
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+    #[DataProvider('outOfRangeDataProvider')]
     public function testInsertIndexOutOfRange($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->expectIndexOutOfRangeException();
         $instance->insert($index);
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+    #[DataProvider('badIndexDataProvider')]
     public function testInsertIndexBadIndex($initial, $index)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->expectWrongIndexTypeException();
         $instance->insert($index);
     }

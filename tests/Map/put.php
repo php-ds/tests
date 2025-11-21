@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use Ds\Tests\HashableObject;
 
 trait put
 {
-    public function putDataProvider()
+    public static function putDataProvider()
     {
         $o = new \stdClass();
 
@@ -39,7 +41,7 @@ trait put
         ];
     }
 
-    public function putHashableDataProvider()
+    public static function putHashableDataProvider()
     {
         // Two objects with the same hash code and equals.
         $h1 = new HashableObject(1);
@@ -55,12 +57,10 @@ trait put
         ];
     }
 
-    /**
-     * @dataProvider putDataProvider
-     */
+    #[DataProvider('putDataProvider')]
     public function testPut(array $pairs, array $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach ($pairs as $pair) {
             $instance->put($pair[0], $pair[1]);
@@ -75,7 +75,7 @@ trait put
 
     public function testPutMany()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         for ($i = 0; $i < self::MANY; $i++) {
             $instance->put(rand(), rand());
@@ -85,9 +85,7 @@ trait put
         $this->assertEquals(self::MANY, count($instance->toArray()));
     }
 
-    /**
-     * @dataProvider putHashableDataProvider
-     */
+    #[DataProvider('putHashableDataProvider')]
     public function testPutHashable(array $pairs, array $expected)
     {
         $this->testPut($pairs, $expected);
@@ -95,21 +93,21 @@ trait put
 
     public function testArrayAccessPut()
     {
-        $instance = $this->getInstance(['a' => 1]);
+        $instance = static::getInstance(['a' => 1]);
         $instance['a'] = 2;
         $this->assertToArray(['a' => 2], $instance);
     }
 
     public function testArrayAccessPutByMethod()
     {
-        $instance = $this->getInstance(['a' => 1]);
+        $instance = static::getInstance(['a' => 1]);
         $instance->offsetSet('a', 2);
         $this->assertToArray(['a' => 2], $instance);
     }
 
     public function testArrayAccessPutByReference()
     {
-        $instance = $this->getInstance(['a' => [1]]);
+        $instance = static::getInstance(['a' => [1]]);
         $instance['a'][0] = 2;
 
         $this->assertToArray(['a' => [2]], $instance);
@@ -117,8 +115,8 @@ trait put
 
     public function testMapPutCircularReference()
     {
-        $a = $this->getInstance();
-        $b = $this->getInstance();
+        $a = static::getInstance();
+        $b = static::getInstance();
 
         $a->put("B", $b);
         $a->put("A", $a);
@@ -131,7 +129,7 @@ trait put
 
     public function testPutKeyAsReference()
     {
-        $map = $this->getInstance();
+        $map = static::getInstance();
 
         $key = ['a'];
         $ref = &$key;
@@ -159,7 +157,7 @@ trait put
 
     public function testArrayAccessPutKeyAsReference()
     {
-        $map = $this->getInstance();
+        $map = static::getInstance();
 
         $key = ['a'];
         $ref = &$key;

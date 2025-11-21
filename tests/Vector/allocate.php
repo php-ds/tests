@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Vector;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait allocate
 {
-    public function allocateDataProvider()
+    public static function allocateDataProvider()
     {
         $m = \Ds\Vector::MIN_CAPACITY;
 
@@ -22,12 +24,10 @@ trait allocate
         ];
     }
 
-    /**
-     * @dataProvider allocateDataProvider
-     */
+    #[DataProvider('allocateDataProvider')]
     public function testAllocate(int $initial, int $allocate, int $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         $instance->allocate($initial);
         $instance->allocate($allocate);

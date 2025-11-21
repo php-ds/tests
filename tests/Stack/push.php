@@ -1,31 +1,29 @@
 <?php
 namespace Ds\Tests\Stack;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait push
 {
-    public function pushDataProvider()
+    public static function pushDataProvider()
     {
-        return $this->basicDataProvider();
+        return self::basicDataProvider();
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+    #[DataProvider('pushDataProvider')]
     public function testPushVariadic(array $values, array $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $instance->push(...$values);
 
         $this->assertToArray($expected, $instance);
         $this->assertCount(count($expected), $instance);
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+    #[DataProvider('pushDataProvider')]
     public function testPush(array $values, array $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach ($values as $value) {
             $instance->push($value);
@@ -35,12 +33,10 @@ trait push
         $this->assertCount(count($expected), $instance);
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+    #[DataProvider('pushDataProvider')]
     public function testArrayAccessPush(array $values, array $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach ($values as $value) {
             $instance[] = $value;
@@ -50,12 +46,10 @@ trait push
         $this->assertCount(count($expected), $instance);
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+    #[DataProvider('pushDataProvider')]
     public function testArrayAccessPushByMethod(array $values, array $expected)
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
 
         foreach ($values as $value) {
             $instance->offsetSet(null, $value);
@@ -67,7 +61,7 @@ trait push
 
     public function testPushCircularReference()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $instance->push($instance);
         $this->assertToArray([$instance], $instance);
     }

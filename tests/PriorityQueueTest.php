@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests;
 
-class PriorityQueueTest extends CollectionTest
+class PriorityQueueTest extends CollectionTestCase
 {
    use PriorityQueue\__construct;
    use PriorityQueue\_clone;
@@ -26,7 +26,7 @@ class PriorityQueueTest extends CollectionTest
    use PriorityQueue\push;
    use PriorityQueue\toArray;
 
-    public function getInstance(array $values = [])
+    public static function getInstance(array $values = [])
     {
         $queue = new \Ds\PriorityQueue();
 
@@ -37,7 +37,7 @@ class PriorityQueueTest extends CollectionTest
         return $queue;
     }
 
-    public function basicDataProvider()
+    public static function basicDataProvider()
     {
         return [
             [[], []],

@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait skip
 {
-    public function skipDataProvider()
+    public static function skipDataProvider()
     {
         // values, position, returned pair
         return [
@@ -16,7 +18,7 @@ trait skip
         ];
     }
 
-    public function skipOutOfRangeDataProvider()
+    public static function skipOutOfRangeDataProvider()
     {
         return [
             [[   ], -1],
@@ -27,24 +29,20 @@ trait skip
         ];
     }
 
-    /**
-     * @dataProvider skipDataProvider
-     */
+    #[DataProvider('skipDataProvider')]
     public function testSkip(array $values, int $position, array $expected)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $pair = $instance->skip($position);
 
         $this->assertEquals($expected, [$pair->key, $pair->value]);
     }
 
-    /**
-     * @dataProvider skipOutOfRangeDataProvider
-     */
+    #[DataProvider('skipOutOfRangeDataProvider')]
     public function testSkipIndexOutOfRange(array $values, int $position)
     {
         $this->expectIndexOutOfRangeException();
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $instance->skip($position);
     }
 }

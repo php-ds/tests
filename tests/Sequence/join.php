@@ -1,16 +1,18 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait join
 {
-    public function joinDataProvider()
+    public static function joinDataProvider()
     {
         // values, glue
         $data = [];
 
         $glues   = ['', '~', 0, 1, false];
         $lengths = [0, 1, 2, 3, 10];
-        $obj     = $this->getInstance();
+        $obj     = static::getInstance();
 
         foreach ($lengths as $length) {
             foreach ($glues as $glue) {
@@ -23,22 +25,18 @@ trait join
         return $data;
     }
 
-    /**
-     * @dataProvider joinDataProvider
-     */
+    #[DataProvider('joinDataProvider')]
     public function testJoin(array $values, $glue)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $expected = join($glue, $values);
         $this->assertEquals($expected, $instance->join($glue));
     }
 
-    /**
-     * @dataProvider joinDataProvider
-     */
+    #[DataProvider('joinDataProvider')]
     public function testJoinWithoutGlue(array $values, $glue)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $expected = join($values);
         $this->assertEquals($expected, $instance->join());
     }

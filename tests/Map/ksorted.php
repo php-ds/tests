@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait ksorted
 {
-    public function sortedKeyDataProvider()
+    public static function sortedKeyDataProvider()
     {
         return [
             [[
@@ -24,12 +26,10 @@ trait ksorted
         ];
     }
 
-    /**
-     * @dataProvider sortedKeyDataProvider
-     */
+    #[DataProvider('sortedKeyDataProvider')]
     public function testSortedByKey(array $values)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $expected = $values;
         ksort($expected);
@@ -38,12 +38,10 @@ trait ksorted
         $this->assertToArray($values, $instance);
     }
 
-    /**
-     * @dataProvider sortKeyDataProvider
-     */
+    #[DataProvider('sortKeyDataProvider')]
     public function testSortedByKeyUsingComparator(array $values)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $sorted = $instance->ksorted(function($a, $b) {
             return $b <=> $a;

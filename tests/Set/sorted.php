@@ -5,7 +5,7 @@ trait sorted
 {
     public function testSorted()
     {
-        $instance = $this->getInstance([4, 1, 2, 5, 3]);
+        $instance = static::getInstance([4, 1, 2, 5, 3]);
 
         $sorted = $instance->sorted();
 
@@ -15,7 +15,7 @@ trait sorted
 
     public function testSortedUsingComparator()
     {
-        $instance = $this->getInstance([4, 1, 2, 5, 3]);
+        $instance = static::getInstance([4, 1, 2, 5, 3]);
 
         $sorted = $instance->sorted(function($a, $b) {
             return $b <=> $a;

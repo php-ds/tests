@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait apply
 {
-    public function applyDataProvider()
+    public static function applyDataProvider()
     {
         // values, callback
         return [
@@ -22,12 +24,10 @@ trait apply
         ];
     }
 
-    /**
-     * @dataProvider applyDataProvider
-     */
+    #[DataProvider('applyDataProvider')]
     public function testApply(array $values, callable $callback)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $instance->apply($callback);
         $expected = array_map($callback, $values);
@@ -37,7 +37,7 @@ trait apply
 
     public function testApplyCallbackThrowsException()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
 
         try {
             $instance->apply(function($value) {
@@ -53,7 +53,7 @@ trait apply
 
     public function testApplyCallbackThrowsExceptionLaterOn()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
 
         try {
             $instance->apply(function($value) {
@@ -73,7 +73,7 @@ trait apply
 
     public function testApplyDoesNotCallByReference()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
 
         $instance->apply(function($value) {
             $before = $value;

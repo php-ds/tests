@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait shift
 {
-    public function shiftDataProvider()
+    public static function shiftDataProvider()
     {
         // initial, expected, result
         return [
@@ -15,12 +17,10 @@ trait shift
         ];
     }
 
-    /**
-     * @dataProvider shiftDataProvider
-     */
+    #[DataProvider('shiftDataProvider')]
     public function testShift(array $initial, $expected, array $result)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
 
         $this->assertEquals($expected, $instance->shift());
         $this->assertToArray($result, $instance);
@@ -29,14 +29,14 @@ trait shift
 
     public function testShiftNotAllowedWhenEmpty()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->expectEmptyNotAllowedException();
         $instance->shift();
     }
 
     public function testShiftAll()
     {
-        $instance = $this->getInstance(range(1, self::MANY));
+        $instance = static::getInstance(range(1, self::MANY));
 
         while ( ! $instance->isEmpty()) {
             $instance->shift();

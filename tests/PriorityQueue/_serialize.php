@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\PriorityQueue;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _serialize
 {
-    public function serializeDataProvider()
+    public static function serializeDataProvider()
     {
         return [
             [
@@ -12,12 +14,10 @@ trait _serialize
         ];
     }
 
-    /**
-     * @dataProvider serializeDataProvider
-     */
+    #[DataProvider('serializeDataProvider')]
     public function testSerialize(array $values, array $expected)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $this->assertSerialized($expected, $instance, true);
     }
 }

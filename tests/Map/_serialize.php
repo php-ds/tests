@@ -1,14 +1,14 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _serialize
 {
-    /**
-     * @dataProvider basicDataProvider
-     */
+    #[DataProvider('basicDataProvider')]
     public function testSerialize(array $values, array $expected)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $this->assertSerialized($expected, $instance, true);
     }
 }

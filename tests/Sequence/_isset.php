@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _isset
 {
-    public function issetDataProvider()
+    public static function issetDataProvider()
     {
         // initial, index, isset
         return [
@@ -33,49 +35,39 @@ trait _isset
         ];
     }
 
-    /**
-     * @dataProvider issetDataProvider
-     */
+    #[DataProvider('issetDataProvider')]
     public function testArrayAccessIsset($initial, $index, bool $isset)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertEquals($isset, isset($instance[$index]));
     }
 
-    /**
-     * @dataProvider issetDataProvider
-     */
+    #[DataProvider('issetDataProvider')]
     public function testArrayAccessIssetByMethod($initial, $index, bool $isset)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertEquals($isset, $instance->offsetExists($index));
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+    #[DataProvider('badIndexDataProvider')]
     public function testArrayAccessIssetIndexBadIndex($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertFalse(isset($instance[$index]));
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+    #[DataProvider('outOfRangeDataProvider')]
     public function testArrayAccessIssetIndexOutOfRange($initial, $index)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
         $this->assertFalse(isset($instance[$index]));
     }
 
 
-    /**
-     * @dataProvider issetDataProvider
-     */
+    #[DataProvider('issetDataProvider')]
     public function testArrayAccessIssetByReference($initial, $index, bool $isset)
     {
-        $instance = $this->getInstance([$initial]);
+        $instance = static::getInstance([$initial]);
         $this->assertEquals($isset, isset($instance[0][$index]));
     }
 }

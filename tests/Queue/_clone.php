@@ -1,14 +1,14 @@
 <?php
 namespace Ds\Tests\Queue;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _clone
 {
-    /**
-     * @dataProvider basicDataProvider
-     */
+    #[DataProvider('basicDataProvider')]
     public function testClone($values, array $expected)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $clone = clone $instance;
 

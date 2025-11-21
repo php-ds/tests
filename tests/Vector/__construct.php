@@ -1,33 +1,31 @@
 <?php
 namespace Ds\Tests\Vector;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use Ds\Vector;
 
 trait __construct
 {
-    public function constructDataProvider()
+    public static function constructDataProvider()
     {
         return array_map(function($a) { return [$a, $a]; }, [
             [],
             ['a'],
             ['a', 'b'],
             ['a', 'b', 'c'],
-            $this->sample(),
+            self::sample(),
             range(1, self::MANY),
         ]);
     }
 
-    /**
-     * @dataProvider constructDataProvider
-     */
+    #[DataProvider('constructDataProvider')]
     public function testConstruct($values, array $expected)
     {
         $this->assertToArray($expected, new Vector($values));
     }
 
-   /**
-     * @dataProvider constructDataProvider
-     */
+   #[DataProvider('constructDataProvider')]
     public function testConstructUsingNonArrayIterable(array $values, array $expected)
     {
         $this->assertToArray($expected, new Vector(new \ArrayIterator($values)));

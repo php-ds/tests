@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use Ds\Pair;
 
 trait _var_dump
 {
-    public function varDumpDataProvider()
+    public static function varDumpDataProvider()
     {
         // values, expected array repr
         return [
@@ -24,12 +26,10 @@ trait _var_dump
         ];
     }
 
-    /**
-     * @dataProvider varDumpDataProvider
-     */
+    #[DataProvider('varDumpDataProvider')]
     public function testVarDump(array $values, array $expected)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
         $this->assertInstanceDump($expected, $instance);
     }
 }

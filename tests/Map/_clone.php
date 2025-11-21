@@ -1,19 +1,19 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _clone
 {
-    public function cloneDataProvider()
+    public static function cloneDataProvider()
     {
-        return $this->basicDataProvider();
+        return self::basicDataProvider();
     }
 
-    /**
-     * @dataProvider cloneDataProvider
-     */
+    #[DataProvider('cloneDataProvider')]
     public function testClone($values, array $expected)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $clone = clone $instance;
 

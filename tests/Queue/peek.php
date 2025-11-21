@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Queue;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait peek
 {
-    public function peekDataProvider()
+    public static function peekDataProvider()
     {
         // initial, returned, expected result
         return [
@@ -12,12 +14,10 @@ trait peek
         ];
     }
 
-    /**
-     * @dataProvider peekDataProvider
-     */
+    #[DataProvider('peekDataProvider')]
     public function testPeek($initial, $returned)
     {
-        $instance = $this->getInstance($initial);
+        $instance = static::getInstance($initial);
 
         $value = $instance->peek();
 
@@ -27,7 +27,7 @@ trait peek
 
     public function testPeekNotAllowedWhenEmpty()
     {
-        $instance = $this->getInstance();
+        $instance = static::getInstance();
         $this->expectEmptyNotAllowedException();
         $instance->peek();
     }

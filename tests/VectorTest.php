@@ -3,7 +3,7 @@ namespace Ds\Tests;
 
 use ArrayAccess;
 
-class VectorTest extends CollectionTest
+class VectorTest extends CollectionTestCase
 {
     use Sequence\_clone;
     use Sequence\_echo;
@@ -51,13 +51,13 @@ class VectorTest extends CollectionTest
     use Sequence\toArray;
     use Sequence\unshift;
 
-    public function getInstance(array $values = [])
+    public static function getInstance(array $values = [])
     {
         return new \Ds\Vector($values);
     }
 
     public function testImplementsArrayAccess()
     {
-        $this->assertInstanceOf(ArrayAccess::class, $this->getInstance());
+        $this->assertInstanceOf(ArrayAccess::class, static::getInstance());
     }
 }

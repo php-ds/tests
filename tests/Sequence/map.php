@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait map
 {
-    public function mapDataProvider()
+    public static function mapDataProvider()
     {
         // values, callback
         return [
@@ -23,12 +25,10 @@ trait map
     }
 
 
-    /**
-     * @dataProvider mapDataProvider
-     */
+    #[DataProvider('mapDataProvider')]
     public function testMap(array $values, callable $callback)
     {
-        $instance = $this->getInstance($values);
+        $instance = static::getInstance($values);
 
         $mapped = $instance->map($callback);
         $expected = array_map($callback, $values);
@@ -39,7 +39,7 @@ trait map
 
     public function testMapCallbackThrowsException()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
         $mapped = null;
 
         try {
@@ -57,7 +57,7 @@ trait map
 
     public function testMapCallbackThrowsExceptionLaterOn()
     {
-        $instance = $this->getInstance([1, 2, 3]);
+        $instance = static::getInstance([1, 2, 3]);
         $mapped = null;
 
         try {
@@ -79,7 +79,7 @@ trait map
 
     public function testMapDoesNotLeakWhenCallbackFails()
     {
-        $instance = $this->getInstance(["a", "b", "c"]);
+        $instance = static::getInstance(["a", "b", "c"]);
 
         static::expectException(\Exception::class);
 

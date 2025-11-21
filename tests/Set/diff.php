@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait diff
 {
-    public function diffDataProvider()
+    public static function diffDataProvider()
     {
         // Values in A but not in B.
         // A, B, expected result
@@ -17,13 +19,11 @@ trait diff
         ];
     }
 
-    /**
-     * @dataProvider diffDataProvider
-     */
+    #[DataProvider('diffDataProvider')]
     public function testDiff(array $a, array $b, array $expected)
     {
-        $a = $this->getInstance($a);
-        $b = $this->getInstance($b);
+        $a = static::getInstance($a);
+        $b = static::getInstance($b);
 
         $this->assertEquals($expected, $a->diff($b)->toArray());
     }
@@ -33,8 +33,8 @@ trait diff
     //  */
     // public function testDiffOperator(array $a, array $b, array $expected)
     // {
-    //     $a = $this->getInstance($a);
-    //     $b = $this->getInstance($b);
+    //     $a = static::getInstance($a);
+    //     $b = static::getInstance($b);
 
     //     $this->assertEquals($expected, ($a - $b)->toArray());
     // }
@@ -44,19 +44,17 @@ trait diff
     //  */
     // public function testDiffOperatorAssign(array $a, array $b, array $expected)
     // {
-    //     $a = $this->getInstance($a);
-    //     $b = $this->getInstance($b);
+    //     $a = static::getInstance($a);
+    //     $b = static::getInstance($b);
 
     //     $a -= $b;
     //     $this->assertEquals($expected, $a->toArray());
     // }
 
-    /**
-     * @dataProvider diffDataProvider
-     */
+    #[DataProvider('diffDataProvider')]
     public function testDiffWithSelf(array $a, array $b, array $expected)
     {
-        $a = $this->getInstance($a);
+        $a = static::getInstance($a);
         $this->assertEquals([], $a->diff($a)->toArray());
     }
 
@@ -65,7 +63,7 @@ trait diff
     //  */
     // public function testDiffOperatorWithSelf(array $a, array $b, array $expected)
     // {
-    //     $a = $this->getInstance($a);
+    //     $a = static::getInstance($a);
     //     $this->assertEquals([], ($a - $a)->toArray());
     // }
 
@@ -74,7 +72,7 @@ trait diff
     //  */
     // public function testDiffOperatorAssignWithSelf(array $a, array $b, array $expected)
     // {
-    //     $a = $this->getInstance($a);
+    //     $a = static::getInstance($a);
 
     //     $a -= $a;
     //     $this->assertEquals([], $a->toArray());
