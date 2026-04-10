@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait set
 {
-    public function setDataProvider()
+    public static function setDataProvider()
     {
         // initial, index, value, expected
         return [
@@ -20,9 +22,8 @@ trait set
     }
 
 
-    /**
-     * @dataProvider setDataProvider
-     */
+
+    #[DataProvider('setDataProvider')]
     public function testSet($initial, $index, $value, array $expected)
     {
         $instance = $this->getInstance($initial);
@@ -35,9 +36,8 @@ trait set
         $this->assertEquals(count($initial), count($instance));
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+
+    #[DataProvider('outOfRangeDataProvider')]
     public function testSetOutOfRange($initial, $index)
     {
         $instance = $this->getInstance($initial);
@@ -45,9 +45,8 @@ trait set
         $instance->set($index, 1);
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+
+    #[DataProvider('badIndexDataProvider')]
     public function testSetIndexBadIndex($initial, $index)
     {
         $instance = $this->getInstance();
@@ -55,9 +54,8 @@ trait set
         $instance->set($index, 1);
     }
 
-    /**
-     * @dataProvider setDataProvider
-     */
+
+    #[DataProvider('setDataProvider')]
     public function testArrayAccessSet($initial, $index, $value, array $expected)
     {
         $instance = $this->getInstance($initial);
@@ -66,9 +64,8 @@ trait set
         $this->assertEquals(count($expected), count($instance));
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+
+    #[DataProvider('badIndexDataProvider')]
     public function testArrayAccessSetIndexBadIndex($initial, $index)
     {
         $instance = $this->getInstance($initial);
@@ -76,9 +73,8 @@ trait set
         $instance[$index] = 1;
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+
+    #[DataProvider('outOfRangeDataProvider')]
     public function testArrayAccessSetIndexOutOfRange($initial, $index)
     {
         $instance = $this->getInstance($initial);

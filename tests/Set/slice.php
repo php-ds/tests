@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait slice
 {
-    public function sliceDataProvider()
+    public static function sliceDataProvider()
     {
         $a = ['a', 'b', 'c'];
         $n = count($a);
@@ -20,9 +22,8 @@ trait slice
         return $data;
     }
 
-    /**
-     * @dataProvider sliceDataProvider
-     */
+
+    #[DataProvider('sliceDataProvider')]
     public function testSlice(array $values, int $index, int $length)
     {
         $instance = $this->getInstance($values);
@@ -34,9 +35,8 @@ trait slice
         $this->assertToArray($expected, $sliced);
     }
 
-    /**
-     * @dataProvider sliceDataProvider
-     */
+
+    #[DataProvider('sliceDataProvider')]
     public function testSliceWithoutLength(array $values, int $index, int $length)
     {
         $instance = $this->getInstance($values);
@@ -48,9 +48,8 @@ trait slice
         $this->assertToArray($expected, $sliced);
     }
 
-    /**
-     * @dataProvider sliceDataProvider
-     */
+
+    #[DataProvider('sliceDataProvider')]
     public function testSliceWithLengthNull(array $values, int $index, int $length)
     {
         $instance = $this->getInstance($values);

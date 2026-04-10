@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait intersect
 {
-    public function intersectDataProvider()
+    public static function intersectDataProvider()
     {
         // Values in A that are also in B.
         // A, B, expected result
@@ -17,9 +19,8 @@ trait intersect
         ];
     }
 
-    /**
-     * @dataProvider intersectDataProvider
-     */
+
+    #[DataProvider('intersectDataProvider')]
     public function testIntersect(array $initial, array $values, array $expected)
     {
         $a = $this->getInstance($initial);
@@ -28,9 +29,8 @@ trait intersect
         $this->assertEquals($expected, $a->intersect($b)->toArray());
     }
 
-    /**
-     * @dataProvider intersectDataProvider
-     */
+
+    #[DataProvider('intersectDataProvider')]
     public function testIntersectWithSelf(array $initial, array $values, array $expected)
     {
         $a = $this->getInstance($initial);

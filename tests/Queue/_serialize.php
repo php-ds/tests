@@ -1,11 +1,12 @@
 <?php
 namespace Ds\Tests\Queue;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _serialize
 {
-    /**
-     * @dataProvider basicDataProvider
-     */
+
+    #[DataProvider('basicDataProvider')]
     public function testSerialize(array $values, array $expected)
     {
         $instance = $this->getInstance($values);

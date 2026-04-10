@@ -1,20 +1,21 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait reversed
 {
-    public function reversedDataProvider()
+    public static function reversedDataProvider()
     {
         $reverse = function($a) {
             return [$a[0], array_reverse($a[1], 1)];
         };
 
-        return array_map($reverse, $this->basicDataProvider());
+        return array_map($reverse, static::basicDataProvider());
     }
 
-    /**
-     * @dataProvider reversedDataProvider
-     */
+
+    #[DataProvider('reversedDataProvider')]
     public function testReversed(array $values, array $expected)
     {
         $instance = $this->getInstance($values);

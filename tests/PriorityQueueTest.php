@@ -37,7 +37,7 @@ class PriorityQueueTest extends CollectionTest
         return $queue;
     }
 
-    public function basicDataProvider()
+    public static function basicDataProvider()
     {
         return [
             [[], []],

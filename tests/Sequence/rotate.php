@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait rotate
 {
-    public function rotateDataProvider()
+    public static function rotateDataProvider()
     {
         // values, rotation, expected
         return [
@@ -41,9 +43,8 @@ trait rotate
         ];
     }
 
-    /**
-     * @dataProvider rotateDataProvider
-     */
+
+    #[DataProvider('rotateDataProvider')]
     public function testRotate(array $values, int $rotation, array $expected)
     {
         $instance = $this->getInstance($values);

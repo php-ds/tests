@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait reduce
 {
-    public function reduceDataProvider()
+    public static function reduceDataProvider()
     {
         // values, initial, callback
         return [
@@ -20,9 +22,8 @@ trait reduce
     }
 
 
-    /**
-     * @dataProvider reduceDataProvider
-     */
+
+    #[DataProvider('reduceDataProvider')]
     public function testReduce(array $values, $initial, callable $callback)
     {
         $instance = $this->getInstance($values);
@@ -34,9 +35,8 @@ trait reduce
         $this->assertEquals($expected, $reduced);
     }
 
-    /**
-     * @dataProvider reduceDataProvider
-     */
+
+    #[DataProvider('reduceDataProvider')]
     public function testReduceWithoutInitial(array $values, $initial, callable $callback)
     {
         $instance = $this->getInstance($values);

@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait get
 {
-    public function getDataProvider()
+    public static function getDataProvider()
     {
         // initial, index, return
         return [
@@ -21,9 +23,8 @@ trait get
         ];
     }
 
-    /**
-     * @dataProvider getDataProvider
-     */
+
+    #[DataProvider('getDataProvider')]
     public function testGet(array $initial, $index, $return)
     {
         $instance = $this->getInstance($initial);
@@ -34,9 +35,8 @@ trait get
         $this->assertEquals($return, $returned);
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+
+    #[DataProvider('outOfRangeDataProvider')]
     public function testGetIndexOutOfRange($initial, $index)
     {
         $instance = $this->getInstance($initial);
@@ -44,9 +44,8 @@ trait get
         $instance->get($index);
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+
+    #[DataProvider('badIndexDataProvider')]
     public function testGetIndexBadIndex($initial, $index)
     {
         $instance = $this->getInstance();
@@ -55,9 +54,8 @@ trait get
     }
 
 
-    /**
-     * @dataProvider getDataProvider
-     */
+
+    #[DataProvider('getDataProvider')]
     public function testArrayAccessGet(array $initial, $index, $return)
     {
         $instance = $this->getInstance($initial);
@@ -65,9 +63,8 @@ trait get
     }
 
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+
+    #[DataProvider('badIndexDataProvider')]
     public function testArrayAccessGetIndexBadIndex($initial, $index)
     {
         $instance = $this->getInstance($initial);
@@ -75,9 +72,8 @@ trait get
         $instance[$index];
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+
+    #[DataProvider('outOfRangeDataProvider')]
     public function testArrayAccessGetIndexOutOfRange($initial, $index)
     {
         $instance = $this->getInstance($initial);

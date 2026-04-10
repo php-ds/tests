@@ -1,11 +1,12 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait toArray
 {
-    /**
-     * @dataProvider basicDataProvider
-     */
+
+    #[DataProvider('basicDataProvider')]
     public function testToArray(array $values, array $expected)
     {
         $instance = $this->getInstance($values);

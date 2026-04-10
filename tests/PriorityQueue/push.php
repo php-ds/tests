@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\PriorityQueue;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait push
 {
-    public function pushDataProvider()
+    public static function pushDataProvider()
     {
         // initial, values, expected
         return [
@@ -18,9 +20,8 @@ trait push
         ];
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+
+    #[DataProvider('pushDataProvider')]
     public function testPush(array $initial, array $values, array $expected)
     {
         $instance = $this->getInstance($initial);

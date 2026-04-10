@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use Ds\Tests\HashableObject;
 
 trait put
 {
-    public function putDataProvider()
+    public static function putDataProvider()
     {
         $o = new \stdClass();
 
@@ -39,7 +41,7 @@ trait put
         ];
     }
 
-    public function putHashableDataProvider()
+    public static function putHashableDataProvider()
     {
         // Two objects with the same hash code and equals.
         $h1 = new HashableObject(1);
@@ -55,9 +57,8 @@ trait put
         ];
     }
 
-    /**
-     * @dataProvider putDataProvider
-     */
+
+    #[DataProvider('putDataProvider')]
     public function testPut(array $pairs, array $expected)
     {
         $instance = $this->getInstance();
@@ -85,9 +86,8 @@ trait put
         $this->assertEquals(self::MANY, count($instance->toArray()));
     }
 
-    /**
-     * @dataProvider putHashableDataProvider
-     */
+
+    #[DataProvider('putHashableDataProvider')]
     public function testPutHashable(array $pairs, array $expected)
     {
         $this->testPut($pairs, $expected);

@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait filter
 {
-    public function filterDataProvider()
+    public static function filterDataProvider()
     {
         // values, callback
         return [
@@ -14,9 +16,8 @@ trait filter
         ];
     }
 
-    /**
-     * @dataProvider filterDataProvider
-     */
+
+    #[DataProvider('filterDataProvider')]
     public function testFilter(array $values, callable $callback)
     {
         $instance = $this->getInstance($values);
@@ -28,9 +29,8 @@ trait filter
         $this->assertEquals($expected, $filtered->toArray());
     }
 
-    /**
-     * @dataProvider filterDataProvider
-     */
+
+    #[DataProvider('filterDataProvider')]
     public function testFilterWithoutCallback(array $values, callable $callback)
     {
         $instance = $this->getInstance($values);

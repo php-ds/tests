@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait shift
 {
-    public function shiftDataProvider()
+    public static function shiftDataProvider()
     {
         // initial, expected, result
         return [
@@ -15,9 +17,8 @@ trait shift
         ];
     }
 
-    /**
-     * @dataProvider shiftDataProvider
-     */
+
+    #[DataProvider('shiftDataProvider')]
     public function testShift(array $initial, $expected, array $result)
     {
         $instance = $this->getInstance($initial);

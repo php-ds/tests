@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use Ds\Tests\HashableObject;
 
 trait remove
 {
-    public function removeDataProvider()
+    public static function removeDataProvider()
     {
         $o = new \stdClass();
 
@@ -23,7 +25,7 @@ trait remove
         ];
     }
 
-    public function removeHashableDataProvider()
+    public static function removeHashableDataProvider()
     {
         // Two objects with the same hash code and equals.
         $h1 = new HashableObject(1);
@@ -35,9 +37,8 @@ trait remove
         ];
     }
 
-    /**
-     * @dataProvider removeHashableDataProvider
-     */
+
+    #[DataProvider('removeHashableDataProvider')]
     public function testRemoveHashable(array $initial, $key, $expected, array $result)
     {
         $this->testRemove($initial, $key, $expected, $result);
@@ -105,9 +106,8 @@ trait remove
         $this->assertToArray($reference, $instance);
     }
 
-    /**
-     * @dataProvider removeDataProvider
-     */
+
+    #[DataProvider('removeDataProvider')]
     public function testRemove(array $initial, $key, $expected, array $result)
     {
         $instance = $this->getInstance();

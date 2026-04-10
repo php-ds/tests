@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait sum
 {
-    public function sumDataProvider()
+    public static function sumDataProvider()
     {
         $nonNumbers = version_compare(PHP_VERSION, '8.3.0', '>=') ? [true, false, null] : ["a", true, false, null];
         return [
@@ -28,9 +30,8 @@ trait sum
         ];
     }
 
-    /**
-     * @dataProvider sumDataProvider
-     */
+
+    #[DataProvider('sumDataProvider')]
     public function testSum($values, $expected)
     {
         $instance = $this->getInstance($values);

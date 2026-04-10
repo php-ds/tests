@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait isEmpty
 {
-    public function isEmptyDataProvider()
+    public static function isEmptyDataProvider()
     {
         // values, is empty
         return [
@@ -12,9 +14,8 @@ trait isEmpty
         ];
     }
 
-    /**
-     * @dataProvider isEmptyDataProvider
-     */
+
+    #[DataProvider('isEmptyDataProvider')]
     public function testIsEmpty(array $values, bool $isEmpty)
     {
         $instance = $this->getInstance($values);

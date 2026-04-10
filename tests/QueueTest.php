@@ -2,7 +2,6 @@
 namespace Ds\Tests;
 
 use ArrayAccess;
-use Ds\Collection;
 
 class QueueTest extends CollectionTest
 {

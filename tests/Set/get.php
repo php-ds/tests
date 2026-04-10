@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait get
 {
-    public function getDataProvider()
+    public static function getDataProvider()
     {
         // initial, index, return
         return [
@@ -21,9 +23,8 @@ trait get
         ];
     }
 
-    /**
-     * @dataProvider getDataProvider
-     */
+
+    #[DataProvider('getDataProvider')]
     public function testGet(array $initial, $index, $return)
     {
         $instance = $this->getInstance($initial);
@@ -34,9 +35,8 @@ trait get
         $this->assertEquals($return, $returned);
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+
+    #[DataProvider('outOfRangeDataProvider')]
     public function testGetIndexOutOfRange($initial, $index)
     {
         $instance = $this->getInstance($initial);
@@ -44,9 +44,8 @@ trait get
         $instance->get($index);
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+
+    #[DataProvider('badIndexDataProvider')]
     public function testGetIndexBadIndex($initial, $index)
     {
         $instance = $this->getInstance();
@@ -54,27 +53,24 @@ trait get
         $instance->get($index);
     }
 
-    /**
-     * @dataProvider getDataProvider
-     */
+
+    #[DataProvider('getDataProvider')]
     public function testArrayAccessGet(array $initial, $index, $return)
     {
         $instance = $this->getInstance($initial);
         $this->assertEquals($return, $instance[$index]);
     }
 
-    /**
-     * @dataProvider getDataProvider
-     */
+
+    #[DataProvider('getDataProvider')]
     public function testArrayAccessGetByMethod(array $initial, $index, $return)
     {
         $instance = $this->getInstance($initial);
         $this->assertEquals($return, $instance->offsetGet($index));
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+
+    #[DataProvider('badIndexDataProvider')]
     public function testArrayAccessGetIndexBadIndex($initial, $index)
     {
         $instance = $this->getInstance($initial);
@@ -82,9 +78,8 @@ trait get
         $instance[$index];
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+
+    #[DataProvider('outOfRangeDataProvider')]
     public function testArrayAccessGetIndexOutOfRange($initial, $index)
     {
         $instance = $this->getInstance($initial);
@@ -120,7 +115,7 @@ trait get
         $this->assertEquals('a', $instance->get(0));
     }
 
-    public function getAfterRemoveProvider()
+    public static function getAfterRemoveProvider()
     {
         // values, value to remove, get index, expected result
         return [
@@ -135,9 +130,8 @@ trait get
         ];
     }
 
-    /**
-     * @dataProvider getAfterRemoveProvider
-     */
+
+    #[DataProvider('getAfterRemoveProvider')]
     public function testGetAfterRemove(array $values, $remove, $index, $expected)
     {
         $instance = $this->getInstance($values);

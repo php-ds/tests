@@ -1,11 +1,12 @@
 <?php
 namespace Ds\Tests\Stack;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _serialize
 {
-    /**
-     * @dataProvider basicDataProvider
-     */
+
+    #[DataProvider('basicDataProvider')]
     public function testSerialize(array $values, array $expected)
     {
         // Stack has to be serialized in push order, so that values can be

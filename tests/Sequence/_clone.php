@@ -1,16 +1,17 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _clone
 {
-    public function cloneDataProvider()
+    public static function cloneDataProvider()
     {
-        return $this->basicDataProvider();
+        return static::basicDataProvider();
     }
 
-    /**
-     * @dataProvider cloneDataProvider
-     */
+
+    #[DataProvider('cloneDataProvider')]
     public function testClone($values, array $expected)
     {
         $instance = $this->getInstance($values);

@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\PriorityQueue;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait peek
 {
-    public function peekDataProvider()
+    public static function peekDataProvider()
     {
         // initial, expected
         return [
@@ -13,9 +15,8 @@ trait peek
         ];
     }
 
-    /**
-     * @dataProvider peekDataProvider
-     */
+
+    #[DataProvider('peekDataProvider')]
     public function testPeek(array $initial, $expected)
     {
         $instance = $this->getInstance($initial);

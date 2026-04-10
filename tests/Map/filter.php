@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait filter
 {
-    public function filterDataProvider()
+    public static function filterDataProvider()
     {
         // values, callback, expected
         return [
@@ -20,9 +22,8 @@ trait filter
         ];
     }
 
-    /**
-     * @dataProvider filterDataProvider
-     */
+
+    #[DataProvider('filterDataProvider')]
     public function testFilter(array $values, callable $callback, array $expected)
     {
         $instance = $this->getInstance($values);

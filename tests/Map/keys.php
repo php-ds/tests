@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait keys
 {
-    public function keysDataProvider()
+    public static function keysDataProvider()
     {
         return [
             [[], []],
@@ -12,9 +14,8 @@ trait keys
         ];
     }
 
-    /**
-     * @dataProvider keysDataProvider
-     */
+
+    #[DataProvider('keysDataProvider')]
     public function testKeys(array $initial, array $expected)
     {
         $instance = $this->getInstance($initial);

@@ -51,9 +51,9 @@ class SetTest extends CollectionTest
         return new \Ds\Set($values);
     }
 
-    public function getUniqueAndDuplicateData()
+    public static function getUniqueAndDuplicateData()
     {
-        $sample = $this->sample();
+        $sample = static::sample();
         $duplicates = [];
 
         foreach ($sample as $value) {

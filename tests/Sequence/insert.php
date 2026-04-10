@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait insert
 {
-    public function insertDataProvider()
+    public static function insertDataProvider()
     {
-        $s = $this->sample();
+        $s = static::sample();
 
         $h = count($s) / 2;
 
@@ -30,9 +32,8 @@ trait insert
     }
 
 
-    /**
-     * @dataProvider insertDataProvider
-     */
+
+    #[DataProvider('insertDataProvider')]
     public function testInsertVariadic(array $initial, $index, array $values)
     {
         $expected = $initial;
@@ -45,9 +46,8 @@ trait insert
         $this->assertToArray($expected, $instance);
     }
 
-    /**
-     * @dataProvider insertDataProvider
-     */
+
+    #[DataProvider('insertDataProvider')]
     public function testInsert(array $initial, $index, array $values)
     {
         $expected = $initial;
@@ -63,9 +63,8 @@ trait insert
         $this->assertToArray($expected, $instance);
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+
+    #[DataProvider('outOfRangeDataProvider')]
     public function testInsertIndexOutOfRange($initial, $index)
     {
         $instance = $this->getInstance($initial);
@@ -73,9 +72,8 @@ trait insert
         $instance->insert($index);
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+
+    #[DataProvider('badIndexDataProvider')]
     public function testInsertIndexBadIndex($initial, $index)
     {
         $instance = $this->getInstance();

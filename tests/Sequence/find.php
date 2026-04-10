@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait find
 {
-    public function findDataProvider()
+    public static function findDataProvider()
     {
         // initial, value, expected
         return [
@@ -24,9 +26,8 @@ trait find
         ];
     }
 
-    /**
-     * @dataProvider findDataProvider
-     */
+
+    #[DataProvider('findDataProvider')]
     public function testFind($initial, $value, $expected)
     {
         $instance = $this->getInstance($initial);

@@ -1,11 +1,12 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _foreach
 {
-    /**
-     * @dataProvider basicDataProvider
-     */
+
+    #[DataProvider('basicDataProvider')]
     public function testForEach(array $values, array $expected)
     {
         $instance = $this->getInstance($values);

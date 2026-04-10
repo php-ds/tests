@@ -1,16 +1,17 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _jsonEncode
 {
-    public function jsonEncodeDataProvider()
+    public static function jsonEncodeDataProvider()
     {
-        return $this->basicDataProvider();
+        return static::basicDataProvider();
     }
 
-    /**
-     * @dataProvider jsonEncodeDataProvider
-     */
+
+    #[DataProvider('jsonEncodeDataProvider')]
     public function testJsonEncode(array $initial, array $expected)
     {
         $instance = $this->getInstance($initial);

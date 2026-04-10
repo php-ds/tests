@@ -1,16 +1,17 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait unshift
 {
-    public function unshiftDataProvider()
+    public static function unshiftDataProvider()
     {
-        return $this->basicDataProvider();
+        return static::basicDataProvider();
     }
 
-    /**
-     * @dataProvider unshiftDataProvider
-     */
+
+    #[DataProvider('unshiftDataProvider')]
     public function testUnshiftVariadic(array $initial, array $values)
     {
         $instance = $this->getInstance($initial);
@@ -22,9 +23,8 @@ trait unshift
         $this->assertEquals(count($expected), count($instance));
     }
 
-    /**
-     * @dataProvider unshiftDataProvider
-     */
+
+    #[DataProvider('unshiftDataProvider')]
     public function testUnshift(array $initial, array $values)
     {
         $instance = $this->getInstance($initial);

@@ -1,16 +1,17 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait toArray
 {
-    public function toArrayDataProvider()
+    public static function toArrayDataProvider()
     {
-        return $this->basicDataProvider();
+        return static::basicDataProvider();
     }
 
-    /**
-     * @dataProvider toArrayDataProvider
-     */
+
+    #[DataProvider('toArrayDataProvider')]
     public function testToArray(array $values, array $expected)
     {
         $instance = $this->getInstance($values);

@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait apply
 {
-    public function applyDataProvider()
+    public static function applyDataProvider()
     {
         // values, callback
         return [
@@ -22,9 +24,8 @@ trait apply
         ];
     }
 
-    /**
-     * @dataProvider applyDataProvider
-     */
+
+    #[DataProvider('applyDataProvider')]
     public function testApply(array $values, callable $callback)
     {
         $instance = $this->getInstance($values);

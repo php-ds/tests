@@ -2,7 +2,6 @@
 namespace Ds\Tests;
 
 use ArrayAccess;
-use Ds\Collection;
 
 class StackTest extends CollectionTest
 {
@@ -35,7 +34,7 @@ class StackTest extends CollectionTest
         return new \Ds\Stack($values);
     }
 
-    public function basicDataProvider()
+    public static function basicDataProvider()
     {
         // Stack should produce values in reverse order.
         return array_map(function($data) {
@@ -43,7 +42,7 @@ class StackTest extends CollectionTest
         }, parent::basicDataProvider());
     }
 
-    public function serializeDataProvider()
+    public static function serializeDataProvider()
     {
         // Stack should serialize in push order, so that it can be
         // unserialized by pushing each serialized value.

@@ -1,16 +1,17 @@
 <?php
 namespace Ds\Tests\Queue;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait push
 {
-    public function pushDataProvider()
+    public static function pushDataProvider()
     {
-        return $this->basicDataProvider();
+        return static::basicDataProvider();
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+
+    #[DataProvider('pushDataProvider')]
     public function testPushVariadic(array $values, array $expected)
     {
         $instance = $this->getInstance();
@@ -21,9 +22,8 @@ trait push
         $this->assertCount(count($expected), $instance);
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+
+    #[DataProvider('pushDataProvider')]
     public function testPush(array $values, array $expected)
     {
         $instance = $this->getInstance();
@@ -36,9 +36,8 @@ trait push
         $this->assertCount(count($expected), $instance);
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+
+    #[DataProvider('pushDataProvider')]
     public function testArrayAccessPush(array $values, array $expected)
     {
         $instance = $this->getInstance();
@@ -51,9 +50,8 @@ trait push
         $this->assertCount(count($expected), $instance);
     }
 
-    /**
-     * @dataProvider pushDataProvider
-     */
+
+    #[DataProvider('pushDataProvider')]
     public function testArrayAccessPushByMethod(array $values, array $expected)
     {
         $instance = $this->getInstance();

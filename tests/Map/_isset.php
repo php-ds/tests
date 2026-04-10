@@ -1,10 +1,12 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _isset
 {
 
-    public function issetDataProvider()
+    public static function issetDataProvider()
     {
         // initial, key, isset
         return [
@@ -16,9 +18,8 @@ trait _isset
         ];
     }
 
-    /**
-     * @dataProvider issetDataProvider
-     */
+
+    #[DataProvider('issetDataProvider')]
     public function testArrayAccessIsset(array $initial, $key, bool $isset)
     {
         $instance = $this->getInstance();
@@ -30,9 +31,8 @@ trait _isset
         $this->assertEquals($isset, isset($instance[$key]));
     }
 
-    /**
-     * @dataProvider issetDataProvider
-     */
+
+    #[DataProvider('issetDataProvider')]
     public function testArrayAccessIssetByMethod(array $initial, $key, bool $isset)
     {
         $instance = $this->getInstance();
@@ -44,9 +44,8 @@ trait _isset
         $this->assertEquals($isset, $instance->offsetExists($key));
     }
 
-    /**
-     * @dataProvider issetDataProvider
-     */
+
+    #[DataProvider('issetDataProvider')]
     public function testArrayAccessIssetByReference(array $initial, $key, bool $isset)
     {
         $instance = $this->getInstance([$initial]);

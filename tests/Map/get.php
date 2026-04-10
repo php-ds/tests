@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait get
 {
-    public function getDataProvider()
+    public static function getDataProvider()
     {
         // initial, key, expected
         return [
@@ -11,9 +13,8 @@ trait get
         ];
     }
 
-    /**
-     * @dataProvider getDataProvider
-     */
+
+    #[DataProvider('getDataProvider')]
     public function testGet(array $initial, $key, $expected)
     {
         $instance = $this->getInstance($initial);

@@ -1,11 +1,12 @@
 <?php
 namespace Ds\Tests\Stack;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait copy
 {
-    /**
-     * @dataProvider basicDataProvider
-     */
+
+    #[DataProvider('basicDataProvider')]
     public function testCopy(array $values, array $expected)
     {
         $instance = $this->getInstance($values);

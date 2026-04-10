@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait merge
 {
-    public function mergeDataProvider()
+    public static function mergeDataProvider()
     {
         // A, B, expected
         return [
@@ -16,9 +18,8 @@ trait merge
         ];
     }
 
-    /**
-     * @dataProvider mergeDataProvider
-     */
+
+    #[DataProvider('mergeDataProvider')]
     public function testMerge(array $initial, array $values, array $expected)
     {
         $instance = $this->getInstance($initial);
@@ -27,9 +28,8 @@ trait merge
         $this->assertToArray($initial, $instance);
     }
 
-    /**
-     * @dataProvider mergeDataProvider
-     */
+
+    #[DataProvider('mergeDataProvider')]
     public function testMergeWithSelf(array $initial, array $values, array $expected)
     {
         $instance = $this->getInstance($initial);

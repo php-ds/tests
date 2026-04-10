@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait first
 {
-    public function firstDataProvider()
+    public static function firstDataProvider()
     {
         // initial, returned
         return [
@@ -13,9 +15,8 @@ trait first
         ];
     }
 
-    /**
-     * @dataProvider firstDataProvider
-     */
+
+    #[DataProvider('firstDataProvider')]
     public function testFirst(array $initial, $expected)
     {
         $instance = $this->getInstance($initial);

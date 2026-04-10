@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait diff
 {
-    public function diffDataProvider()
+    public static function diffDataProvider()
     {
         // Values in A but not in B.
         // A, B, expected result
@@ -17,9 +19,8 @@ trait diff
         ];
     }
 
-    /**
-     * @dataProvider diffDataProvider
-     */
+
+    #[DataProvider('diffDataProvider')]
     public function testDiff(array $a, array $b, array $expected)
     {
         $a = $this->getInstance($a);
@@ -51,9 +52,8 @@ trait diff
     //     $this->assertEquals($expected, $a->toArray());
     // }
 
-    /**
-     * @dataProvider diffDataProvider
-     */
+
+    #[DataProvider('diffDataProvider')]
     public function testDiffWithSelf(array $a, array $b, array $expected)
     {
         $a = $this->getInstance($a);

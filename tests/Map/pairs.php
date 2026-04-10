@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use Ds\Vector;
 
 trait pairs
 {
-    public function pairsDataProvider()
+    public static function pairsDataProvider()
     {
         return [
             [[], []],
@@ -13,9 +15,8 @@ trait pairs
         ];
     }
 
-    /**
-     * @dataProvider pairsDataProvider
-     */
+
+    #[DataProvider('pairsDataProvider')]
     public function testPairs(array $initial, array $expected)
     {
         $instance = $this->getInstance($initial);

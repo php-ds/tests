@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Queue;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait pop
 {
-    public function popDataProvider()
+    public static function popDataProvider()
     {
         // initial, returned, expected result
         return [
@@ -12,9 +14,8 @@ trait pop
         ];
     }
 
-    /**
-     * @dataProvider popDataProvider
-     */
+
+    #[DataProvider('popDataProvider')]
     public function testPop($initial, $returned, array $expected)
     {
         $instance = $this->getInstance($initial);

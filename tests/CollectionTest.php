@@ -1,9 +1,6 @@
 <?php
 namespace Ds\Tests;
 
-use Ds\Collection;
-use PHPUnit\Framework\Error\Notice;
-use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 
 use function ini_get;
@@ -21,7 +18,7 @@ abstract class CollectionTest extends TestCase
     /**
      * Generic mixed value sample array.
      */
-    public function sample()
+    public static function sample()
     {
         return array_merge(
             [[]],                               // empty
@@ -38,14 +35,14 @@ abstract class CollectionTest extends TestCase
     /**
      * @return array provides two equal values for each test.
      */
-    public function basicDataProvider()
+    public static function basicDataProvider()
     {
         $values = [
             [],
             ['a'],
             ['a', 'b'],
             ['a', 'b', 'c'],
-            $this->sample(),
+            static::sample(),
         ];
 
         return array_map(function($a) { return [$a, $a]; }, $values);
@@ -54,7 +51,7 @@ abstract class CollectionTest extends TestCase
     /**
      * @return array a data provider for Sequence and Set to test out of range.
      */
-    public function outOfRangeDataProvider()
+    public static function outOfRangeDataProvider()
     {
         return [
             [[ ], -1],
@@ -64,7 +61,7 @@ abstract class CollectionTest extends TestCase
         ];
     }
 
-    public function badIndexDataProvider()
+    public static function badIndexDataProvider()
     {
         return [
             [[], 'a'],
@@ -149,11 +146,7 @@ abstract class CollectionTest extends TestCase
 
     public function expectInternalIllegalOffset()
     {
-        if (PHP_MAJOR_VERSION === 7) {
-            static::markTestSkipped(); // PHP 7 does not promote E_ERROR to an exception.
-        } else {
-            static::expectException(\TypeError::class);
-        }
+        static::expectException(\TypeError::class);
     }
 
     public function assertInstanceDump(array $expected, $instance)

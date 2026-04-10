@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait map
 {
-    public function mapDataProvider()
+    public static function mapDataProvider()
     {
         // values, callback
         return [
@@ -23,9 +25,8 @@ trait map
     }
 
 
-    /**
-     * @dataProvider mapDataProvider
-     */
+
+    #[DataProvider('mapDataProvider')]
     public function testMap(array $values, callable $callback)
     {
         $instance = $this->getInstance($values);

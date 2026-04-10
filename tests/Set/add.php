@@ -1,11 +1,13 @@
 <?php
 namespace Ds\Tests\Set;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait add
 {
-    public function addDataProvider()
+    public static function addDataProvider()
     {
-        list($unique, $duplicates) = $this->getUniqueAndDuplicateData();
+        list($unique, $duplicates) = static::getUniqueAndDuplicateData();
 
         // initial, input, expected
         return [
@@ -40,9 +42,8 @@ trait add
         ];
     }
 
-    /**
-     * @dataProvider addDataProvider
-     */
+
+    #[DataProvider('addDataProvider')]
     public function testAdd(
         array $initial,
         array $values,
@@ -58,9 +59,8 @@ trait add
         $this->assertToArray($expected, $instance);
     }
 
-    /**
-     * @dataProvider addDataProvider
-     */
+
+    #[DataProvider('addDataProvider')]
     public function testArrayAccessAdd(
         array $initial,
         array $values,
@@ -76,9 +76,8 @@ trait add
         $this->assertToArray($expected, $instance);
     }
 
-    /**
-     * @dataProvider addDataProvider
-     */
+
+    #[DataProvider('addDataProvider')]
     public function testArrayAccessAddByMethod(
         array $initial,
         array $values,
@@ -94,9 +93,8 @@ trait add
         $this->assertToArray($expected, $instance);
     }
 
-    /**
-     * @dataProvider addDataProvider
-     */
+
+    #[DataProvider('addDataProvider')]
     public function testAddVariadic(
         array $initial,
         array $values,

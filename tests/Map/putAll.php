@@ -1,9 +1,11 @@
 <?php
 namespace Ds\Tests\Map;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait putAll
 {
-    public function putAllDataProvider()
+    public static function putAllDataProvider()
     {
         // values, values
         return [
@@ -11,14 +13,13 @@ trait putAll
             [['a']],
             [['a', 'b']],
             [['a', 'b', 'c']],
-            [$this->sample()],
+            [static::sample()],
             [range(1, self::MANY)],
         ];
     }
 
-    /**
-     * @dataProvider putAllDataProvider
-     */
+
+    #[DataProvider('putAllDataProvider')]
     public function testPutAll(array $values)
     {
         $instance = $this->getInstance();
@@ -26,9 +27,8 @@ trait putAll
         $this->assertToArray($values, $instance);
     }
 
-    /**
-     * @dataProvider putAllDataProvider
-     */
+
+    #[DataProvider('putAllDataProvider')]
     public function testPutAllUsingIterator(array $values)
     {
         $instance = $this->getInstance();
@@ -36,9 +36,8 @@ trait putAll
         $this->assertToArray($values, $instance);
     }
 
-    /**
-     * @dataProvider putAllDataProvider
-     */
+
+    #[DataProvider('putAllDataProvider')]
     public function testPutAllFromSet(array $values)
     {
         $instance = $this->getInstance();
@@ -47,9 +46,8 @@ trait putAll
         $this->assertToArray($values, $instance);
     }
 
-    /**
-     * @dataProvider putAllDataProvider
-     */
+
+    #[DataProvider('putAllDataProvider')]
     public function testPutAllFromMap(array $values)
     {
         $instance = $this->getInstance();
@@ -58,9 +56,8 @@ trait putAll
         $this->assertToArray($values, $instance);
     }
 
-    /**
-     * @dataProvider putAllDataProvider
-     */
+
+    #[DataProvider('putAllDataProvider')]
     public function testPutAllFromVector(array $values)
     {
         $instance = $this->getInstance();
@@ -69,9 +66,8 @@ trait putAll
         $this->assertToArray($values, $instance);
     }
 
-    /**
-     * @dataProvider putAllDataProvider
-     */
+
+    #[DataProvider('putAllDataProvider')]
     public function testPutAllFromDeque(array $values)
     {
         $instance = $this->getInstance();
@@ -80,9 +76,8 @@ trait putAll
         $this->assertToArray($values, $instance);
     }
 
-    /**
-     * @dataProvider putAllDataProvider
-     */
+
+    #[DataProvider('putAllDataProvider')]
     public function testPutAllFromStack(array $values)
     {
         $instance = $this->getInstance();
@@ -92,9 +87,8 @@ trait putAll
         $this->assertCount(0, $stack);
     }
 
-    /**
-     * @dataProvider putAllDataProvider
-     */
+
+    #[DataProvider('putAllDataProvider')]
     public function testPutAllFromQueue(array $values)
     {
         $instance = $this->getInstance();
@@ -104,9 +98,8 @@ trait putAll
         $this->assertCount(0, $queue);
     }
 
-    /**
-     * @dataProvider putAllDataProvider
-     */
+
+    #[DataProvider('putAllDataProvider')]
     public function testPutAllFromPriorityQueue(array $values)
     {
         $instance = $this->getInstance();

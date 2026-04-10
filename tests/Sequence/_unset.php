@@ -1,11 +1,12 @@
 <?php
 namespace Ds\Tests\Sequence;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 trait _unset
 {
-    /**
-     * @dataProvider removeDataProvider
-     */
+
+    #[DataProvider('removeDataProvider')]
     public function testArrayAccessUnset($initial, $index, $return, array $expected)
     {
         $instance = $this->getInstance($initial);
@@ -14,9 +15,8 @@ trait _unset
         $this->assertEquals(count($expected), count($instance));
     }
 
-    /**
-     * @dataProvider removeDataProvider
-     */
+
+    #[DataProvider('removeDataProvider')]
     public function testArrayAccessUnsetByMethod($initial, $index, $return, array $expected)
     {
         $instance = $this->getInstance($initial);
@@ -25,9 +25,8 @@ trait _unset
         $this->assertEquals(count($expected), count($instance));
     }
 
-    /**
-     * @dataProvider badIndexDataProvider
-     */
+
+    #[DataProvider('badIndexDataProvider')]
     public function testArrayAccessUnsetIndexBadIndex($initial, $index)
     {
         $instance = $this->getInstance($initial);
@@ -36,9 +35,8 @@ trait _unset
         $this->assertFalse(isset($instance[$index]));
     }
 
-    /**
-     * @dataProvider outOfRangeDataProvider
-     */
+
+    #[DataProvider('outOfRangeDataProvider')]
     public function testArrayAccessUnsetIndexOutOfRange($initial, $index)
     {
         $instance = $this->getInstance($initial);
