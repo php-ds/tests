@@ -1,0 +1,38 @@
+<?php
+namespace Ds\Tests\Seq;
+
+use PHPUnit\Framework\Attributes\DataProvider;
+
+trait reverse
+{
+    public static function reverseDataProvider()
+    {
+        return array_map(function($a) { return [$a[0], array_reverse($a[1])]; },
+            static::basicDataProvider()
+        );
+    }
+
+
+    #[DataProvider('reverseDataProvider')]
+    public function testReverse(array $values, array $expected)
+    {
+        $instance = $this->getInstance($values);
+        $instance->reverse();
+
+        $this->assertToArray($expected, $instance);
+    }
+
+    public function testReverseEmpty()
+    {
+        $instance = $this->getInstance();
+        $instance->reverse();
+        $this->assertToArray([], $instance);
+    }
+
+    public function testReverseSingle()
+    {
+        $instance = $this->getInstance(['a']);
+        $instance->reverse();
+        $this->assertToArray(['a'], $instance);
+    }
+}

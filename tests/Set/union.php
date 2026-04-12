@@ -38,8 +38,8 @@ trait union
 
     public function testUnionWhenOperatingOnSetsWithObjectsWithNonZeroHash()
     {
-        $a = new \Ds\Tests\HashableObject("a", rand());
-        $b = new \Ds\Tests\HashableObject("b", rand());
+        $a = new \Ds\Tests\KeyObject("a", rand());
+        $b = new \Ds\Tests\KeyObject("b", rand());
 
         $setA = $this->getInstance([$a]);
         $setB = $this->getInstance([$b]);
@@ -49,8 +49,8 @@ trait union
 
     public function testUnionWhenOperatingOnSetsWithObjectsWithZeroHash()
     {
-        $a = new \Ds\Tests\HashableObject("a", 0);
-        $b = new \Ds\Tests\HashableObject("b", 0);
+        $a = new \Ds\Tests\KeyObject("a", 0);
+        $b = new \Ds\Tests\KeyObject("b", 0);
 
         $setA = $this->getInstance([$a]);
         $setB = $this->getInstance([$b]);

@@ -3,7 +3,7 @@ namespace Ds\Tests\Map;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
-use Ds\Vector;
+use Ds\Seq;
 
 trait values
 {
@@ -26,7 +26,7 @@ trait values
         $instance = $this->getInstance($initial);
         $values = $instance->values();
 
-        $this->assertInstanceOf(Vector::class, $values);
+        $this->assertInstanceOf(Seq::class, $values);
         $this->assertEquals($expected, $values->toArray());
     }
 }

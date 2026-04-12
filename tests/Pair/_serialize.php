@@ -6,6 +6,10 @@ trait _serialize
     public function testSerialize()
     {
         $pair = $this->getPair('a', 1);
-        $this->assertSerialized(['a', 1], $pair, false);
+        $unserialized = unserialize(serialize($pair));
+
+        $this->assertInstanceOf(\Ds\Pair::class, $unserialized);
+        $this->assertEquals($pair->toArray(), $unserialized->toArray());
+        $this->assertTrue($pair !== $unserialized);
     }
 }

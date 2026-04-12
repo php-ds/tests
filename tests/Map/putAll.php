@@ -58,59 +58,11 @@ trait putAll
 
 
     #[DataProvider('putAllDataProvider')]
-    public function testPutAllFromVector(array $values)
+    public function testPutAllFromSeq(array $values)
     {
         $instance = $this->getInstance();
-        $vector = new \Ds\Vector($values);
-        $instance->putAll($vector);
+        $seq = new \Ds\Seq($values);
+        $instance->putAll($seq);
         $this->assertToArray($values, $instance);
-    }
-
-
-    #[DataProvider('putAllDataProvider')]
-    public function testPutAllFromDeque(array $values)
-    {
-        $instance = $this->getInstance();
-        $deque = new \Ds\Deque($values);
-        $instance->putAll($deque);
-        $this->assertToArray($values, $instance);
-    }
-
-
-    #[DataProvider('putAllDataProvider')]
-    public function testPutAllFromStack(array $values)
-    {
-        $instance = $this->getInstance();
-        $stack = new \Ds\Stack(array_reverse($values));
-        $instance->putAll($stack);
-        $this->assertToArray($values, $instance);
-        $this->assertCount(0, $stack);
-    }
-
-
-    #[DataProvider('putAllDataProvider')]
-    public function testPutAllFromQueue(array $values)
-    {
-        $instance = $this->getInstance();
-        $queue = new \Ds\Queue($values);
-        $instance->putAll($queue);
-        $this->assertToArray($values, $instance);
-        $this->assertCount(0, $queue);
-    }
-
-
-    #[DataProvider('putAllDataProvider')]
-    public function testPutAllFromPriorityQueue(array $values)
-    {
-        $instance = $this->getInstance();
-        $queue = new \Ds\PriorityQueue();
-
-        foreach ($values as $value) {
-            $queue->push($value, 0);
-        }
-
-        $instance->putAll($queue);
-        $this->assertToArray($values, $instance);
-        $this->assertCount(0, $queue);
     }
 }

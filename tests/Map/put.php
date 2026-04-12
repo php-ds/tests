@@ -3,7 +3,7 @@ namespace Ds\Tests\Map;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
-use Ds\Tests\HashableObject;
+use Ds\Tests\KeyObject;
 
 trait put
 {
@@ -41,11 +41,11 @@ trait put
         ];
     }
 
-    public static function putHashableDataProvider()
+    public static function putKeyObjectDataProvider()
     {
         // Two objects with the same hash code and equals.
-        $h1 = new HashableObject(1);
-        $h2 = new HashableObject(1);
+        $h1 = new KeyObject(1);
+        $h2 = new KeyObject(1);
 
         // put pairs, expected pairs
         return [
@@ -87,8 +87,8 @@ trait put
     }
 
 
-    #[DataProvider('putHashableDataProvider')]
-    public function testPutHashable(array $pairs, array $expected)
+    #[DataProvider('putKeyObjectDataProvider')]
+    public function testPutKeyObject(array $pairs, array $expected)
     {
         $this->testPut($pairs, $expected);
     }
@@ -105,14 +105,6 @@ trait put
         $instance = $this->getInstance(['a' => 1]);
         $instance->offsetSet('a', 2);
         $this->assertToArray(['a' => 2], $instance);
-    }
-
-    public function testArrayAccessPutByReference()
-    {
-        $instance = $this->getInstance(['a' => [1]]);
-        $instance['a'][0] = 2;
-
-        $this->assertToArray(['a' => [2]], $instance);
     }
 
     public function testMapPutCircularReference()

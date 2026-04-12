@@ -261,7 +261,7 @@ class Producer {
         $this->test = $test;
     }
 
-    public function getInstance(array $values = null)
+    public function getInstance(?array $values = null)
     {
         return $this->test->getInstance($values);
     }

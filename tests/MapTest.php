@@ -2,7 +2,6 @@
 namespace Ds\Tests;
 
 use ArrayAccess;
-use Ds\Vector;
 
 class MapTest extends CollectionTest
 {

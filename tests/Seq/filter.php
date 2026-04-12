@@ -1,0 +1,82 @@
+<?php
+namespace Ds\Tests\Seq;
+
+use PHPUnit\Framework\Attributes\DataProvider;
+
+trait filter
+{
+    public static function filterDataProvider()
+    {
+        // values, callback
+        return [
+            [[], function(){}],
+
+            // Test only including odd values.
+            [[1, 2, 3], function ($v) { return $v & 1; }],
+        ];
+    }
+
+
+    #[DataProvider('filterDataProvider')]
+    public function testFilter(array $values, callable $callback)
+    {
+        $instance = $this->getInstance($values);
+
+        $filtered = $instance->filter($callback);
+        $expected = array_values(array_filter($values, $callback));
+
+        $this->assertToArray($values, $instance);
+        $this->assertEquals($expected, $filtered->toArray());
+    }
+
+
+    #[DataProvider('filterDataProvider')]
+    public function testFilterWithoutCallback(array $values, callable $callback)
+    {
+        $instance = $this->getInstance($values);
+
+        $filtered = $instance->filter();
+        $expected = array_values(array_filter($values));
+
+        $this->assertToArray($values, $instance);
+        $this->assertEquals($expected, $filtered->toArray());
+    }
+
+    public function testFilterCallbackThrowsException()
+    {
+        $instance = $this->getInstance([1, 2, 3]);
+        $filtered = null;
+
+        try {
+            $filtered = $instance->filter(function($value) {
+                throw new \Exception();
+            });
+        } catch (\Exception $e) {
+            $this->assertToArray([1, 2, 3], $instance);
+            $this->assertNull($filtered);
+            return;
+        }
+
+        $this->fail('Exception should have been caught');
+    }
+
+    public function testFilterCallbackThrowsExceptionLaterOn()
+    {
+        $instance = $this->getInstance([1, 2, 3]);
+        $filtered = null;
+
+        try {
+            $filtered = $instance->filter(function($value) {
+                if ($value === 3) {
+                    throw new \Exception();
+                }
+            });
+        } catch (\Exception $e) {
+            $this->assertToArray([1, 2, 3], $instance);
+            $this->assertNull($filtered);
+            return;
+        }
+
+        $this->fail('Exception should have been caught');
+    }
+}

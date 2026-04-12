@@ -3,7 +3,7 @@ namespace Ds\Tests\Map;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
-use Ds\Vector;
+use Ds\Seq;
 
 trait pairs
 {
@@ -22,7 +22,7 @@ trait pairs
         $instance = $this->getInstance($initial);
         $pairs = $instance->pairs();
 
-        $this->assertInstanceOf(Vector::class, $pairs);
+        $this->assertInstanceOf(Seq::class, $pairs);
 
         $to_array = function ($pair) {
             return [$pair->key, $pair->value];
@@ -45,11 +45,10 @@ trait pairs
         $this->assertFalse($instance->pairs()->first()->key->state);
     }
 
-    public function testKeysAreNotMutableThroughAccess()
+    public function testKeysAreReadonly()
     {
         $instance = $this->getInstance(['a' => 1, 'b' => 2]);
+        $this->expectException(\Error::class);
         $instance->pairs()->first()->key = 'c';
-
-        $this->assertEquals('a', $instance->pairs()->first()->key);
     }
 }

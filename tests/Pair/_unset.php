@@ -3,17 +3,17 @@ namespace Ds\Tests\Pair;
 
 trait _unset
 {
-    public function testPropertyUnsetKey()
+    public function testPropertyUnsetKeyThrows()
     {
         $pair = $this->getPair('a', 1);
+        $this->expectException(\Error::class);
         unset($pair->key);
-        $this->assertNull($pair->key);
     }
 
-    public function testPropertyUnsetValue()
+    public function testPropertyUnsetValueThrows()
     {
         $pair = $this->getPair('a', 1);
+        $this->expectException(\Error::class);
         unset($pair->value);
-        $this->assertNull($pair->value);
     }
 }

@@ -3,24 +3,17 @@ namespace Ds\Tests\Pair;
 
 trait __set
 {
-    public function testPropertySetKey()
+    public function testPropertySetKeyThrows()
     {
         $pair = $this->getPair('a', 1);
+        $this->expectException(\Error::class);
         $pair->key = 'b';
-        $this->assertEquals('b', $pair->key);
     }
 
-    public function testPropertySetValue()
+    public function testPropertySetValueThrows()
     {
         $pair = $this->getPair('a', 1);
+        $this->expectException(\Error::class);
         $pair->value = 2;
-        $this->assertEquals(2, $pair->value);
-    }
-
-    public function testSetSelf()
-    {
-        $pair = $this->getPair('a', 1);
-        $pair->value = $pair;
-        $this->assertEquals($pair, $pair->value);
     }
 }

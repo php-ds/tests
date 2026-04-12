@@ -3,7 +3,7 @@ namespace Ds\Tests\Map;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
-use Ds\Tests\HashableObject;
+use Ds\Tests\KeyObject;
 
 trait remove
 {
@@ -25,11 +25,11 @@ trait remove
         ];
     }
 
-    public static function removeHashableDataProvider()
+    public static function removeKeyObjectDataProvider()
     {
         // Two objects with the same hash code and equals.
-        $h1 = new HashableObject(1);
-        $h2 = new HashableObject(1);
+        $h1 = new KeyObject(1);
+        $h2 = new KeyObject(1);
 
         // put pairs, expected pairs
         return [
@@ -38,8 +38,8 @@ trait remove
     }
 
 
-    #[DataProvider('removeHashableDataProvider')]
-    public function testRemoveHashable(array $initial, $key, $expected, array $result)
+    #[DataProvider('removeKeyObjectDataProvider')]
+    public function testRemoveKeyObject(array $initial, $key, $expected, array $result)
     {
         $this->testRemove($initial, $key, $expected, $result);
     }

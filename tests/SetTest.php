@@ -61,10 +61,10 @@ class SetTest extends CollectionTest
             $duplicates[] = $value;
         }
 
-        $sample[] = new HashableObject(1);
+        $sample[] = new KeyObject(1);
 
-        $duplicates[] = new HashableObject(1);
-        $duplicates[] = new HashableObject(1);
+        $duplicates[] = new KeyObject(1);
+        $duplicates[] = new KeyObject(1);
 
         return [$sample, $duplicates];
     }
