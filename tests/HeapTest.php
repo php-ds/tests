@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests;
 
-class HeapTest extends CollectionTest
+class HeapTest extends CollectionTestCase
 {
     use Heap\__construct;
     use Heap\_clone;

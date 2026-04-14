@@ -7,7 +7,7 @@ use function ini_get;
 use function strpos;
 use function var_dump;
 
-abstract class CollectionTest extends TestCase
+abstract class CollectionTestCase extends TestCase
 {
     /**
      * Sample sizes.

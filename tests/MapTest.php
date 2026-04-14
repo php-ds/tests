@@ -3,7 +3,7 @@ namespace Ds\Tests;
 
 use ArrayAccess;
 
-class MapTest extends CollectionTest
+class MapTest extends CollectionTestCase
 {
     use Map\__construct;
     use Map\_clone;

@@ -1,7 +1,7 @@
 <?php
 namespace Ds\Tests;
 
-class PairTest extends CollectionTest
+class PairTest extends CollectionTestCase
 {
     use Pair\__construct;
     use Pair\__get;
