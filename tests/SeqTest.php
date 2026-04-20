@@ -3,7 +3,7 @@ namespace Ds\Tests;
 
 use ArrayAccess;
 
-class SeqTest extends CollectionTest
+class SeqTest extends CollectionTestCase
 {
     use Seq\__construct;
     use Seq\_clone;
